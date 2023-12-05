@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include("layout.head")
+    @include('Layout.Head')
     <style>
         .login {
             user-select: none;
