@@ -1,0 +1,170 @@
+* {
+    font-family: var(--fontstyle);
+}
+/* ======================================== */
+header {
+    user-select: none;
+    border-bottom: 2px solid var(--Nuetrals300);
+    display: flex;
+    background-color: var(--Nuetrals200);
+}
+body {
+    user-select: none;
+    padding-left: 225px;
+}
+/* ---------------------------------------- */
+.sidenav {
+    margin-block: auto;
+    width: 30%;
+    max-width: 210px;
+    border-radius: 30px;
+    position: fixed;
+    z-index: 1;
+    top: 10px;
+    bottom: 10px;
+    left: 5px;
+    background-color: var(--Brand);
+    overflow-x: hidden;
+    padding-top: 30px;
+}
+.logo {
+    display: flex;
+    justify-content: center;
+}
+.logo img {
+    width: 190px;
+    padding-inline: auto;
+    -webkit-filter: brightness(200%) contrast(200%) hue-rotate(40deg)
+        saturate(200%);
+    filter: brightness(200%) contrast(200%) hue-rotate(40deg) saturate(200%);
+}
+.navbar {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding-block: 15px;
+    padding-left: 20px;
+}
+.navbar a:hover {
+    color: var(--Brand900);
+    background-color: var(--Nuetrals100);
+}
+.CreateUser {
+    color: var(--Nuetrals100);
+    width: 180px;
+    margin-inline: auto;
+    padding-block: 12px;
+    border-radius: 9px;
+    border: transparent;
+    background-color: var(--Brand600);
+    transition: background-color 0.3s;
+}
+.CreateUser:hover {
+    background-color: var(--Brand400);
+}
+.navbarhead {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+    margin-top: 10px;
+}
+.navbar a i {
+    color: white;
+    width: 30px;
+    transform: scale(1.2);
+}
+.navbar a:hover i {
+    color: var(--Brand);
+}
+.Title_navbar {
+    border-radius: 5px;
+    margin-top: -55px;
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 600px;
+    padding-bottom: 5px;
+    color: var(--Brand);
+}
+.messege {
+    position: relative;
+}
+.dropdown .btn {
+    background-color: var(--Brand);
+    border-radius: 50%;
+    border: transparent;
+    padding-block: 10px;
+    padding-inline: 15px;
+    margin-right: 20px;
+}
+.dropdown-menu {
+    background-color: white;
+}
+.dropdown-menu a:hover {
+    color: var(--Nuetrals900);
+}
+.dropdown-item:hover {
+    background-color: var(--Nuetrals100);
+}
+.text {
+    color: var(--Brand);
+}
+/* ========================================== */
+@media only screen and (max-width: 900px) {
+    .sidenav {
+        margin-block: auto;
+        width: 55px;
+        border-radius: 20px;
+        position: fixed;
+        z-index: 1;
+        top: 10px;
+        bottom: 10px;
+        left: 5px;
+        background-color: var(--Brand);
+        overflow-x: hidden;
+        padding-top: 30px;
+    }
+    .logo {
+        display: flex;
+        justify-content: center;
+    }
+    .logo img {
+        width: 60px;
+        padding-inline: auto;
+        -webkit-filter: brightness(200%) contrast(200%) hue-rotate(40deg)
+            saturate(200%);
+        filter: brightness(200%) contrast(200%) hue-rotate(40deg) saturate(200%);
+    }
+    body {
+        padding-left: 70px;
+    }
+    .hide {
+        display: none;
+    }
+    .navbarhead {
+        margin-top: 5px;
+    }
+    .dropdown .btn {
+        background-color: var(--Brand);
+        border-radius: 50%;
+        border: transparent;
+        padding-block: 5px;
+        padding-inline: 10px;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+    .Title_navbar {
+        border-radius: 5px;
+        margin-top: -45px;
+        padding-top: 10px;
+        padding-left: 10px;
+        width: 400px;
+        padding-bottom: 5px;
+        color: var(--Brand);
+    }
+}
