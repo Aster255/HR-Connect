@@ -373,6 +373,7 @@
     <div class="section">
         <h2 class="section-title">Emergency Contact Information</h2>
         <div class="section-content">
+            @if($employeenotify)
             <div class="form-group">
                 <label>Name:</label>
                 <input disabled value="{{$employeenotify->name}}" type="text">
@@ -389,31 +390,40 @@
                 <label>Address:</label>
                 <input disabled value="{{$employeenotify->address}}" type="text">
             </div>
+            @else
+            <p>No emergency contact information available.</p>
+            @endif
         </div>
     </div>
+
 
     <!-- Contributions -->
     <div class="section">
         <h2 class="section-title">Contributions</h2>
         <div class="section-content">
+            @if($employeedoc)
             <div class="form-group">
                 <label>SSS:</label>
-                <input disabled value="{{$employeedoc->sss}}" type="text">
+                <input disabled value="{{ $employeedoc ? $employeedoc->sss : '' }}" type="text">
             </div>
             <div class="form-group">
                 <label>TIN:</label>
-                <input disabled value="{{$employeedoc->tin}}" type="text">
+                <input disabled value="{{ $employeedoc ? $employeedoc->tin : '' }}" type="text">
             </div>
             <div class="form-group">
                 <label>PhilHealth:</label>
-                <input disabled value="{{$employeedoc->philhealth}}" type="text">
+                <input disabled value="{{ $employeedoc ? $employeedoc->philhealth : '' }}" type="text">
             </div>
             <div class="form-group">
                 <label>HDMF:</label>
-                <input disabled value="{{$employeedoc->hdmf}}" type="text">
+                <input disabled value="{{ $employeedoc ? $employeedoc->hdmf : '' }}" type="text">
             </div>
+            @else
+            <p>No Contributions information available.</p>
+            @endif
         </div>
     </div>
+
 
     </div>
 
@@ -471,7 +481,3 @@
 <script>
     AOS.init();
 </script>
-
-
-
-

@@ -22,6 +22,7 @@ class AdminController extends Controller
             ->where('employee_id', '=', $employee_id)
             ->first();
 
+
         $employeelist = Employee::all();
         $totalemployee = $employeelist->count();
         $today = Carbon::today()->toDateString();
