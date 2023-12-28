@@ -4,64 +4,38 @@
 <head>
     @include("Layout.Head")
     <title>System Admin</title>
-    @include('Layout.Button')
-    <style>
-        .list {
-            margin-right: 20px;
-        }
+    <link rel="stylesheet" href="{{ asset('css/AdminAttendanceLoglist.css') }}">
 
-        .list_one {
-            background-color: var(--Nuetrals100);
-            border-radius: 5px;
 
-        }
-
-        .list_two {
-            background-color: var(--Nuetrals100);
-            border-radius: 10px;
-        }
-
-        table {
-            margin-block: 20px;
-            width: 100%;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        th {
-            padding-block: 10px;
-        }
-
-        td {
-            padding-block: 10px;
-        }
-    </style>
 </head>
 
 <body>
     @include("Layout.NavBarAdmin")
-    <h1 class="Title_navbar" data-aos="zoom-in">LOG LIST</h1>
-
-    <div class="col-12" data-aos="zoom-in">
-        <a class="btn btn-brand" href="/Admin/Attendance">BACK</a>
-        <a class="btn btn-success" href="/Admin/Attendance/Log/create">Log In</a>
+    <div class="greetings">
+        <h1 class="Title_navbar" data-aos="zoom-in">LOG LIST</h1>
     </div>
 
 
-    <div class="list" data-aos="zoom-in">
-        <div class="list_one" data-aos="zoom-in">
-            <table>
-                <thead>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-left-radius: 10px;">Attendance ID</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Employee ID</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Time Log In</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Time Log Out</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Date</th>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-right-radius: 10px;">Log Out</th>
+    <div class="button">
+        <a class="btn btn-brand" href="/Admin/Attendance">BACK</a>
+        <a class="btn btn-green" href="/Admin/Attendance/Log/create">Log In</a>
+    </div>
+
+
+    <div>
+        <div class="list">
+            <table class="Position_List">
+                <thead class="table_section">
+                    <th>Attendance ID</th>
+                    <th>Employee ID</th>
+                    <th>Time Log In</th>
+                    <th>Time Log Out</th>
+                    <th>Date</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     @foreach ($attendance as $a)
-                    <tr>
+                    <tr class='table_section'>
                         <td>{{$a->attendance_id}}</td>
                         <td>{{$a->employee_id}}</td>
                         <td>{{$a->in_time}}</td>
@@ -69,9 +43,43 @@
                         <td>{{$a->attendance_date}}</td>
                         <td>
                             @if (empty($a->out_time) && empty($a->out_status))
-                            <a class="btn btn-red" href="/Admin/Attendance/Log/{{$a->attendance_id}}/edit">Log Out</a>
+                            <button type="button" class="btn btn-red" data-toggle="modal" data-target="#logout_{{$a->attendance_id}}">
+                                LOG OUT
+                            </button>
                             @endif
 
+                            <div class="modal" id="logout_{{$a->attendance_id}}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Do you want to Log Out?</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal Body -->
+                                        <div class="modal-body">
+                                            <div>
+                                                <p id="realtime-date">{{ date('h:i:s') }}</p>
+                                            </div>
+                                        </div>
+                                        <!-- Modal Footer -->
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <form action="{{ route('Log.update', $a->attendance_id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="submit" class="btn btn-red" style="width: 100%" value="LOG OUT">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -86,4 +94,21 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function updateRealtimeDate() {
+            var dateElement = document.getElementById('realtime-date');
+            var currentDate = new Date();
+            var formattedDate = currentDate.toLocaleString('en-GB', {
+                hour12: false
+            });
+            dateElement.textContent = formattedDate;
+        }
+
+        updateRealtimeDate();
+        setInterval(updateRealtimeDate, 1000);
+    });
 </script>

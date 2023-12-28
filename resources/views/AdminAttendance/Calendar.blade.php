@@ -3,7 +3,6 @@
 
 <head>
     @include("Layout.Head")
-    @include('Layout.Button')
     <link rel="stylesheet" href="/css/calendar.css">
 </head>
 

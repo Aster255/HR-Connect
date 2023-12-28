@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 
 class PositionController extends Controller
 {
+
+    // Show the Organization
     public function index()
     {
         return view('AdminOrganization.Organization');
     }
 
+
+    // get New Position with Department set 
     public function create()
     {
         $department = Department::all();
@@ -26,6 +30,7 @@ class PositionController extends Controller
         return view('AdminOrganization.AddPosition', compact('positionlist', 'department'));
     }
 
+    // Store New position with Department set
     public function store(Request $request)
     {
         $newposition = new Position();
@@ -37,6 +42,8 @@ class PositionController extends Controller
         return redirect('Admin/Organization')->with('success', 'Position added successfully!');
     }
 
+
+    // Show Position List 
     public function show(string $id)
     {
         $position = Position::query()
@@ -88,7 +95,7 @@ class PositionController extends Controller
     {
         $position = Position::findOrFail($id);
         $position->update([
-            'position_name' => $request->input('position_name'),
+            'position_name' => $request->input('new_position_name'),
             'department_id' => $request->input('department_id'),
             'position_status' => $request->input('position_status')
         ]);

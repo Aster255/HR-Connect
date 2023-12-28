@@ -64,11 +64,11 @@ class DepartmentController extends Controller
         $department = Department::findOrFail($id);
 
         $department->update([
-            'department_name' => $request->input('department_name'),
+            'department_name' => $request->input('new_department_name'),
             'department_status' => $request->input('department_status')
         ]);
 
-        return redirect('Admin/Organization')->with('Success', 'Department Updated Successfully!');
+        return redirect('Admin/Organization')->with('success', 'Department Updated Successfully!');
     }
     public function destroy(string $id)
     {

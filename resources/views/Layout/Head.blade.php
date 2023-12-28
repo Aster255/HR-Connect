@@ -11,8 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;800&display=swap" rel="stylesheet">
 <!-- favicon -->
 <link rel="icon" type="image/png" href="{{ asset('img/Hrconnect.png') }}">
-
-
+<!-- JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/css/all.css" />

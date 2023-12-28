@@ -15,26 +15,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function LogOut()
-    {
-        if (Session::has('user_id')) {
-            Session::flush();
-        }
-
-        return redirect('/')->with('success', 'Successfully Log Out');
-    }
-    // ==========================================
+    // webpage of Login System
     public function ShowLogin()
     {
         return view('Login');
     }
 
+
+    //Logging In from the system
     public function Login(Request $request)
     {
         $user = User::where("username", "=", $request->username)->first();
 
         if ($user) {
-            if (Hash::check($request->input('password'), $user->password)) {
+            // if (Hash::check($request->input('password'), $user->password)) {
+            if ($request->input('password') === $user->password) {
                 $request->session()->put('user_id', $user->user_id);
                 $request->session()->put('role', $user->role);
                 $request->session()->put('employee_id', $user->employee_id);
@@ -54,12 +49,25 @@ class UserController extends Controller
         }
     }
 
+    // Logging Out from the system
+    public function LogOut()
+    {
+        if (Session::has('user_id')) {
+            Session::flush();
+        }
+
+        return redirect('/')->with('success', 'Successfully Log Out');
+    }
+
+    // Create User Webpage
     public function UserCreate()
     {
         $user = User::all();
         $employee = Employee::whereNotIn('employee_id', $user->pluck('employee_id'))->get();
         return view('CreateUser', compact('user', 'employee'));
     }
+
+    // User Creation
     public function UserStore(Request $request)
     {
         $user = new User();
@@ -74,6 +82,9 @@ class UserController extends Controller
 
         return redirect('/Admin/CreateUser')->with('success', 'Successfully Created User');
     }
+
+
+    // Show Profile;
     public function Profile(Request $request)
     {
         if (Session::has('user_id')) {

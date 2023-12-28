@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
+    // Show the DashBoard
     public function ShowDashboard(Request $request)
     {
         $user_id = $request->session()->get('user_id');
@@ -38,6 +39,8 @@ class AdminController extends Controller
         return view('AdminDashboard/Dashboard', compact('employee', 'totalemployee', 'totalEmployeesLoggedInToday', 'pendingLeaveCount'));
     }
 
+
+    //Show the Organization webpage
     public function ShowOrganization()
     {
         $positionlist = Position::query()
@@ -51,6 +54,8 @@ class AdminController extends Controller
             ->paginate(10);
         return view('AdminOrganization.Organization', compact('departmentlist', 'positionlist'));
     }
+
+    //Show the Attendance webpage
     public function ShowAttendace()
     {
         $attendance = Attendance::paginate(10);
@@ -92,10 +97,14 @@ class AdminController extends Controller
 
         return view('AdminAttendance.Attendance', compact('employee', 'totalEmployeesLoggedInToday', 'attendance', 'totalemployee', 'totalEmployeesLoggedInToday'));
     }
+
+    // SHow the Calendar webpage
     public function ShowCalendar()
     {
         return view('AdminAttendance.Calendar');
     }
+
+    // Show the Leave webpage
     public function ShowLeave()
     {
         $leave = Leaf::all();
@@ -104,6 +113,8 @@ class AdminController extends Controller
         return view('AdminLeave.Leave', compact('leave', 'leavetypes', 'employee'));
     }
 
+
+    // This is Demo info show
     public function trial()
     {
         return redirect()->back()->with('info', 'NOT PART OF OUR DEMO');

@@ -5,49 +5,28 @@
     @include("Layout.Head")
 
     <title>System Admin</title>
-    @include('Layout.Button')
-    <style>
-        .list {
-            margin-right: 20px;
-        }
-
-        .Position_List {
-            background-color: var(--Nuetrals100);
-            border-radius: 5px;
-
-        }
-
-        .Department_List {
-            background-color: var(--Nuetrals100);
-            border-radius: 10px;
-        }
-
-        table {
-            margin-block: 20px;
-            width: 100%;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        th {
-            padding-block: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/AdminShowPosition.css')}}">
 </head>
 
 <body>
     @include("Layout.NavBarAdmin")
-    <h1 class="Title_navbar" data-aos="zoom-in">{{$position->position_name}}</h1>
-    <div data-aos="zoom-in">
+
+    <div class="greetings">
+        <h1 class="Title_navbar">{{$position->position_name}}</h1>
+    </div>
+
+    <div class="button">
         <a class="btn btn-brand" href="/Admin/Organization">BACK</a>
-        <a href="/Admin/Organization/Position/{{$position->position_id}}/edit" class="btn btn-primary">EDIT</a>
+        <a class="btn btn-green" href="/Admin/Organization/Position/{{$position->position_id}}/edit">EDIT</a>
         <a class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$position -> position_id}}'>DELETE</a>
     </div>
+
     <div class=" modal fade" id="delete_{{$position -> position_id}}" tabindex="-1" data-aos="zoom-in">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampositioneModalLabel">Confirm deletion of Position {{$position-> position_name}}</h5>
+                    <h5 class="modal-title" id="exampositioneModalLabel">Confirm deletion of Position {{$position->
+                        position_name}}</h5>
                 </div>
                 <div class="modal-body">
                     Are you sure you want to delete this Position?
@@ -68,20 +47,20 @@
     </div>
 
     <div class="list">
-        <div class="Position_List" data-aos="zoom-in">
-            <table>
-                <thead>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-left-radius: 10px;">ID</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Name</th>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-right-radius: 10px;">Department</th>
+        <div>
+            <table class="Position_List">
+                <thead class="table_section">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
                 </thead>
                 <tbody>
                     @foreach ($employee as $emp)
-                    <tr>
-                        <th>{{$emp->position_id}}</th>
-                        <th>{{$emp->first_name}} {{$emp->last_name}}</th>
+                    <tr class="table_section">
+                        <td>{{$emp->position_id}}</td>
+                        <td>{{$emp->first_name}} {{$emp->last_name}}</td>
                         @foreach ($department as $dept)
-                        <th>{{$dept->department_name}}</th>
+                        <td>{{$dept->department_name}}</td>
                         @endforeach
                     </tr>
                     @endforeach
@@ -94,7 +73,8 @@
 
 </html>
 
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src=" https://unpkg.com/aos@next/dist/aos.js">
+</script>
 <script>
     AOS.init();
 </script>

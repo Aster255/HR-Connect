@@ -1,0 +1,53 @@
+.font-style {
+    color: var(--Brand);
+}
+/* ============================ */
+
+.agenda {
+    margin-inline: 10px;
+}
+
+.panel {
+    margin-top: 30px;
+
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+}
+
+.panel > * {
+    background: var(--Nuetrals100);
+    padding-inline: 30px;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification {
+    display: flex;
+    justify-content: center;
+}
+
+.notification > * {
+    width: 48%;
+    margin: 15px;
+}
+
+.notice_content,
+.event_content {
+    display: flex;
+    flex-direction: column;
+    background: var(--Nuetrals100);
+
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.notice_info,
+.event_info {
+    display: flex;
+    justify-content: space-between;
+}

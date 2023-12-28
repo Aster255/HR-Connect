@@ -2,73 +2,138 @@
     --fontstyle: "Open Sans", sans-serif;
     /* ------------------------------ */
     /* Nuetrals Colors */
-    --Nuetrals100: rgba(241, 243, 245, 1);
-    --Nuetrals200: rgba(233, 236, 239, 1);
-    --Nuetrals300: rgba(222, 226, 230, 1);
-    --Nuetrals400: rgba(206, 212, 218, 1);
-    --Nuetrals: rgba(173, 181, 189, 1);
-    --Nuetrals600: rgba(134, 142, 150, 1);
-    --Nuetrals700: rgba(73, 80, 87, 1);
-    --Nuetrals800: rgba(52, 58, 64, 1);
+    --Nuetrals100: rgb(241, 241, 241);
+    --Nuetrals: rgb(200, 200, 200);
     --Nuetrals900: rgba(33, 37, 41, 1);
 
     /* Brand Colors */
-    --Brand100: rgba(243, 214, 253, 1);
-    --Brand200: rgba(227, 174, 252, 1);
-    --Brand300: rgba(204, 133, 248, 1);
-    --Brand400: rgba(181, 101, 241, 1);
-    --Brand: rgba(146, 53, 232, 1);
-    --Brand600: rgba(113, 38, 199, 1);
-    --Brand700: rgba(85, 26, 167, 1);
-    --Brand800: rgba(59, 16, 134, 1);
+    --Brand-label: rgba(227, 174, 252, 1);
+
+    --Brand: rgba(146, 53, 232, 0.7);
+    --Brand-Hover: #b565f1;
     --Brand900: rgba(41, 10, 111, 1);
 
     /* Success Colors */
-    --Success100: rgba(244, 253, 213, 1);
-    --Success200: rgba(231, 252, 172, 1);
-    --Success300: rgba(212, 248, 130, 1);
-    --Success400: rgba(192, 241, 98, 1);
+    --Success-Hover: rgba(192, 241, 98, 1);
     --Success: rgba(162, 232, 49, 1);
-    --Success600: rgba(130, 199, 35, 1);
-    --Success700: rgba(101, 167, 24, 1);
-    --Success800: rgba(75, 134, 15, 1);
     --Success900: rgba(56, 111, 9, 1);
 
     /* Fail Colors */
-    --Fail100: rgba(254, 229, 215, 1);
-    --Fail200: rgba(253, 196, 177, 1);
-    --Fail300: rgba(249, 156, 137, 1);
-    --Fail400: rgba(243, 118, 106, 1);
+    --Fail-Hover: rgb(236, 93, 80);
     --Fail: rgba(235, 59, 59, 1);
-    --Fail600: rgba(202, 43, 56, 1);
-    --Fail700: rgba(169, 29, 53, 1);
-    --Fail800: rgba(136, 18, 49, 1);
     --Fail900: rgba(112, 11, 46, 1);
 
     /* Information Colors */
-    --Information100: rgba(215, 243, 254, 1);
-    --Information200: rgba(177, 228, 253, 1);
-    --Information300: rgba(137, 206, 249, 1);
-    --Information400: rgba(106, 184, 243, 1);
+    --Information-Hover: rgba(106, 184, 243, 1);
     --Information: rgba(59, 150, 235, 1);
-    --Information600: rgba(43, 117, 202, 1);
-    --Information700: rgba(29, 87, 169, 1);
-    --Information800: rgba(18, 61, 136, 1);
     --Information900: rgba(11, 42, 112, 1);
 
     /* Warning Colors */
-    --Warning100: rgba(254, 245, 214, 1);
-    --Warning200: rgba(253, 232, 175, 1);
-    --Warning300: rgba(249, 215, 133, 1);
-    --Warning400: rgba(243, 196, 102, 1);
+    --Warning-Hover: rgba(243, 196, 102, 1);
     --Warning: rgba(235, 168, 54, 1);
-    --Warning600: rgba(202, 135, 39, 1);
-    --Warning700: rgba(169, 105, 27, 1);
-    --Warning800: rgba(136, 78, 17, 1);
     --Warning900: rgba(112, 59, 10, 1);
 
     /* ------------------------------ */
     --light: 200;
     --normal: 400;
     --bold: 700;
+}
+
+/* button */
+.btn-brand {
+    margin-block: 8px;
+    background-color: var(--Brand);
+    color: var(--Nuetrals100);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-brand:hover {
+    background-color: var(--Brand-Hover);
+    color: var(--Nuetrals100);
+}
+
+.btn-red {
+    margin-block: 8px;
+    background-color: var(--Fail);
+    color: var(--Nuetrals100);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background-color: var(--Fail-Hover);
+    color: var(--Nuetrals100);
+}
+
+.btn-green {
+    margin-block: 8px;
+    background-color: var(--Success);
+    color: var(--Nuetrals900);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-green:hover {
+    background-color: var(--Success-Hover);
+    color: var(--Nuetrals900);
+}
+
+.btn-grey {
+    margin-block: 8px;
+    background-color: rgba(173, 181, 189, 1);
+    color: rgba(33, 37, 41, 1);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-grey:hover {
+    background-color: rgba(134, 142, 150, 1);
+    color: rgba(244, 253, 213, 1);
+}
+
+.btn-info {
+    margin-block: 8px;
+    background-color: var(--Information);
+    color: var(--Nuetrals100);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-info:hover {
+    background-color: var(--Information-Hover);
+    color: var(--Nuetrals100);
+}
+
+/* infortion */
+.Title_navbar {
+    color: var(--Brand);
+}
+
+.greetings {
+    background-color: var(--Nuetrals100);
+    padding: 10px 20px;
+}
+
+.button {
+    display: flex;
+    justify-content: start;
+    gap: 30px;
+
+    margin-left: 20px;
 }

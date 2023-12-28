@@ -4,64 +4,58 @@
 <head>
     @include("Layout.Head")
     <title>System Admin</title>
-    @include("layout.Button")
-    <style>
-        .list {
-            margin-right: 20px;
-        }
+    <link rel="stylesheet" href="{{ asset('css/AdminEmployee.css') }}">
 
-        .list_one {
-            background-color: var(--Nuetrals100);
-            border-radius: 5px;
-
-        }
-
-        .list_two {
-            background-color: var(--Nuetrals100);
-            border-radius: 10px;
-        }
-
-        table {
-            margin-block: 20px;
-            width: 100%;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        th {
-            padding-block: 10px;
-        }
-
-        td {
-            padding-block: 10px;
-        }
-    </style>
 </head>
 
 <body>
     @include("Layout.NavBarAdmin")
-    <h1 class="Title_navbar" data-aos="zoom-in">EMPLOYEE</h1>
-    <div data-aos="zoom-in">
+    <div class="greetings">
+        <h1 class="Title_navbar" data-aos="zoom-in">EMPLOYEE</h1>
+    </div>
+
+    <div class="button">
         <a class="btn btn-brand" href="/Admin/Employee/create">ADD EMPLOYEE</a>
     </div>
     <div class="list">
         <div class="list_one" data-aos="zoom-in">
             <table>
-                <thead>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-left-radius: 10px;">Employee ID</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Employee Name</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Status</th>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-right-radius: 10px;">Date</th>
+                <thead class="table_section">
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Status</th>
+                    <th>Date</th>
                 </thead>
                 <tbody>
+                    @php
+                    $hasUpdatesForToday = false;
+                    @endphp
+
                     @foreach ($employees as $e)
-                    <tr>
-                        <td style="width: 20%">{{$e->employee_id}}</td>
-                        <td style="width: 20%">{{$e->first_name}} {{$e->last_name}}</td>
-                        <td style="width: 20%">{{$e->employee_status}}</td>
-                        <td style="width: 20%">{{$e->employee_timestamp}}</td>
+                    @php
+                    $formattedDate = date('Y-m-d', strtotime($e->employee_timestamp));
+                    @endphp
+
+                    @if ($formattedDate == now()->toDateString())
+                    @php
+                    $hasUpdatesForToday = true;
+                    @endphp
+
+                    <tr class="table_section">
+                        <td>{{$e->employee_id}}</td>
+                        <td>{{$e->first_name}} {{$e->last_name}}</td>
+                        <td>{{$e->employee_status}}</td>
+                        <td>{{$e->employee_timestamp}}</td>
                     </tr>
+                    @endif
                     @endforeach
+
+                    @if (!$hasUpdatesForToday)
+                    <tr>
+                        <td colspan="4" style='text-align: center;'>No available updates for today.</td>
+                    </tr>
+                    @endif
+
                 </tbody>
             </table>
 
@@ -69,22 +63,22 @@
         <div class="list_two" data-aos="zoom-in">
             <table>
                 <thead>
-                    <tr>
-                        <th colspan="4" style="background-color: rgba(206, 212, 218, 1); border-top-right-radius: 10px; border-top-left-radius: 10px;" colspan="3">Employee List</th>
+                    <tr class="table_title">
+                        <th colspan="4">Employee List</th>
                     </tr>
-                    <tr>
-                        <th style="width: 20%">Picture</th>
-                        <th style="width: 10%">Employee ID</th>
-                        <th style="width: 40%">Employee Name</th>
-                        <th style="width: 30%"></th>
+                    <tr class="table_section">
+                        <th>Picture</th>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        @foreach ($employees as $e)
-                    <tr>
-                        <td><img src="/img/user_profiles/{{$e->picture}}" alt="{{$e->first_name}} pictures" width="100px"></td>
+                    @foreach ($employees as $e)
+                    <tr class="table_section">
+                        <td><img src="/img/user_profiles/{{$e->picture}}" alt="{{$e->first_name}} pictures"
+                                width="100px"></td>
                         <td>{{$e->employee_id}}</td>
                         <td>{{$e->first_name}} {{$e->last_name}}</td>
                         <td>

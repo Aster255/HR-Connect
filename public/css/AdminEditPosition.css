@@ -1,0 +1,28 @@
+.section_edit {
+    display: flex; 
+    justify-content: center;
+}
+
+.current_name {
+    color: var(--Brand);
+    font-size: 25px;
+    text-align: center;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#new_position_name,
+#department_id {
+    border-radius: 5px;
+    border: solid 1px var(--Brand);
+    padding-block: 5px;
+    transition: border-color 0.3s ease;
+}
+
+#new_position_name:focus,
+#department_id:focus {
+    outline: 2px solid var(--Brand-Hover);
+}

@@ -16,26 +16,28 @@
         <a disabled href="/trial"><i class="fa-solid fa-user-group"></i><span class="hide"> RECRUITMENT</span></a>
         <hr style="color: white; font-weight: 700;">
         <button class="CreateUser" href="/Admin/CreateUser"><span class="hide">Create User</span></button>
+
+        <div class="messege">
+            @include('Layout.Messege')
+        </div>
+        <div class="navbarhead">
+            <div class="dropdown" data-aos="slide-left" data-aos-duration="4000">
+                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="900,10">
+                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                </button>
+                <ul class="dropdown-menu me-3">
+                    <li><a class="dropdown-item" href="/Profile">Profile</a></li>
+                    <li><a class="dropdown-item" href="/trial">Setting</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
 <head>
-    <div class="messege">
-        @include('Layout.Messege')
-    </div>
-    <div class="navbarhead">
-        <div class="dropdown" data-aos="slide-left" data-aos-duration="4000">
-            <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="900,10">
-                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-            </button>
-            <ul class="dropdown-menu me-3">
-                <li><a class="dropdown-item" href="/Profile">Profile</a></li>
-                <li><a class="dropdown-item" href="/trial">Setting</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
-            </ul>
-        </div>
-    </div>
+
 </head>

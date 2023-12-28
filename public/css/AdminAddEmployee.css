@@ -1,0 +1,46 @@
+#image-preview {
+    width: 300px;
+    border-radius: 50%;
+    height: 300px;
+
+    margin-bottom: 15px;
+
+    object-fit: cover;
+}
+.profile-picture {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section_title {
+    color: var(--Brand);
+}
+.section {
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--Nuetrals100);
+
+    margin: 15px;
+    padding: 15px;
+}
+.form_group {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+}
+.form_group > * {
+    width: 50%;
+    margin-block: 5px;
+    height: 40px;
+}
+.form_group > input,
+.form_group select,
+.form_group textarea {
+    border: solid 1px var(--Brand);
+}
+.divider {
+    border: 1px solid var(--Brand);
+}
