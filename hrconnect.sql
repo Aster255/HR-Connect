@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2023 at 08:45 AM
+-- Generation Time: Dec 29, 2023 at 02:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,6 +39,14 @@ CREATE TABLE `attendances` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`attendance_id`, `employee_id`, `attendance_date`, `location_id`, `in_time`, `in_status`, `out_time`, `out_status`, `created_at`) VALUES
+(50, 22, '2023-12-29', 1, '20:32:30', 'Early In', '20:48:57', 'Early Out', '2023-12-29 12:48:57'),
+(51, 22, '2023-12-29', 1, '20:50:33', 'Early In', '20:50:35', 'Early Out', '2023-12-29 12:50:35');
+
 -- --------------------------------------------------------
 
 --
@@ -58,7 +66,12 @@ CREATE TABLE `departments` (
 
 INSERT INTO `departments` (`department_id`, `department_name`, `department_status`, `department_timestamp`) VALUES
 (1, 'Human Resource Developement', 'Added', '2023-08-01 16:24:00'),
-(2, 'Finance Department', 'Added', '2023-08-01 16:24:20');
+(2, 'Finance & Accounting', 'Update', '2023-12-26 08:59:23'),
+(3, 'Maintenance', 'Added', '2023-12-26 08:54:28'),
+(4, 'Sales & Marketing', 'Update', '2023-12-26 08:57:51'),
+(5, 'Business Planning', 'Added', '2023-12-26 08:56:01'),
+(6, 'Research & Development', 'Added', '2023-12-26 08:56:54'),
+(7, 'Operations', 'Added', '2023-12-26 08:57:01');
 
 -- --------------------------------------------------------
 
@@ -89,7 +102,11 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `position_id`, `department_id`, `first_name`, `last_name`, `hire_date`, `salary`, `employee_timestamp`, `employee_status`, `title`, `middle_name`, `maiden_name`, `nick_name`, `picture`, `schedule_id`) VALUES
-(18, 1, 1, 'first', 'last', '2023-12-03', 15000.00, '2023-12-05 23:09:47', 'Added', 'Mr', 'middle', 'maiden', 'nick', 'profile.png', 9);
+(18, 1, 1, 'Do Do', 'Hee', '2023-12-03', 15000.00, '2023-12-29 13:09:04', 'Added', 'Mr', 'Bok', 'maiden', 'Doo', '202312292109000000Am9 Commercial.jpg', 9),
+(19, 3, 2, 'Morris', 'Hutalla', '2023-12-25', 25000.00, '2023-12-29 12:55:49', 'Added', 'Mr', 'Crisostomo', NULL, 'Maurisyo', 'profile.png', 9),
+(20, 2, 1, 'Marc', NULL, '2023-12-25', 150000.00, '2023-12-29 12:55:44', 'Added', 'Mrs', 'Lowery', NULL, NULL, 'profile.png', 9),
+(21, 2, 1, 'Grant', 'Jeffrey', '2023-12-05', 15000.00, '2023-12-27 08:56:44', 'Added', 'Mr', 'Shepherd', NULL, 'Grant', 'profile.png', 9),
+(22, 2, 4, 'Am9', 'Guiamel', '2023-12-05', 25200.00, '2023-12-29 12:55:56', 'Added', 'Mrs', 'Commercial', NULL, NULL, 'profile.png', 9);
 
 -- --------------------------------------------------------
 
@@ -105,38 +122,15 @@ CREATE TABLE `employee_docs` (
   `hdmf` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `employee_educations`
+-- Dumping data for table `employee_docs`
 --
 
-CREATE TABLE `employee_educations` (
-  `record_no` int(20) NOT NULL,
-  `level` int(20) DEFAULT NULL,
-  `school` varchar(90) DEFAULT NULL,
-  `course` varchar(100) DEFAULT NULL,
-  `year_from` date DEFAULT NULL,
-  `year_to` date DEFAULT NULL,
-  `employee_id` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employee_employments`
---
-
-CREATE TABLE `employee_employments` (
-  `employee_id` int(5) DEFAULT NULL,
-  `record_no` int(20) NOT NULL,
-  `from_year` date DEFAULT NULL,
-  `to_year` date DEFAULT NULL,
-  `position` varchar(100) DEFAULT NULL,
-  `employeer` varchar(100) DEFAULT NULL,
-  `experience` varchar(100) DEFAULT NULL,
-  `monthly_salary` int(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `employee_docs` (`employee_id`, `sss`, `tin`, `philhealth`, `hdmf`) VALUES
+(19, NULL, NULL, NULL, NULL),
+(20, NULL, NULL, NULL, NULL),
+(21, NULL, NULL, NULL, NULL),
+(22, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -150,13 +144,13 @@ CREATE TABLE `employee_informations` (
   `place_of_birth` varchar(90) DEFAULT NULL,
   `nationality` varchar(90) DEFAULT NULL,
   `civil_status` varchar(90) DEFAULT NULL,
-  `mobile_no` int(20) DEFAULT NULL,
+  `mobile_no` varchar(200) DEFAULT NULL,
   `email_address` varchar(90) DEFAULT NULL,
   `zip` varchar(10) DEFAULT NULL,
   `city` varchar(90) DEFAULT NULL,
   `street` varchar(90) DEFAULT NULL,
   `province` varchar(90) DEFAULT NULL,
-  `phone_no` int(20) DEFAULT NULL,
+  `phone_no` varchar(200) DEFAULT NULL,
   `gender` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -165,7 +159,9 @@ CREATE TABLE `employee_informations` (
 --
 
 INSERT INTO `employee_informations` (`employee_id`, `date_of_birth`, `place_of_birth`, `nationality`, `civil_status`, `mobile_no`, `email_address`, `zip`, `city`, `street`, `province`, `phone_no`, `gender`) VALUES
-(18, '1999-07-06', 'Philippines', 'Pilipino', 'Single', 997355124, 'firstmiddlelast@yahoo.com', '4120', 'City', 'Street', 'Cavite', 997355124, 'Female');
+(18, '1999-07-06', 'Philippines', 'Pilipino', 'single', '997355124', 'DooDooHeeMyDemon@yahoo.com', '4120', 'Cavite City', 'Nia Road', 'Cavite', '997355124', 'Female'),
+(21, '1998-12-05', 'Imus city', 'Philippines', 'single', '09983551211', 'grantMiddle@yahoo.com', '4103', 'Pasig', 'Francisco', 'Manila', '0465812441', 'female'),
+(22, '1987-12-02', 'Pasig', 'Philippines', 'married', '0999788521', 'Am9Commercial@yahoo.com', '4103', 'pasig', 'Pasig', 'Manila', '099785520', 'female');
 
 -- --------------------------------------------------------
 
@@ -177,24 +173,17 @@ CREATE TABLE `employee_notifies` (
   `employee_id` int(5) NOT NULL,
   `name` varchar(90) DEFAULT NULL,
   `relationship` varchar(90) DEFAULT NULL,
-  `mobile_no` int(20) DEFAULT NULL,
+  `mobile_no` varchar(200) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `events`
+-- Dumping data for table `employee_notifies`
 --
 
-CREATE TABLE `events` (
-  `event_id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `start` datetime NOT NULL,
-  `end` datetime NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `employee_notifies` (`employee_id`, `name`, `relationship`, `mobile_no`, `address`) VALUES
+(21, 'Ernest Shepherd', 'Father', '09975884312', '4103 Francisco Pasic Manila'),
+(22, 'Saudi Roar', 'Father', '0997844125', 'Pasig Manila');
 
 -- --------------------------------------------------------
 
@@ -211,6 +200,13 @@ CREATE TABLE `leaves` (
   `approve` varchar(90) DEFAULT NULL,
   `leavetype_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `leaves`
+--
+
+INSERT INTO `leaves` (`leave_id`, `employee_id`, `start_date`, `end_date`, `status`, `approve`, `leavetype_id`) VALUES
+(16, 22, '2023-12-05', '2023-12-10', 'pending', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -256,94 +252,6 @@ INSERT INTO `locations` (`location_id`, `location`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(13, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(14, '2023_07_22_183811_create_events_table', 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `overtime`
---
-
-CREATE TABLE `overtime` (
-  `ot_id` int(11) NOT NULL,
-  `employee_id` int(11) DEFAULT NULL,
-  `ot_date` date DEFAULT NULL,
-  `ot_hours` decimal(5,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payroll_transactions`
---
-
-CREATE TABLE `payroll_transactions` (
-  `transaction_no` int(11) NOT NULL,
-  `employee_id` int(5) DEFAULT NULL,
-  `tax_code` varchar(10) DEFAULT NULL,
-  `payroll_period` int(11) DEFAULT NULL,
-  `basic_salary` decimal(10,2) DEFAULT NULL,
-  `gross_income` decimal(10,2) DEFAULT NULL,
-  `withholding_tax` decimal(10,2) DEFAULT NULL,
-  `sss_cont` decimal(10,2) DEFAULT NULL,
-  `pf_cont` decimal(10,2) DEFAULT NULL,
-  `pag_ibig_cont` decimal(10,2) DEFAULT NULL,
-  `philhealth_cont` decimal(10,2) DEFAULT NULL,
-  `total_deduction` decimal(10,2) DEFAULT NULL,
-  `net_pay` decimal(10,2) DEFAULT NULL,
-  `year_to_date_basic` decimal(10,2) DEFAULT NULL,
-  `year_to_date_non_basic` decimal(10,2) DEFAULT NULL,
-  `taxable_bonus` decimal(10,2) DEFAULT NULL,
-  `taxable_income` decimal(10,2) DEFAULT NULL,
-  `tax_exemption` decimal(10,2) DEFAULT NULL,
-  `tax_withheld` decimal(10,2) DEFAULT NULL,
-  `vacation_leave_hours` decimal(10,2) DEFAULT NULL,
-  `sick_leave_hours` decimal(10,2) DEFAULT NULL,
-  `last_leave_availed` date DEFAULT NULL,
-  `leave_balance` decimal(10,2) DEFAULT NULL,
-  `pay_date` date DEFAULT NULL,
-  `overtime_pay` decimal(10,2) DEFAULT NULL,
-  `attendance_deductions` decimal(10,2) DEFAULT NULL,
-  `leave_deductions` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `personal_access_tokens`
---
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `positions`
 --
 
@@ -363,7 +271,10 @@ CREATE TABLE `positions` (
 INSERT INTO `positions` (`position_id`, `department_id`, `position_name`, `position_status`, `position_timestamp`, `deleted_at`) VALUES
 (1, 1, 'Head of HR', 'Added', '2023-08-01 16:24:09', NULL),
 (2, 1, 'Human Resource', 'Added', '2023-09-22 14:12:50', NULL),
-(3, 2, 'Accounting', 'Added', '2023-12-05 21:57:45', NULL);
+(3, 2, 'Accounting 2', 'Update', '2023-12-26 07:59:00', NULL),
+(4, 4, 'Team Leader', 'Added', '2023-12-26 11:16:43', NULL),
+(5, 5, 'Team leader', 'Added', '2023-12-26 11:16:54', NULL),
+(6, 7, 'Team Leader', 'Added', '2023-12-26 11:17:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -381,7 +292,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`role_id`, `role_name`) VALUES
-(1, 'Admin'),
+(1, 'admin'),
 (2, 'employee');
 
 -- --------------------------------------------------------
@@ -403,7 +314,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `employee_id`, `role`) VALUES
-(6, 'User', 'User1234', 18, 1);
+(7, 'User_Am9', '$2y$10$BkHs8GaWHxXvZdMd9yQC7ef9/TwHQfYAHKF8ZLNLqTS/072PLfl/e', 22, 2),
+(8, 'Admin', '$2y$10$GDb9yAFBiwMiGvW3cTmanOwATwGl4nKk6SiTAA2M5yOaHNebrE7Ua', 21, 1),
+(9, 'User', '$2y$10$l93hRKu6oFJz7VmH/Fdte.2wexC/Y7RtZ.YIRXPwb6QK53IX3402.', 18, 1);
 
 -- --------------------------------------------------------
 
@@ -422,7 +335,8 @@ CREATE TABLE `workschedule` (
 --
 
 INSERT INTO `workschedule` (`schedule_id`, `start_time`, `end_time`) VALUES
-(9, '08:00:00', '09:00:00');
+(9, '08:00:00', '09:00:00'),
+(10, '10:00:00', '17:00:00');
 
 --
 -- Indexes for dumped tables
@@ -454,19 +368,6 @@ ALTER TABLE `employee_docs`
   ADD PRIMARY KEY (`employee_id`);
 
 --
--- Indexes for table `employee_educations`
---
-ALTER TABLE `employee_educations`
-  ADD PRIMARY KEY (`record_no`),
-  ADD UNIQUE KEY `record_no` (`record_no`);
-
---
--- Indexes for table `employee_employments`
---
-ALTER TABLE `employee_employments`
-  ADD PRIMARY KEY (`record_no`);
-
---
 -- Indexes for table `employee_informations`
 --
 ALTER TABLE `employee_informations`
@@ -479,12 +380,6 @@ ALTER TABLE `employee_informations`
 ALTER TABLE `employee_notifies`
   ADD PRIMARY KEY (`employee_id`),
   ADD UNIQUE KEY `mobile_no` (`mobile_no`);
-
---
--- Indexes for table `events`
---
-ALTER TABLE `events`
-  ADD PRIMARY KEY (`event_id`);
 
 --
 -- Indexes for table `leaves`
@@ -503,33 +398,6 @@ ALTER TABLE `leave_types`
 --
 ALTER TABLE `locations`
   ADD PRIMARY KEY (`location_id`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `overtime`
---
-ALTER TABLE `overtime`
-  ADD PRIMARY KEY (`ot_id`);
-
---
--- Indexes for table `payroll_transactions`
---
-ALTER TABLE `payroll_transactions`
-  ADD PRIMARY KEY (`transaction_no`),
-  ADD UNIQUE KEY `employee_id` (`employee_id`);
-
---
--- Indexes for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
 -- Indexes for table `positions`
@@ -565,55 +433,43 @@ ALTER TABLE `workschedule`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `employee_docs`
 --
 ALTER TABLE `employee_docs`
-  MODIFY `employee_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `employee_employments`
---
-ALTER TABLE `employee_employments`
-  MODIFY `record_no` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `employee_informations`
 --
 ALTER TABLE `employee_informations`
-  MODIFY `employee_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `employee_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `employee_notifies`
 --
 ALTER TABLE `employee_notifies`
-  MODIFY `employee_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `events`
---
-ALTER TABLE `events`
-  MODIFY `event_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `leaves`
 --
 ALTER TABLE `leaves`
-  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `leave_types`
@@ -628,22 +484,10 @@ ALTER TABLE `locations`
   MODIFY `location_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `positions`
 --
 ALTER TABLE `positions`
-  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -655,13 +499,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `workschedule`
 --
 ALTER TABLE `workschedule`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
