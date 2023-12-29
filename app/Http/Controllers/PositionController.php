@@ -7,7 +7,7 @@ use App\Models\Position;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
-class PositionController extends Controller
+class PositionController extends BaseController
 {
 
     // Show the Organization

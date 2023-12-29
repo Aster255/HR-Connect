@@ -8,7 +8,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use DB;
 
-class DepartmentController extends Controller
+class DepartmentController extends BaseController
 {
     public function index()
     {

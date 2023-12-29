@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LeaveType;
 use Illuminate\Http\Request;
 
-class LeaveCreate extends Controller
+class LeaveCreate extends BaseController
 {
     public function LeaveCreate()
     {

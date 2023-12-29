@@ -8,7 +8,7 @@ use App\Models\Employee;
 use App\Models\LeaveType;
 use Illuminate\Http\Request;
 
-class LeaveController extends Controller
+class LeaveController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,15 @@ class LeaveController extends Controller
     public function index()
     {
         if (Session::has('user_id')) {
+            $employee = Employee::query()
+                ->select('*')
+                ->where("employee_id", "=", Session::get("employee_id"))
+                ->first();
+
             $leaves = LeaveType::all();
             $leave = Leaf::all();
 
-            return view('Employee.Leave', compact('leave', 'leaves'));
+            return view('Employee.Leave', compact('leave', 'leaves', 'employee'));
         }
     }
 

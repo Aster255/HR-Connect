@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $picture
  * @property int|null $schedule_id
  * 
+ * @property Department|null $department
  * @property Collection|User[] $users
  *
  * @package App\Models
@@ -64,6 +65,11 @@ class Employee extends Model
 		'picture',
 		'schedule_id'
 	];
+
+	public function department()
+	{
+		return $this->belongsTo(Department::class);
+	}
 
 	public function users()
 	{

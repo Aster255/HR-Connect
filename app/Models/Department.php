@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $department_status
  * @property Carbon $department_timestamp
  * 
+ * @property Collection|Employee[] $employees
  * @property Collection|Position[] $positions
  *
  * @package App\Models
@@ -37,6 +38,11 @@ class Department extends Model
 		'department_status',
 		'department_timestamp'
 	];
+
+	public function employees()
+	{
+		return $this->hasMany(Employee::class);
+	}
 
 	public function positions()
 	{

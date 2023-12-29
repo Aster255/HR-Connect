@@ -5,9 +5,20 @@
 
     justify-content: space-between;
 }
-
+a,
+a:hover {
+    text-decoration: none;
+    color: var(--Brand);
+    text-align: center;
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .logo > img {
     width: 60px;
+    object-fit: cover;
 }
 
 .navbar {
@@ -36,4 +47,37 @@
 .CreateUser:hover {
     background-color: var(--Brand-label);
     color: var(--Nuetrals100);
+}
+
+.profile_picture {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 20px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
 }

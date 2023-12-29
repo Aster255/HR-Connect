@@ -4,7 +4,6 @@
 <head>
     @include("Layout.Head")
     <title>System Admin</title>
-    @include('Layout.Button')
     <style>
         .section {
             margin-bottom: 20px;

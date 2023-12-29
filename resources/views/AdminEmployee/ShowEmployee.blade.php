@@ -15,12 +15,14 @@
 
     <div class="button">
         <a class="btn btn-brand" href="{{ route('Employee.index') }}">BACK</a>
-        <a class="btn btn-brand" href="/Admin/Employee/{{$employee->employee_id}}/edit">EDIT</a>
-        <a class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$employee->employee_id}}'>DELETE</a>
+        <button type="button" class="btn btn-red" data-toggle="modal" data-target="#delete_{{$employee->employee_id}}">
+            DELETE
+        </button>
     </div>
 
-    <div class="modal fade" id="delete_{{$employee->employee_id}}" tabindex="-1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="delete_{{$employee->employee_id}}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Confirm deletion of Employee</h5>
@@ -29,9 +31,7 @@
                     Are you sure you want to delete this {{$employee->first_name}} {{$employee->last_name}}?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
                     <form action="/Admin/Employee/{{$employee->employee_id}}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -41,11 +41,36 @@
             </div>
         </div>
     </div>
+    </div>
+
+
 
     {{-- picture --}}
     <div class="picture">
         <img src="/img/user_profiles/{{$employee->picture}}" alt="{{$employee->first_name}} pictures" width="100px">
     </div>
+
+    <div class="picturebtn">
+        <form action="/Admin/Employee/{{$employee->employee_id}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <input type="file" name="picture" id="picture" accept="image/*" hidden>
+            <button type="button" class="btn btn-green" onclick="chooseFile()">Change Profile</button>
+
+            <button type="submit" class="btn btn-brand">Update Picture</button>
+        </form>
+
+        <script>
+            function chooseFile() {
+            document.getElementById('picture').click();
+        }
+        </script>
+    </div>
+
+
+
+
 
     {{-- Personal Information --}}
     <div class="section">
@@ -56,7 +81,7 @@
             </button>
         </div>
 
-        {{-- edit section --}}
+        {{-- edit section information --}}
         <div class="modal fade" id="EditpersonalInformation" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -139,16 +164,69 @@
 
         <div class="top_section">
             <h4 class="section_title">Other Information</h4>
-            <button type="button" class="btn btn-brand" data-toggle="modal" data-target="#EditpersonalInformation">
+            <button type="button" class="btn btn-brand" data-toggle="modal" data-target="#EditOtherInformation">
                 Edit
             </button>
+        </div>
+
+        {{-- edit section other information --}}
+        <div class="modal fade" id="EditOtherInformation" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Edit Other Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data"
+                            method="POST" class="form-group">
+                            @csrf
+                            @method('PUT')
+
+                            <label for="date_of_birth">Date of Birth: </label>
+                            <input type="text" id="date_of_birth" value="{{$employeeinformation->date_of_birth}}">
+
+                            <label for="place_of_birth">Place of Birth: </label>
+                            <input type="text" id="place_of_birth" value="{{$employeeinformation->place_of_birth}}">
+
+                            <label for="nationality">Nationality: </label>
+                            <input type="text" id="nationality" value="{{$employeeinformation->nationality}}">
+
+                            <label for="civil_status">Civil Status: </label>
+                            <select name="civil_status" id="civil_status">
+                                <option value="" {{ $employeeinformation->civil_status === "" ? 'selected' : '' }}>
+                                </option>
+                                <option value="single" {{ $employeeinformation->civil_status === "single" ?
+                                    'selected' : '' }}>Single</option>
+                                <option value="married" {{ $employeeinformation->civil_status === "married" ?
+                                    'selected' : '' }}>Married</option>
+                                <option value="divorced" {{ $employeeinformation->civil_status === "divorced" ?
+                                    'selected' : '' }}>Divorced</option>
+                                <option value="widowed" {{ $employeeinformation->civil_status === "widowed" ?
+                                    'selected' : '' }}>Widowed</option>
+                            </select>
+
+                            <label for="gender">Gender: </label>
+                            <input type="text" id="gender" value="{{$employeeinformation->gender}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         {{-- other information --}}
         <div class="other_information">
             <div>
                 <p class="title_information">Date of Birth: </p>
-                <p class="information">{{$employeeinformation->date_of_birth}}</p>
+                <p class="information">{{ $employeeinformation->date_of_birth ?
+                    \Carbon\Carbon::parse($employeeinformation->date_of_birth)->format('Y-m-d') : '' }}</p>
             </div>
             <div>
                 <p class="title_information">Place of Birth: </p>
@@ -160,7 +238,7 @@
             </div>
             <div>
                 <p class="title_information">Status: </p>
-                <p class="information">{{$employeeinformation->status}}</p>
+                <p class="information">{{$employeeinformation->civil_status}}</p>
             </div>
             <div>
                 <p class="title_information">Gender: </p>
@@ -171,9 +249,63 @@
 
         <div class="top_section">
             <h4 class="section_title">Contact Information</h4>
-            <button type="button" class="btn btn-brand" data-toggle="modal" data-target="#EditpersonalInformation">
+            <button type="button" class="btn btn-brand" data-toggle="modal" data-target="#EditContactInformation">
                 Edit
             </button>
+        </div>
+
+        {{-- edit section contact-information --}}
+        <div class="modal fade" id="EditContactInformation" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Edit Main Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data"
+                            method="POST" class="form-group">
+                            @csrf
+                            @method('PUT')
+
+                            <!-- Phone No. -->
+                            <label for="mobile_no">Phone No. :</label>
+                            <input type="text" name="mobile_no" id="mobile_no"
+                                value="{{$employeeinformation->mobile_no}}">
+
+                            <!-- Telephone No. -->
+                            <label for="phone_no">Telephone No. :</label>
+                            <input type="text" name="phone_no" id="phone_no" value="{{$employeeinformation->phone_no}}">
+
+                            <!-- Email -->
+                            <label for="email_address">Email:</label>
+                            <input type="email" name="email_address" id="email_address"
+                                value="{{$employeeinformation->email_address}}">
+
+                            <!-- Address -->
+                            <label for="zip">Zip Code:</label>
+                            <input type="text" name="zip" id="zip" value="{{$employeeinformation->zip}}">
+
+                            <label for="street">Street:</label>
+                            <input type="text" name="street" id="street" value="{{$employeeinformation->street}}">
+
+                            <label for="city">City:</label>
+                            <input type="text" name="city" id="city" value="{{$employeeinformation->city}}">
+
+                            <label for="province">Province:</label>
+                            <input type="text" name="province" id="province" value="{{$employeeinformation->province}}">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-green">Save changes</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
         {{-- contact_information --}}
@@ -195,7 +327,9 @@
                 <p class="information">{{$employeeinformation->zip}}, {{$employeeinformation->street}},
                     {{$employeeinformation->city}} ,{{$employeeinformation->province}}" .</p>
             </div>
-            <div></div>
+            <div>
+
+            </div>
 
 
 
@@ -229,35 +363,41 @@
                             method="POST" class="form-group">
                             @csrf
                             @method('PUT')
-                            <div>
-                                <!-- position -->
-                                <label for="position_id">Position:</label>
-                                <select name="position_id" id="position_id">
-                                    <option value="">Select Position</option>
-                                    @foreach ($positionlist as $pos)
-                                    <option value="{{ $pos->position_id }}">{{ $pos->position_name }}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <!-- department -->
-                                <label for="department_id">Department:</label>
-                                <select name="department_id" id="department_id">
-                                    <option value="">Select Department</option>
-                                    @foreach ($departmentlist as $dept)
-                                    <option value="{{ $dept->department_id }}">{{ $dept->department_name }}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <!-- Salary -->
-                                <label for="salary">Salary:</label>
-                                <input type="number" name="salary" id="salary" min="5000">
-                                <hr>
-                            </div>
+
+                            <!-- position -->
+                            <label for="position_id">Position:</label>
+                            <select name="position_id" id="position_id">
+                                <option value="">Select Position</option>
+                                @foreach ($positionlist as $pos)
+                                <option value="{{ $pos->position_id }}" @if($pos->position_id == $employee->position_id)
+                                    selected @endif>
+                                    {{ $pos->position_name }}
+                                </option>
+                                @endforeach
+                            </select>
+
+                            <!-- department -->
+                            <label for="department_id">Department:</label>
+                            <select name="department_id" id="department_id">
+                                <option value="">Select Department</option>
+                                @foreach ($departmentlist as $dept)
+                                <option value="{{ $dept->department_id }}" @if($dept->department_id ==
+                                    $employee->department_id) selected @endif>
+                                    {{ $dept->department_name }}
+                                </option>
+                                @endforeach
+                            </select>
+
+                            <!-- Salary -->
+                            <label for="salary">Salary:</label>
+                            <input type="number" name="salary" id="salary" min="5000" value="{{$employee->salary}}">
+                            <hr>
+
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-green">Save changes</button>
                     </div>
                     </form>
                 </div>

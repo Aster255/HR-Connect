@@ -11,11 +11,12 @@ use App\Models\Workschedule;
 use Illuminate\Http\Request;
 use Session;
 
-class EmployeeUserEmployee extends Controller
+class EmployeeUserEmployee extends BaseController
 {
     public function EmployeeDashboard(Request $request)
     {
         if (Session::has('user_id')) {
+
             $employee = Employee::query()
                 ->select('*')
                 ->where("employee_id", "=", Session::get("employee_id"))
@@ -33,7 +34,8 @@ class EmployeeUserEmployee extends Controller
                 ->first();
 
             $locations = Location::all();
-            return view('Employee.Dashboard', compact('employee'));
+
+            return view('Employee.Dashboard', compact('employee', 'attendance', 'schedule', 'locations'));
         }
     }
 
@@ -43,23 +45,26 @@ class EmployeeUserEmployee extends Controller
             $employee = Employee::query()
                 ->select('*')
                 ->where("employee_id", "=", Session::get("employee_id"))
-                ->get()
-                ->first();
+                ->first(); // Assuming there's only one employee with the given ID
+
             $attendance = Attendance::query()
                 ->select('*')
                 ->where('employee_id', '=', $employee->employee_id)
-                ->get()
-                ->first();
+                ->get(); // Use get() to retrieve all records, not just the first one
+
             $schedule = Workschedule::query()
                 ->select('*')
                 ->where('schedule_id', '=', $employee->schedule_id)
-                ->get()
-                ->first();
+                ->first(); // Assuming there's only one schedule with the given ID
 
             $locations = Location::all();
         }
+
         return view('Employee.Attendance', compact('employee', 'attendance', 'locations', 'schedule'));
     }
+
+
+
     public function AttendanceLogIn(Request $request)
     {
         if (Session::has('user_id')) {
@@ -70,6 +75,15 @@ class EmployeeUserEmployee extends Controller
                 ->first();
             $employee_id = $employee->employee_id;
             $schedule_id = $employee->schedule_id;
+
+            $existingAttendance = Attendance::where('employee_id', Session::get("employee_id"))
+                ->whereNull('out_time')
+                ->first();
+
+            if ($existingAttendance) {
+                return redirect('/Attendance')->with('fail', 'You are already logged in. Please log out first.');
+            }
+
 
             $workschedule = Workschedule::where('schedule_id', $schedule_id)->first();
 
@@ -107,9 +121,13 @@ class EmployeeUserEmployee extends Controller
                 ->first();
             $attendance = Attendance::where('employee_id', $employee->employee_id)
                 ->whereNotNull('in_status')
+                ->whereNull('out_time')
                 ->orderBy('created_at', 'desc')
                 ->first();
 
+            if (!$attendance) {
+                return redirect('/Attendance')->with('fail', 'You have already logged out.');
+            }
 
             $schedule_id = $employee->schedule_id;
             $workschedule = Workschedule::where('schedule_id', $schedule_id)->first();
@@ -119,7 +137,6 @@ class EmployeeUserEmployee extends Controller
             $sign = ($time_difference < 0) ? '+' : '-';
             $minutes = abs($time_difference);
             $time_difference_formatted = $sign . $minutes;
-
 
             $attendance->out_time = $login_time;
             if ($time_difference_formatted < -60) {
@@ -131,8 +148,7 @@ class EmployeeUserEmployee extends Controller
             }
 
             $attendance->save();
-
-            return redirect('/Attendance')->with('success', 'Successfully Logged In, Your ' . $attendance->out_status);
         }
+        return redirect('/Attendance')->with('success', 'Successfully Logged Out, Your ' . $attendance->out_status);
     }
 }

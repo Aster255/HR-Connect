@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Position;
@@ -12,8 +13,10 @@ use Illuminate\Http\Request;
 use App\Models\EmployeeNotify;
 use App\Models\EmployeeInformation;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     // webpage of Login System
     public function ShowLogin()
@@ -23,31 +26,57 @@ class UserController extends Controller
 
 
     //Logging In from the system
-    public function Login(Request $request)
+    // public function Login(Request $request)
+    // {
+    //     $user = User::where("username", "=", $request->username)->first();
+
+    //     if ($user) {
+    //         if (Hash::check($request->input('password'), $user->password)) {
+    //             // if ($request->input('password') === $user->password) {
+    //             $request->session()->put('user_id', $user->user_id);
+    //             $request->session()->put('role', $user->role);
+    //             $request->session()->put('employee_id', $user->employee_id);
+
+    //             $employee = Employee::find($user->employee_id);
+
+    //             if ($user->role === 1) {
+    //                 return redirect('/Admin/Dashboard')->with('success', 'Logged in as admin!');
+    //             } else if ($user->role === 2) {
+    //                 return redirect('/Dashboard')->with('success', 'Welcome, ' . $user->username . '!');
+    //             } else if ($user->role === 'head') {
+    //                 return redirect('/HeadDashboard')->with('success', 'Welcome, ' . $user->username . '!');
+    //             }
+    //         } else {
+    //             return redirect('/')->with('fail', 'Incorrect password');
+    //         }
+    //     } else {
+    //         return redirect('/')->with('fail', 'An account with that email does not exist!');
+    //     }
+    // }
+    public function login(Request $request)
     {
-        $user = User::where("username", "=", $request->username)->first();
+        $credentials = $request->only('username', 'password');
 
-        if ($user) {
-            // if (Hash::check($request->input('password'), $user->password)) {
-            if ($request->input('password') === $user->password) {
-                $request->session()->put('user_id', $user->user_id);
-                $request->session()->put('role', $user->role);
-                $request->session()->put('employee_id', $user->employee_id);
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-                if ($user->role === 1) {
-                    return redirect('/Admin/Dashboard')->with('success', 'Logged in as admin!');
-                } else if ($user->role === 2) {
-                    return redirect('/Dashboard')->with('success', 'Welcome, ' . $user->username . '!');
-                } else if ($user->role === 'head') {
-                    return redirect('/HeadDashboard')->with('success', 'Welcome, ' . $user->username . '!');
-                }
-            } else {
-                return redirect('/')->with('fail', 'Incorrect password');
+            $request->session()->put('user_id', $user->user_id);
+            $request->session()->put('role', $user->role);
+            $request->session()->put('employee_id', $user->employee_id);
+
+            $employee = Employee::find($user->employee_id);
+
+            if ($user->role === 1) {
+                return redirect(url('/Admin/Dashboard'))->with(compact('employee'))->with('success', 'Logged in as admin!');
+            } elseif ($user->role === 2) {
+                return redirect(url('/Dashboard'))->with(compact('employee'))->with('success', 'Welcome, ' . $user->username . '!');
             }
         } else {
-            return redirect('/')->with('fail', 'An account with that email does not exist!');
+            return redirect('/')->with('fail', 'Incorrect username or password');
         }
     }
+
+
 
     // Logging Out from the system
     public function LogOut()
@@ -63,8 +92,9 @@ class UserController extends Controller
     public function UserCreate()
     {
         $user = User::all();
+        $role = Role::all();
         $employee = Employee::whereNotIn('employee_id', $user->pluck('employee_id'))->get();
-        return view('CreateUser', compact('user', 'employee'));
+        return view('CreateUser', compact('user', 'employee', 'role'));
     }
 
     // User Creation

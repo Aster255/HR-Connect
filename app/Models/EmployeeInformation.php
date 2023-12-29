@@ -17,13 +17,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $place_of_birth
  * @property string|null $nationality
  * @property string|null $civil_status
- * @property int|null $mobile_no
+ * @property string|null $mobile_no
  * @property string|null $email_address
  * @property string|null $zip
  * @property string|null $city
  * @property string|null $street
  * @property string|null $province
- * @property int|null $phone_no
+ * @property string|null $phone_no
  * @property string|null $gender
  *
  * @package App\Models
@@ -35,9 +35,7 @@ class EmployeeInformation extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'date_of_birth' => 'datetime',
-		'mobile_no' => 'int',
-		'phone_no' => 'int'
+		'date_of_birth' => 'datetime'
 	];
 
 	protected $fillable = [

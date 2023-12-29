@@ -8,7 +8,7 @@ use App\Models\Location;
 use App\Models\Workschedule;
 use Illuminate\Http\Request;
 
-class Logs extends Controller
+class Logs extends BaseController
 {
     /**
      * Display a listing of the resource.

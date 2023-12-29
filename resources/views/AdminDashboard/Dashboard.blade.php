@@ -29,20 +29,28 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
 
     <div class="panel">
         <div class="pending_leave">
-            <h1 style="padding-block: 15px">{{ $totalemployee}}</h1>
-            <p class="font-style">TOTAL EMPLOYEE</p>
+            <a href="Employee">
+                <h1 style="padding-block: 15px">{{ $totalemployee}}</h1>
+                <p class="font-style">TOTAL EMPLOYEE</p>
+            </a>
         </div>
         <div class="approved_leave">
-            <h1 style="padding-block: 15px">{{$totalEmployeesLoggedInToday}} / {{$totalemployee}}</h1>
-            <p class="font-style">EMPLOYEE TODAY</p>
+            <a href="/Admin/Attendance/Log">
+                <h1 style="padding-block: 15px">{{$totalEmployeesLoggedInToday}} / {{$totalemployee}}</h1>
+                <p class="font-style">EMPLOYEE TODAY</p>
+            </a>
         </div>
         <div class="pending_overtime">
-            <h1 style="padding-block: 15px">{{$pendingLeaveCount}}</h1>
-            <p class="font-style">PENDING LEAVE</p>
+            <a href="/Admin/Leave">
+                <h1 style="padding-block: 15px">{{$pendingLeaveCount}}</h1>
+                <p class="font-style">PENDING LEAVE</p>
+            </a>
         </div>
         <div class="approved_overtime">
-            <h1 style="padding-block: 15px">1</h1>
-            <p class="font-style">PENDING OVERTIME</p>
+            <a href="/trial">
+                <h1 style="padding-block: 15px">0</h1>
+                <p class="font-style">PENDING OVERTIME</p>
+            </a>
         </div>
     </div>
 

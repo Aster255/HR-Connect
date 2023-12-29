@@ -11,7 +11,7 @@ use App\Models\LeaveType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     // Show the DashBoard
     public function ShowDashboard(Request $request)
@@ -23,7 +23,7 @@ class AdminController extends Controller
             ->where('employee_id', '=', $employee_id)
             ->first();
 
-
+        //get Employee with attendance
         $employeelist = Employee::all();
         $totalemployee = $employeelist->count();
         $today = Carbon::today()->toDateString();
@@ -31,8 +31,8 @@ class AdminController extends Controller
         $totalEmployeesLoggedInToday = Attendance::whereDate('attendance_date', $today)
             ->distinct('employee_id')
             ->count('employee_id');
-        $pendingLeaveCount = Leaf::where('employee_id', $employee_id)
-            ->where('status', 'pending')
+
+        $pendingLeaveCount = Leaf::where('status', 'pending')
             ->count();
 
 

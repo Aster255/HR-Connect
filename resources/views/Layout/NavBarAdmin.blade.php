@@ -15,14 +15,17 @@
 
         <a disabled href="/trial"><i class="fa-solid fa-user-group"></i><span class="hide"> RECRUITMENT</span></a>
         <hr style="color: white; font-weight: 700;">
-        <button class="CreateUser" href="/Admin/CreateUser"><span class="hide">Create User</span></button>
+        <a href="/Admin/CreateUser"><button class="CreateUser"><span class="hide">Create User</span></button></a>
 
         <div class="messege">
             @include('Layout.Messege')
         </div>
-        <div class="navbarhead">
+
+
+        {{-- <div class="navbarhead">
             <div class="dropdown" data-aos="slide-left" data-aos-duration="4000">
-                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="900,10">
+                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false"
+                    data-bs-offset="900,10">
                     <i class="fa-solid fa-user" style="color: #ffffff;"></i>
                 </button>
                 <ul class="dropdown-menu me-3">
@@ -34,7 +37,38 @@
                     <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                 </ul>
             </div>
+        </div> --}}
+
+
+        <div class="dropdown">
+            <img class="profile_picture" src="/img/user_profiles/{{$employee_picture->picture}}" alt="{{$employee_picture->first_name}} pictures" onclick="toggleDropdown()">
+            <div class="dropdown-content" id="myDropdown">
+                <a href="/trial">Profile</a>
+                <a href="/trial">Setting</a>
+                <a href="/logout">Log out</a>
+            </div>
         </div>
+
+        <script>
+            function toggleDropdown() {
+                var dropdown = document.getElementById("myDropdown");
+                dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+            }
+
+            window.onclick = function(event) {
+                if (!event.target.matches('.profile_picture')) {
+                    var dropdown = document.getElementById("myDropdown");
+                    if (dropdown.style.display === "block") {
+                        dropdown.style.display = "none";
+                    }
+                }
+            }
+        </script>
+
+
+
+
+
     </div>
 </div>
 

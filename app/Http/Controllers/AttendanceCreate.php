@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use App\Models\Workschedule;
 use Illuminate\Http\Request;
 
-class AttendanceCreate extends Controller
+class AttendanceCreate extends BaseController
 {
     public function ListSchedule()
     {

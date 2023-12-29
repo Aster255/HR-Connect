@@ -1,5 +1,5 @@
 <?php
-$currentTime = date('H:i'); // Get the current time in 24-hour format (e.g., 13:30)
+$currentTime = date('H:i');
 $greeting = '';
 if ($currentTime >= '05:00' && $currentTime < '12:00') {
     $greeting = 'Good Morning';
@@ -17,22 +17,25 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
 <head>
     @include("Layout.Head")
     <title>System</title>
-    @include('Layout.Button')
+    <link rel="stylesheet" href="{{ asset('css/Dashboard.css') }}">
 </head>
 
 
 <body>
     @include("Layout.NavBarEmployee")
-    <h1 class="Title_navbar" data-aos="zoom-in">DASHBOARD</h1>
-    <div>
-        <p>{{ $greeting }}! {{$employee->first_name}} {{$employee->last_name}}. Here's our agenda for today.</p>
+    <div class="greetings">
+        <h1 class="Title_navbar">DASHBOARD</h1>
+        <div>
+            <p>{{ $greeting }}! {{$employee->first_name}} {{$employee->last_name}}. Here's our agenda for today.</p>
+        </div>
     </div>
 
-    <div class=" panel" data-aos="zoom-in">
-        <div class="notification">
-            <div class="notice">
-                <h3>Notice</h3>
-                <div class="notice_info">
+
+    <div class="notification">
+        <div class="notice">
+            <h3 class="font-style">Notice</h3>
+            <div class="notice_content">
+                <div class=" notice_info">
                     <p>Hod approved OT of BIBI Garcia</p>
                     <p>thurs 7:00pm</p>
                 </div>
@@ -45,9 +48,12 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
                     <p>thurs 7:00pm</p>
                 </div>
             </div>
-            <div class="event">
-                <h3>Events</h3>
-                <div class="event_info">
+        </div>
+
+        <div class="event">
+            <h3 class="font-style">Events</h3>
+            <div class="event_content">
+                <div class=" event_info">
                     <p>SEMINAR: Healt and Remedy</p>
                     <p>Thurs 10:00AM- 11:30PM</p>
                 </div>
@@ -61,10 +67,13 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
                 </div>
             </div>
         </div>
+    </div>
 </body>
+
+
+</html>
+
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
 </script>
-
-</html>

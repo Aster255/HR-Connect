@@ -4,7 +4,6 @@
 <head>
     @include("Layout.Head")
     <title>System Admin</title>
-    @include('Layout.Button')
     <style>
         .list {
             margin-right: 20px;
