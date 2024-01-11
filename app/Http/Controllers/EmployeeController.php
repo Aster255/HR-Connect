@@ -32,12 +32,10 @@ class EmployeeController extends BaseController
     public function create()
     {
         $employees = Employee::query()
-            ->select('positions.*', 'employees.*', 'departments.*', 'employee_docs.*', 'employee_educations.*', 'employee_employments.*', 'employee_informations.*', 'employee_notifies.*')
+            ->select('positions.*', 'employees.*', 'departments.*', 'employee_docs.*', 'employee_informations.*', 'employee_notifies.*')
             ->join('positions', 'positions.position_id', '=', 'employees.position_id')
             ->join('departments', 'departments.department_id', '=', 'departments.department_id')
             ->join('employee_docs', 'employee_docs.employee_id', '=', 'employees.employee_id')
-            ->join('employee_educations', 'employee_educations.employee_id', '=', 'employees.employee_id')
-            ->join('employee_employments', 'employee_employments.employee_id', '=', 'employees.employee_id')
             ->join('employee_informations', 'employee_informations.employee_id', '=', 'employees.employee_id')
             ->join('employee_notifies', 'employee_notifies.employee_id', '=', 'employees.employee_id')
             ->get();

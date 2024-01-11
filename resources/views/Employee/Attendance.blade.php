@@ -30,7 +30,7 @@
                             <input disabled type="text" value="{{ $employee->employee_id }}"></input>
                             <labe>Employee Name:</labe>
                             <input disabled type="text" value="{{ $employee-> last_name }}, {{ $employee-> first_name }}">
-                            <input hidden type="text" value="{{ $schedule->schedule_id}}">
+                            <input hidden type="text" value="{{ $schedule->schedule_id ?? ''}}">
                         </div>
                         <div class="form-group">
                             <select name="location_id" id="location_id" required>

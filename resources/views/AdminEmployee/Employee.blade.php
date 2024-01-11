@@ -77,8 +77,7 @@
                 <tbody>
                     @foreach ($employees as $e)
                     <tr class="table_section">
-                        <td><img src="/img/user_profiles/{{$e->picture}}" alt="{{$e->first_name}} pictures"
-                                width="100px"></td>
+                        <td><img src="/img/user_profiles/{{$e->picture}}" alt="{{$e->first_name}} pictures" width="100px"></td>
                         <td>{{$e->employee_id}}</td>
                         <td>{{$e->first_name}} {{$e->last_name}}</td>
                         <td>

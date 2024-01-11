@@ -43,29 +43,28 @@
                         <td>{{$a->attendance_date}}</td>
                         <td>
                             @if (empty($a->out_time) && empty($a->out_status))
-                            <button type="button" class="btn btn-red" data-toggle="modal" data-target="#logout_{{$a->attendance_id}}">
+                            <button type="button" class="btn btn-red" data-bs-toggle='modal' data-bs-target='#logout_{{$a->attendance_id}}'>
                                 LOG OUT
                             </button>
                             @endif
 
-                            <div class="modal" id="logout_{{$a->attendance_id}}">
+                            <div class="modal fade" id="logout_{{$a->attendance_id}}" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
-                                        <!-- Modal Header -->
+                             
                                         <div class="modal-header">
                                             <h4 class="modal-title">Do you want to Log Out?</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          
                                         </div>
 
-                                        <!-- Modal Body -->
+                                    
                                         <div class="modal-body">
                                             <div>
                                                 <p id="realtime-date">{{ date('h:i:s') }}</p>
                                             </div>
                                         </div>
-                                        <!-- Modal Footer -->
-                                        <!-- Modal Footer -->
+                                   
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
                                                 Close
@@ -90,12 +89,6 @@
 </body>
 
 </html>
-
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -40,12 +40,16 @@ Route::post('Admin/Leave/Create', [LeaveCreate::class, 'LeaveStore']);
 Route::get('/Dashboard', [EmployeeUserEmployee::class, 'EmployeeDashboard']);
 Route::get('/Profile', [UserController::class, 'Profile']);
 Route::get('/trial', [AdminController::class, 'trial']);
+Route::get('/Admin/Employee/search', [AdminController::class, 'index'])->name('admin.employee.search');
 
 
 // ==========================================================
 Route::get('/Attendance', [EmployeeUserEmployee::class, 'Attendance']);
 Route::post('/Attendance', [EmployeeUserEmployee::class, 'AttendanceLogIn']);
 Route::put('/Attendance', [EmployeeUserEmployee::class, 'AttendanceLogOut']);
+Route::get('/Schedule', [EmployeeUserEmployee::class, 'schedule']);
+Route::post('/Schedule/{id}', [EmployeeUserEmployee::class, 'getschedule']);
+Route::put('/Schedule/{id}', [EmployeeUserEmployee::class, 'requestschedule']);
 // ==========================================================
 
 Route::resource('/Leave', LeaveController::class);

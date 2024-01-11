@@ -58,42 +58,14 @@ class AdminController extends BaseController
     //Show the Attendance webpage
     public function ShowAttendace()
     {
-        $attendance = Attendance::paginate(10);
-        $employee = Employee::paginate(10);
+        $attendance = Attendance::all();
+        $employee = Employee::all();
         $totalemployee = $employee->count();
         $today = Carbon::today()->toDateString();
 
         $totalEmployeesLoggedInToday = Attendance::whereDate('attendance_date', $today)
             ->distinct('employee_id')
             ->count('employee_id');
-
-        // $TotalLogIn = [$totalemployee, $totalEmployeesLoggedInToday];
-        // $InStatus_EarlyIn = Attendance::whereDate('attendance_date', $today)
-        //     ->where('in_status', 'Early In')
-        //     ->distinct('employee_id')
-        //     ->count('employee_id');
-        // $InStatus_Intime = Attendance::whereDate('attendance_date', $today)
-        //     ->where('in_status', 'In-Time')
-        //     ->distinct('employee_id')
-        //     ->count('employee_id');
-        // $InStatus_Late = Attendance::whereDate('attendance_date', $today)
-        //     ->where('in_status', 'Late')
-        //     ->distinct('employee_id')
-        //     ->count('employee_id');
-        // $OutStatus_EarlyOut = Attendance::whereDate('attendance_date', $today)
-        //     ->where('out_status', 'Early Out')
-        //     ->distinct('employee_id')
-        //     ->count('employee_id');
-        // $OutStatus_OutTime = Attendance::whereDate('attendance_date', $today)
-        //     ->where('out_status', 'Out-Time')
-        //     ->distinct('employee_id')
-        //     ->count('employee_id');
-        // $OutStatus_OverTime = Attendance::whereDate('attendance_date', $today)
-        //     ->where('out_status', 'Over Time')
-        //     ->distinct('employee_id')
-        //     ->count('employee_id');
-
-        // $TotalStatus = [$InStatus_EarlyIn, $InStatus_Intime, $InStatus_Late, $OutStatus_EarlyOut, $OutStatus_OutTime, $OutStatus_OverTime];
 
         return view('AdminAttendance.Attendance', compact('employee', 'totalEmployeesLoggedInToday', 'attendance', 'totalemployee', 'totalEmployeesLoggedInToday'));
     }
@@ -118,5 +90,23 @@ class AdminController extends BaseController
     public function trial()
     {
         return redirect()->back()->with('info', 'NOT PART OF OUR DEMO');
+    }
+
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        if ($search) {
+            $employees = Employee::where('employee_id', 'LIKE', "%$search%")
+                ->orWhere(function ($query) use ($search) {
+                    $query->where('first_name', 'LIKE', "%$search%")
+                        ->orWhere('last_name', 'LIKE', "%$search%");
+                })
+                ->get();
+        } else {
+            $employees = Employee::all();
+        }
+
+        return view('adminemployee.employee', compact('employees'));
     }
 }

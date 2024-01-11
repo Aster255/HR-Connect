@@ -17,7 +17,7 @@
 
     <div class="button">
         <a href="/Admin/Attendance/Log" class="btn btn-brand">Log List</a>
-        <a href="/Admin/Attendance/Calendar" class="btn btn-brand">Calendar</a>
+        <!-- <a href="/Admin/Attendance/Calendar" class="btn btn-brand">Calendar</a> -->
         <a href="/Admin/Attendance/Schedule" class="btn btn-brand">Schedule</a>
         <a href="/Admin/Attendance/Location" class="btn btn-brand">Location</a>
     </div>
@@ -47,7 +47,8 @@
                         <td>{{$e->first_name}} {{$e->last_name}}</td>
                         @endif
                         @endforeach
-                        <td>{{$a->in_time}}</td>
+
+                        <td>{{ $a->in_time ? $a->in_time->format('H:i') : '' }}</td>
                     </tr>
 
                     @endforeach
@@ -77,7 +78,7 @@
                         <td>{{$e->first_name}} {{$e->last_name}}</td>
                         @endif
                         @endforeach
-                        <td>{{$a->out_time}}</td>
+                        <td>{{ $a->out_time ? $a->out_time->format('H:i') : '' }}</td>
                     </tr>
 
                     @endforeach

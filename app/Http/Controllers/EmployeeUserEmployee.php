@@ -50,7 +50,7 @@ class EmployeeUserEmployee extends BaseController
             $attendance = Attendance::query()
                 ->select('*')
                 ->where('employee_id', '=', $employee->employee_id)
-                ->get(); // Use get() to retrieve all records, not just the first one
+                ->get();
 
             $schedule = Workschedule::query()
                 ->select('*')
@@ -86,6 +86,10 @@ class EmployeeUserEmployee extends BaseController
 
 
             $workschedule = Workschedule::where('schedule_id', $schedule_id)->first();
+            if (!$workschedule) {
+                return redirect('/Schedule')->with('fail', "You have not selected your schedule");
+            }
+
 
             $start_time = $workschedule->start_time;
             $login_time = now();
@@ -150,5 +154,64 @@ class EmployeeUserEmployee extends BaseController
             $attendance->save();
         }
         return redirect('/Attendance')->with('success', 'Successfully Logged Out, Your ' . $attendance->out_status);
+    }
+
+    public function schedule()
+    {
+        if (Session::has('user_id')) {
+            $employee = Employee::query()
+                ->select('*')
+                ->where("employee_id", "=", Session::get("employee_id"))
+                ->first();
+
+            $scheduleId = $employee->schedule_id;
+            $schedule = WorkSchedule::where('schedule_id', $scheduleId)->first();
+            $workschedule = Workschedule::all();
+        }
+
+        return view('Employee.Schedule', compact('employee', 'schedule', 'workschedule'));
+    }
+
+    public function getschedule(Request $request, string $id)
+    {
+        $request->validate([
+            'selectschedule' => 'required',
+        ]);
+
+        if (Session::has('user_id')) {
+            $employee = Employee::where("employee_id", $id)->first();
+
+            if ($employee) {
+                $employee->update([
+                    'schedule_id' => $request->input('selectschedule'),
+                ]);
+
+                return redirect('/Schedule')->with('success', 'You successfully selected your schedule!');
+            }
+        }
+
+        return redirect()->back()->with('fail', 'Unable to update schedule. Please try again.');
+    }
+
+    public function requestschedule(Request $request, string $id)
+    {
+        $request->validate([
+            'requestschedule' => 'required',
+        ]);
+
+        if (Session::has('user_id')) {
+            $employee = Employee::where("employee_id", $id)->first();
+
+            if ($employee) {
+               // Update the schedule only if it's not commented out in your original code
+                // $employee->update([
+                //     'schedule_id' => $request->input('requestschedule'),
+                // ]); 
+
+                return redirect('/Schedule')->with('info', 'THIS IS NOT PART OF OUR DEMO!');
+            }
+        }
+
+        return redirect()->back()->with('fail', 'Unable to update schedule. Please try again.');
     }
 }

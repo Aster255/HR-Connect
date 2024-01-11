@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class EmployeeNotify
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EmployeeNotify extends Model
 {
+	use HasFactory;
+
 	protected $table = 'employee_notifies';
 	protected $primaryKey = 'employee_id';
 	public $timestamps = false;

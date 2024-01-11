@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class EmployeeInformation
@@ -30,6 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EmployeeInformation extends Model
 {
+	use HasFactory;
+
 	protected $table = 'employee_informations';
 	protected $primaryKey = 'employee_id';
 	public $timestamps = false;

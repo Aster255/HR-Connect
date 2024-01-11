@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class EmployeeDoc
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EmployeeDoc extends Model
 {
+	use HasFactory;
+
 	protected $table = 'employee_docs';
 	protected $primaryKey = 'employee_id';
 	public $timestamps = false;
