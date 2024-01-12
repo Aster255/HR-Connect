@@ -447,15 +447,15 @@
                 <p class="information">{{ $employeedoc ? $employeedoc->sss : '' }}</p>
             </div>
             <div>
-                <p>TIN: </p>
+                <p class="title_information">TIN: </p>
                 <p class="information">{{ $employeedoc ? $employeedoc->tin : '' }}</p>
             </div>
             <div>
-                <p>PhilHealth: </p>
+                <p class="title_information">PhilHealth: </p>
                 <p class="information">{{ $employeedoc ? $employeedoc->philhealth : '' }}</p>
             </div>
-            <div>
-                <p>HDMF: </p>
+            <div >
+                <p class="title_information">HDMF: </p>
                 <p class="information">{{ $employeedoc ? $employeedoc->hdmf : '' }}</p>
             </div>
             @else

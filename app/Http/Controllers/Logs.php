@@ -39,7 +39,14 @@ class Logs extends BaseController
         $employee = Employee::where('employee_id', $request->input('employee_id'))->first();
         $schedule_id = $employee->schedule_id;
 
+        if (!$employee->schedule_id) {
+            return redirect()->back()->with('fail', "$employee->first_name $employee->last_name didn't choose a schedule.");
+        }
+        
         $workschedule = Workschedule::where('schedule_id', $schedule_id)->first();
+        if (!$workschedule) {
+            return redirect()->back()->with('fail', "$employee->first_name $employee->last_name didn't choose a schedule.");
+        }
 
         $start_time = $workschedule->start_time;
         $login_time = now();
@@ -47,18 +54,21 @@ class Logs extends BaseController
         $sign = ($time_difference < 0) ? '+' : '-';
         $minutes = abs($time_difference);
         $time_difference_formatted = $sign . $minutes;
-
+        
         $attendance = new Attendance;
         $attendance->location_id = $request->input('location_id');
         $attendance->employee_id = $request->input('employee_id');
-
-        if ($time_difference_formatted < -60) {
+        
+        $acceptable_early_late_minutes = 10;
+        
+        if ($time_difference_formatted < -$acceptable_early_late_minutes) {
             $attendance->in_status = "Early In";
-        } elseif ($time_difference_formatted <= -10 && $time_difference_formatted >= -10) {
+        } elseif ($time_difference_formatted >= -$acceptable_early_late_minutes && $time_difference_formatted <= $acceptable_early_late_minutes) {
             $attendance->in_status = "In-Time";
-        } elseif ($time_difference_formatted > 30) {
+        } elseif ($time_difference_formatted > $acceptable_early_late_minutes) {
             $attendance->in_status = "Late";
-        }
+        }     
+        
 
         $attendance->save();
 

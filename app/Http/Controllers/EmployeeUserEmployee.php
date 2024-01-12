@@ -45,8 +45,7 @@ class EmployeeUserEmployee extends BaseController
             $employee = Employee::query()
                 ->select('*')
                 ->where("employee_id", "=", Session::get("employee_id"))
-                ->first(); // Assuming there's only one employee with the given ID
-
+                ->first(); 
             $attendance = Attendance::query()
                 ->select('*')
                 ->where('employee_id', '=', $employee->employee_id)
@@ -55,7 +54,7 @@ class EmployeeUserEmployee extends BaseController
             $schedule = Workschedule::query()
                 ->select('*')
                 ->where('schedule_id', '=', $employee->schedule_id)
-                ->first(); // Assuming there's only one schedule with the given ID
+                ->first(); 
 
             $locations = Location::all();
         }
