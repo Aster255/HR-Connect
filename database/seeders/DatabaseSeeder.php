@@ -3,7 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
+use App\Models\Position;
+use App\Models\Department;
+use App\Models\EmployeeInformation;
+use App\Models\EmployeeNotify;
+use App\Models\EmployeeDoc;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,22 +18,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+            
+        // Create available Departments
+            Department::factory()->create([
+                'department_name' => 'Human Resource Developement',
+                'department_status' => 'Added',
+            ]);
+
+        // Create available Positions
+        Position::factory()->create([
+            'department_id' => 1,
+            'position_name' => 'Human Resource Associate',
+        ]);
+        
         // Create employees and related records
-        $employees = \App\Models\Employee::factory(50)->create();
+        $employees = Employee::factory(50)->create();
 
         foreach ($employees as $employee) {
             // Create EmployeeInformation
-            \App\Models\EmployeeInformation::factory()->create([
+            EmployeeInformation::factory()->create([
                 'employee_id' => $employee->employee_id,
             ]);
 
             // Create EmployeeNotify
-            \App\Models\EmployeeNotify::factory()->create([
+            EmployeeNotify::factory()->create([
                 'employee_id' => $employee->employee_id,
             ]);
 
             // Create EmployeeDoc
-            \App\Models\EmployeeDoc::factory()->create([
+            EmployeeDoc::factory()->create([
                 'employee_id' => $employee->employee_id,
             ]);
         }

@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->decimal('salary', 10, 2);
             $table->timestamp('employee_timestamp')->useCurrent();
             $table->enum('employee_status', ['Added', 'Update', 'Deleted', ''])->default('');
-            $table->string('title', 5);
+            $table->string('title', 5)->nullable();
             $table->string('middle_name', 90)->nullable();
             $table->string('maiden_name', 90)->nullable();
             $table->string('nick_name', 90)->nullable();
