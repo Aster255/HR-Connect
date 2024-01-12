@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Leaf
+ * Class Leave
  * 
  * @property int $leave_id
  * @property int|null $employee_id
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Leaf extends Model
+class Leave extends Model
 {
 	protected $table = 'leaves';
 	protected $primaryKey = 'leave_id';
