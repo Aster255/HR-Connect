@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
-use App\Models\Leaf;
+use App\Models\Leave;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Location;

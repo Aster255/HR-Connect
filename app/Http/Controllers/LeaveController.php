@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
-use App\Models\Leaf;
+use App\Models\Leave;
 use App\Models\Employee;
 use App\Models\LeaveType;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class LeaveController extends BaseController
                 ->first();
 
             $leaves = LeaveType::all();
-            $leave = Leaf::all();
+            $leave = Leave::all();
 
             return view('Employee.Leave', compact('leave', 'leaves', 'employee'));
         }
@@ -38,7 +38,7 @@ class LeaveController extends BaseController
                 ->select('*')
                 ->where("employee_id", "=", Session::get("employee_id"))
                 ->first();
-            $leave = Leaf::query()
+            $leave = Leave::query()
                 ->select('*')
                 ->where("employee_id", "=", Session::get("employee_id"))
                 ->get();
@@ -52,7 +52,7 @@ class LeaveController extends BaseController
      */
     public function store(Request $request)
     {
-        $requestleave = new Leaf;
+        $requestleave = new Leave;
         $requestleave->start_date = $request->input('start_date');
         $requestleave->end_date = $request->input('end_date');
         $requestleave->status = $request->input('status');
@@ -80,7 +80,7 @@ class LeaveController extends BaseController
     public function edit(string $id)
     {
         $employee = Employee::findOrFail($id);
-        $leave = Leaf::all();
+        $leave = Leave::all();
         return view('AdminLeave.ShowLeave', compact('employee', 'leave'));
     }
 
@@ -89,7 +89,7 @@ class LeaveController extends BaseController
      */
     public function update(Request $request, string $id)
     {
-        $leave = Leaf::findOrFail($id);
+        $leave = Leave::findOrFail($id);
         $leave->update([
             'status' => $request->input('status'),
             'department_status' => $request->input('department_status')
