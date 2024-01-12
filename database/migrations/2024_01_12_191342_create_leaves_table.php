@@ -10,12 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id'); // Auto-incrementing primary key
-            $table->string('username', 50);
-            $table->string('password', 400); // Consider using a more secure method like bcrypt for passwords
+        Schema::create('leaves', function (Blueprint $table) {
+            $table->id('leave_id'); // Auto-incrementing primary key
             $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('role');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('status', 90);
+            $table->string('approve', 90);
+            $table->unsignedBigInteger('leavetype_id');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('leaves');
     }
 };

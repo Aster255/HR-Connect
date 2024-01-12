@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id('attendance_id');
-            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->unsignedBigInteger('employee_id');
             $table->date('attendance_date');
-            $table->unsignedBigInteger('location_id')->nullable();
-            $table->time('in_time');
+            $table->unsignedBigInteger('location_id');
+            $table->time('in_time')->nullable();
             $table->string('in_status', 40)->nullable();
             $table->time('out_time')->nullable();
             $table->string('out_status', 70)->nullable();
