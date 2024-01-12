@@ -6,7 +6,7 @@ use App\Models\Employee;
 use App\Models\Position;
 use App\Models\Attendance;
 use App\Models\Department;
-use App\Models\Leaf;
+use App\Models\Leave;
 use App\Models\LeaveType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -32,7 +32,7 @@ class AdminController extends BaseController
             ->distinct('employee_id')
             ->count('employee_id');
 
-        $pendingLeaveCount = Leaf::where('status', 'pending')
+        $pendingLeaveCount = Leave::where('status', 'pending')
             ->count();
 
 
@@ -79,7 +79,7 @@ class AdminController extends BaseController
     // Show the Leave webpage
     public function ShowLeave()
     {
-        $leave = Leaf::all();
+        $leave = Leave::all();
         $leavetypes = LeaveType::all();
         $employee = Employee::all();
         return view('AdminLeave.Leave', compact('leave', 'leavetypes', 'employee'));
