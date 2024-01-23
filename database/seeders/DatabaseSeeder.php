@@ -18,19 +18,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-            
+
         // Create available Departments
-            Department::factory()->create([
-                'department_name' => 'Human Resource Developement',
-                'department_status' => 'Added',
-            ]);
+        Department::factory()->create([
+            'department_name' => 'Human Resource Developement',
+            'department_status' => 'Active',
+        ]);
 
         // Create available Positions
         Position::factory()->create([
             'department_id' => 1,
             'position_name' => 'Human Resource Associate',
         ]);
-        
+
         // Create employees and related records
         $employees = Employee::factory(50)->create();
 
