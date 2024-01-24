@@ -22,9 +22,8 @@ class EmployeeFactory extends Factory
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'hire_date' => $this->faker->date(),
-            'salary' => $this->faker->numberBetween(5000, 100000),
-            'middle_name' => $this->faker->optional()->firstName,
-            'maiden_name' => $this->faker->optional()->lastName,
+            'salary' => $this->faker->numberBetween(25000, 50000),
+            'middle_name' => $this->faker->optional()->lastName,
             'nick_name' => $this->faker->optional()->userName,
         ];
     }
