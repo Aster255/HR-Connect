@@ -73,9 +73,9 @@ class Employee extends Model
 		return $this->belongsTo(Department::class);
 	}
 
-	public function users()
+	public function user()
 	{
-		return $this->hasMany(User::class);
+		return $this->hasOne(User::class);
 	}
 
 	public function employeeDocs()
@@ -83,10 +83,10 @@ class Employee extends Model
 		return $this->hasMany(EmployeeDoc::class);
 	}
 
-	public function employeeEducations()
-	{
-		return $this->hasMany(EmployeeEducation::class);
-	}
+	// public function employeeEducations()
+	// {
+	// 	return $this->hasMany(EmployeeEducation::class);
+	// }
 
 	public function employeeInformations()
 	{
