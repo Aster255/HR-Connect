@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('departments', function (Blueprint $table) {
             $table->id('department_id'); // Auto-incrementing primary key
             $table->string('department_name', 50);
-            $table->enum('department_status', ['Added', 'Update', 'Deleted', ''])->default(''); // Default status is an empty string
+            $table->enum('department_status', ['Active', 'Update', 'Deleted', ''])->default(''); // Default status is an empty string
             $table->timestamps();
         });
     }
