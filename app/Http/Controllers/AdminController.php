@@ -32,13 +32,10 @@ class AdminController extends BaseController
             ->distinct('employee_id')
             ->count('employee_id');
 
-        $pendingLeaveCount = Leave::where('status', 'pending')
-            ->count();
-
+        $pendingLeaveCount = Leave::where('status', 'pending')->count();
 
         return view('AdminDashboard/Dashboard', compact('employee', 'totalemployee', 'totalEmployeesLoggedInToday', 'pendingLeaveCount'));
     }
-
 
     //Show the Organization webpage
     public function ShowOrganization()
@@ -46,28 +43,32 @@ class AdminController extends BaseController
         $positionlist = Position::query()
             ->select('positions.*', 'departments.*')
             ->join('departments', 'departments.department_id', '=', 'positions.department_id')
+            ->withCount('employees as employees_count')
             ->orderByDesc('positions.position_id')
-            ->paginate(10);
+            ->get();
+
         $departmentlist = Department::query()
-            ->select('*')
+            ->select('departments.*')
+            ->withCount('employees as employees_count')
+            ->withCount('positions as positions_count')
             ->orderbyDesc('department_id')
-            ->paginate(10);
+            ->get();
+
         return view('AdminOrganization.Organization', compact('departmentlist', 'positionlist'));
     }
 
     //Show the Attendance webpage
     public function ShowAttendace()
     {
-        $attendance = Attendance::all();
-        $employee = Employee::all();
-        $totalemployee = $employee->count();
-        $today = Carbon::today()->toDateString();
+        $attendance = Attendance::query()
+            ->whereDate('attendance_date', today())
+            ->get(['employee_id', 'in_time', 'out_time']);
 
-        $totalEmployeesLoggedInToday = Attendance::whereDate('attendance_date', $today)
-            ->distinct('employee_id')
-            ->count('employee_id');
+        $employee = Employee::query()
+            ->select('employee_id', 'first_name', 'last_name')
+            ->get();
 
-        return view('AdminAttendance.Attendance', compact('employee', 'totalEmployeesLoggedInToday', 'attendance', 'totalemployee', 'totalEmployeesLoggedInToday'));
+        return view('AdminAttendance.Attendance', compact('employee', 'attendance'));
     }
 
     // SHow the Calendar webpage
@@ -85,11 +86,12 @@ class AdminController extends BaseController
         return view('AdminLeave.Leave', compact('leave', 'leavetypes', 'employee'));
     }
 
-
     // This is Demo info show
     public function trial()
     {
-        return redirect()->back()->with('info', 'NOT PART OF OUR DEMO');
+        return redirect()
+            ->back()
+            ->with('info', 'NOT PART OF OUR DEMO');
     }
 
     public function index(Request $request)
@@ -99,8 +101,7 @@ class AdminController extends BaseController
         if ($search) {
             $employees = Employee::where('employee_id', 'LIKE', "%$search%")
                 ->orWhere(function ($query) use ($search) {
-                    $query->where('first_name', 'LIKE', "%$search%")
-                        ->orWhere('last_name', 'LIKE', "%$search%");
+                    $query->where('first_name', 'LIKE', "%$search%")->orWhere('last_name', 'LIKE', "%$search%");
                 })
                 ->get();
         } else {

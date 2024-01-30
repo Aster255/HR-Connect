@@ -4,14 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->id('employee_id'); // Auto-incrementing primary key
+            $table->id('employee_id');
             $table->unsignedBigInteger('position_id');
             $table->unsignedBigInteger('department_id');
             $table->string('first_name', 50);
@@ -24,9 +25,8 @@ return new class extends Migration {
             $table->string('middle_name', 90)->nullable();
             $table->string('maiden_name', 90)->nullable();
             $table->string('nick_name', 90)->nullable();
-            $table->string('picture', 200)->nullable();
-            $table->unsignedBigInteger('schedule_id')->nullable();
-
+            $table->string('picture', 200)->default('https://robohash.org/15');
+            $table->unsignedBigInteger('schedule_id')->default(1);
             $table->timestamps();
         });
     }

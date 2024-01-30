@@ -11,6 +11,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeUserEmployee;
 use App\Http\Controllers\LeaveController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/Admin/CreateUser', [UserController::class, 'UserCreate']);
 Route::post('/Admin/CreateUser', [UserController::class, 'UserStore']);
@@ -47,9 +48,16 @@ Route::get('/Admin/Employee/search', [AdminController::class, 'index'])->name('a
 Route::get('/Attendance', [EmployeeUserEmployee::class, 'Attendance']);
 Route::post('/Attendance', [EmployeeUserEmployee::class, 'AttendanceLogIn']);
 Route::put('/Attendance', [EmployeeUserEmployee::class, 'AttendanceLogOut']);
-Route::get('/Schedule', [EmployeeUserEmployee::class, 'schedule']);
 Route::post('/Schedule/{id}', [EmployeeUserEmployee::class, 'getschedule']);
 Route::put('/Schedule/{id}', [EmployeeUserEmployee::class, 'requestschedule']);
 // ==========================================================
 
 Route::resource('/Leave', LeaveController::class);
+
+
+
+Route::get('/run-migration', function () {
+    Artisan::call('optimize:clear');
+    Artisan::call('migrate:refresh --seed');
+    return "Migrations executed successfully";
+});

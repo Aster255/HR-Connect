@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminLeave.css') }}">
 </head>
 
@@ -11,37 +11,45 @@
     @include("Layout.NavBarAdmin")
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in">LEAVE</h1>
+
+        <div class="button">
+            <a class="btn btn-brand" href="/Admin/Leave/Create" data-aos="zoom-in">Leave Types</a>
+        </div>
     </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Leave/Create" data-aos="zoom-in">Leave Types</a>
-    </div>
-
-    <div class="list">
-        <table class="table ">
-            <thead class='table_section'>
-                <th>Employee ID</th>
-                <th>Employee Name</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Approval</th>
-            </thead>
-            <tbody>
-                @foreach ($leave as $l)
-                <tr class='table_section'>
-                    <td>{{$l->employee_id}}</td>
-                    @foreach($employee as $e)
-                    @if ($e->employee_id === $l->employee_id)
-                    <td>{{$e->first_name}} {{$l->last_name}}</td>
-                    @endif
-                    @endforeach
-                    <td>{{$l->start_date}}</td>
-                    <td>{{$l->end_date}}</td>
-                    <td class="mt2- mb-2"><a class=" btn-brand" href="/trial">information</a></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="List">
+        <div class="One_List">
+            <table>
+                <thead class='thead_section'>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Approval</th>
+                    </tr>
+                </thead>
+                <tbody class="body_section">
+                    @forelse ($leave as $l)
+                    <tr>
+                        <td>{{ $l->employee_id }}</td>
+                        @foreach($employee as $e)
+                        @if ($e->employee_id === $l->employee_id)
+                        <td>{{ $e->first_name }} {{ $e->last_name }}</td>
+                        @endif
+                        @endforeach
+                        <td>{{ $l->start_date }}</td>
+                        <td>{{ $l->end_date }}</td>
+                        <td class="mt2- mb-2"><a class="btn-brand" href="/trial">information</a></td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5">No Leave Information</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
@@ -52,4 +60,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

@@ -21,7 +21,9 @@ class EmployeeController extends BaseController
      */
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::query()
+            ->filter(request(['search']))
+            ->get();
 
         return view('AdminEmployee.Employee', compact('employees'));
     }

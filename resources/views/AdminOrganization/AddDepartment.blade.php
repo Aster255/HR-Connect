@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminAddDepartment.css')}}">
 
 </head>
@@ -11,28 +11,25 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">ADD NEW DEPARTMENT</h1>
+        <h1 class="Title_navbar">ADD NEW DEPARTMENT</h1>
+
+        <div class="button">
+            <a class="btn btn-brand" href="/Admin/Organization">Back</a>
+        </div>
     </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Organization">Back</a>
-    </div>
-    <div class="row justify-content-center" data-aos="zoom-in">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ route('Department.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="department_name">Department Name: </label>
-                            <input type="text" name="department_name" id="department_name" class="form-control" required>
-                            <input type="hidden" name="department_status" value="added">
-                        </div>
 
-                        <input type="submit" class="btn btn-green" value="New Department" />
-                    </form>
+    <div class="Form_Section mx-5">
+        <div class="Form_Body">
+            <form action="{{ route('Department.store') }}" method="POST">
+                @csrf
+                <div class="Form_Input_Section">
+                    <label class="Form_Label" for="department_name">Department Name: </label>
+                    <input class="Form_Input" type="text" name="department_name" id="department_name" class="form-control" required>
+                    <input type="hidden" name="department_status" value="Active">
                 </div>
-            </div>
+                <input type="submit" class="btn btn-green" value="New Department" />
+            </form>
         </div>
     </div>
 
@@ -43,4 +40,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

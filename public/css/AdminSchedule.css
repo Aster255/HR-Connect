@@ -11,14 +11,6 @@
     background-color: var(--Nuetrals100);
     border-radius: 10px;
 }
-
-table {
-    margin-block: 20px;
-    width: 100%;
-    text-align: center;
-    border-radius: 10px;
-}
-
 th {
     padding-block: 10px;
 }

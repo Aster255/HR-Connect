@@ -41,7 +41,7 @@
 
 
         <div class="dropdown">
-            <img class="profile_picture" src="/img/user_profiles/{{$employee_picture->picture}}" alt="{{$employee_picture->first_name}} pictures" onclick="toggleDropdown()">
+            <img class="profile_picture" src="{{$employee_picture->picture}}" alt="{{$employee_picture->first_name}} pictures" onclick="toggleDropdown()">
             <div class="dropdown-content" id="myDropdown">
                 <a href="/trial">Profile</a>
                 <a href="/trial">Setting</a>

@@ -9,6 +9,7 @@ use App\Models\Position;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\User;
+use App\Models\Workschedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EmployeeFactory extends Factory
@@ -22,6 +23,7 @@ class EmployeeFactory extends Factory
 
         $position = Position::whereNotIn('position_id', $excludedPositionIds)->inRandomOrder()->first();
         $department = Department::whereNotIn('department_id', $excludedDepartmentIds)->inRandomOrder()->first();
+        $workschedule = Workschedule::inRandomOrder()->first();
 
         if ($position) {
             return [
@@ -33,6 +35,8 @@ class EmployeeFactory extends Factory
                 'salary' => $this->faker->numberBetween(25000, 50000),
                 'middle_name' => $this->faker->optional()->lastName,
                 'nick_name' => $this->faker->optional()->userName,
+                'picture' => 'https://robohash.org/' . $this->faker->firstName . $this->faker->lastName,
+                'schedule_id' => $workschedule->schedule_id,
             ];
         } else {
             return [
@@ -42,6 +46,8 @@ class EmployeeFactory extends Factory
                 'salary' => $this->faker->numberBetween(25000, 50000),
                 'middle_name' => $this->faker->optional()->lastName,
                 'nick_name' => $this->faker->optional()->userName,
+                'picture' => 'https://robohash.org/' . $this->faker->firstName . $this->faker->lastName,
+                'schedule_id' => $workschedule->schedule_id,
             ];
         }
     }

@@ -17,7 +17,7 @@ class PositionController extends BaseController
     }
 
 
-    // get New Position with Department set 
+    // get New Position with Department set
     public function create()
     {
         $department = Department::all();
@@ -25,7 +25,7 @@ class PositionController extends BaseController
             ->select('positions.*', 'departments.*')
             ->join('departments', 'departments.department_id', '=', 'positions.department_id')
             ->orderByDesc('positions.position_id')
-            ->paginate(10);
+            ->get();
 
         return view('AdminOrganization.AddPosition', compact('positionlist', 'department'));
     }
@@ -43,7 +43,7 @@ class PositionController extends BaseController
     }
 
 
-    // Show Position List 
+    // Show Position List
     public function show(string $id)
     {
         $position = Position::query()
@@ -55,6 +55,7 @@ class PositionController extends BaseController
             ->join('positions', 'positions.position_id', 'employees.position_id')
             ->join('departments', 'departments.department_id', 'positions.department_id')
             ->where('employees.position_id', $id)
+            ->filter(request(['search']))
             ->get();
         $department = Department::query()
             ->select('departments.*', 'positions.*')
