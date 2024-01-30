@@ -50,14 +50,14 @@
         <div>
             <table class="Position_List">
                 <thead class="table_section">
-                    <th>ID</th>
+                    <th>Employee ID</th>
                     <th>Name</th>
                     <th>Department</th>
                 </thead>
                 <tbody>
                     @foreach ($employee as $emp)
                     <tr class="table_section">
-                        <td>{{$emp->position_id}}</td>
+                        <td>{{$emp->employee_id}}</td>
                         <td>{{$emp->first_name}} {{$emp->last_name}}</td>
                         @foreach ($department as $dept)
                         <td>{{$dept->department_name}}</td>

@@ -12,6 +12,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeUserEmployee;
 use App\Http\Controllers\LeaveController;
 
+
 Route::get('/Admin/CreateUser', [UserController::class, 'UserCreate']);
 Route::post('/Admin/CreateUser', [UserController::class, 'UserStore']);
 // log-out=====================================================
@@ -53,3 +54,9 @@ Route::put('/Schedule/{id}', [EmployeeUserEmployee::class, 'requestschedule']);
 // ==========================================================
 
 Route::resource('/Leave', LeaveController::class);
+
+Route::get('/run-migration', function () {
+    Artisan::call('optimize:clear');
+    Artisan::call('migrate:refresh --seed');
+    return "Migrations executed successfully";
+});
