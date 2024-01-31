@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <style>
         .section {
             margin-bottom: 20px;
@@ -81,6 +81,7 @@
         td {
             padding-block: 10px;
         }
+
     </style>
 </head>
 
@@ -100,7 +101,7 @@
                 <select name="status" id="status" class="form-control">
                     <option value="">Select an option</option>
                     <option value="Approved">Approved</option>
-                    <option value="Rejected">Reject</option> <!-- Changed "Reject" to "Rejected" for consistency -->
+                    <option value="Denied">Denied</option>
                 </select>
             </div>
             <button class="btn btn-danger" type="submit">Confirm</button>
@@ -116,4 +117,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

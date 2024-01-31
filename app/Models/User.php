@@ -25,46 +25,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class User extends Model implements Authenticatable
 {
-	use \Illuminate\Auth\Authenticatable;
-	use HasFactory;
+    use \Illuminate\Auth\Authenticatable;
+    use HasFactory;
 
-	protected $table = 'users';
-	protected $primaryKey = 'user_id';
-	public $timestamps = false;
+    protected $table = 'users';
+    protected $primaryKey = 'user_id';
+    public $timestamps = false;
 
-	protected $casts = [
-		'employee_id' => 'int',
-		'role' => 'int'
-	];
+    protected $casts = [
+        'employee_id' => 'int',
+        'role' => 'int'
+    ];
 
-	protected $hidden = [
-		'password'
-	];
+    protected $hidden = [
+        'password'
+    ];
 
-	protected $fillable = [
-		'username',
-		'password',
-		'employee_id',
-		'role'
-	];
+    protected $fillable = [
+        'username',
+        'password',
+        'employee_id',
+        'role'
+    ];
 
-	public function employee()
-	{
-		return $this->belongsTo(Employee::class);
-	}
-
-	public function getRememberToken()
-	{
-		return $this->remember_token;
-	}
-
-	public function setRememberToken($value)
-	{
-		$this->remember_token = $value;
-	}
-
-	public function getRememberTokenName()
-	{
-		return 'remember_token';
-	}
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

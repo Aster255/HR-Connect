@@ -4,7 +4,7 @@
 <head>
     @include("Layout.Head")
 
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminShowPosition.css')}}">
 </head>
 
@@ -13,13 +13,15 @@
 
     <div class="greetings">
         <h1 class="Title_navbar">{{$position->position_name}}</h1>
+
+        <div class="button">
+            <a class="btn btn-brand" href="/Admin/Organization">BACK</a>
+            <a class="btn btn-green" href="/Admin/Organization/Position/{{$position->position_id}}/edit">EDIT</a>
+            <a class="btn btn-red" data-bs-toggle='modal'
+                data-bs-target='#delete_{{$position -> position_id}}'>DELETE</a>
+        </div>
     </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Organization">BACK</a>
-        <a class="btn btn-green" href="/Admin/Organization/Position/{{$position->position_id}}/edit">EDIT</a>
-        <a class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$position -> position_id}}'>DELETE</a>
-    </div>
 
     <div class=" modal fade" id="delete_{{$position -> position_id}}" tabindex="-1" data-aos="zoom-in">
         <div class="modal-dialog">
@@ -44,19 +46,30 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <form class="Search_Bar" action="">
+            <input class="Search_Input" type="text" name="search" value="{{ request('search') }}">
+            <div class="Search_Button">
+                <button class="btn-brand" type="submit">Search</button>
+                <a href="{{ url('/Admin/Organization/Position/' . $position->position_id) }}"
+                    class="btn-grey ">Clear</a>
+            </div>
+        </form>
     </div>
 
-    <div class="list">
-        <div>
-            <table class="Position_List">
-                <thead class="table_section">
+
+    <div class="List">
+        <div class="One_List">
+            <table>
+                <thead class="thead_section">
                     <th>Employee ID</th>
                     <th>Name</th>
                     <th>Department</th>
                 </thead>
-                <tbody>
+                <tbody class="body_section">
                     @foreach ($employee as $emp)
-                    <tr class="table_section">
+                    <tr>
                         <td>{{$emp->employee_id}}</td>
                         <td>{{$emp->first_name}} {{$emp->last_name}}</td>
                         @foreach ($department as $dept)
@@ -77,4 +90,5 @@
 </script>
 <script>
     AOS.init();
+
 </script>

@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <style>
         body {
             user-select: none;
@@ -76,6 +76,7 @@
             border-radius: 5px;
             background-color: white;
         }
+
     </style>
 </head>
 
@@ -270,4 +271,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

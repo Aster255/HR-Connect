@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/CreateLeave.css') }}">
 </head>
 
@@ -11,10 +11,10 @@
     @include("Layout.NavBarEmployee")
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in">Request Leave</h1>
-    </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Leave">BACK</a>
+        <div class="button">
+            <a class="btn btn-brand" href="/Leave">BACK</a>
+        </div>
     </div>
 
     <div class="card">
@@ -26,7 +26,7 @@
                     <input type="date" name="start_date" id="start_date">
                     <label for="end_date">end</label>
                     <input type="date" name="end_date" id="end_date">
-                    <input type="text" hidden value="pending" name="status" id="status">
+                    <input type="text" hidden value="Pending" name="status" id="status">
                 </div>
                 <div class="form-group">
                     <label for="leavetype_id">Leave Type</label>
@@ -49,4 +49,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

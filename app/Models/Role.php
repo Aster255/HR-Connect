@@ -6,11 +6,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Role
- * 
+ *
  * @property int $role_id
  * @property string $role_name
  *
@@ -18,11 +19,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Role extends Model
 {
-	protected $table = 'roles';
-	protected $primaryKey = 'role_id';
-	public $timestamps = false;
+    use HasFactory;
+    protected $table = 'roles';
+    protected $primaryKey = 'role_id';
+    public $timestamps = false;
 
-	protected $fillable = [
-		'role_name'
-	];
+    protected $fillable = [
+        'role_name'
+    ];
 }

@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminAttendanceLogin.css')}}">
 </head>
 
@@ -11,10 +11,10 @@
     @include("Layout.NavBarAdmin")
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in">LOG IN</h1>
-    </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Attendance/Log">BACK</a>
+        <div class="button">
+            <a class="btn btn-brand" href="/Admin/Attendance/Log">BACK</a>
+        </div>
     </div>
 
     <div class="row justify-content-center" data-aos="zoom-in">
@@ -41,7 +41,7 @@
                             <select name="location_id" id="location_id" required>
                                 <option value="">select one</option>
                                 @foreach ($locations as $location)
-                                <option value="{{ $location->location_id }}">{{ $location->location }}</option>
+                                <option value="{{ $location->location_id }}">{{ $location->location_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -59,6 +59,7 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>
 
 <script>
@@ -72,4 +73,5 @@
     }
     updateRealtimeDate();
     setInterval(updateRealtimeDate, 1000);
+
 </script>

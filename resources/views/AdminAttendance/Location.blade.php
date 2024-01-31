@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminLocation.css') }}">
 </head>
 
@@ -11,42 +11,43 @@
     @include("Layout.NavBarAdmin")
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in">LOCATION</h1>
+
+        <div class="button">
+            <a class="btn btn-brand" href="/Admin/Attendance">Back</a>
+        </div>
     </div>
 
-
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Attendance">Back</a>
-    </div>
-    <div class="row justify-content-center " style="  margin-right: 10px;" data-aos="zoom-in">
-        <div>
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="section-title">Create Location</h2>
+    <div class="List">
+        <div class="One_List">
+            <div class="Form_Section">
+                <div class="Form_Body">
+                    <div class="Form_Title_Section">
+                        <h2 class="Form_Title">Create Location</h2>
+                    </div>
                     <form action="/Admin/Attendance/Location" method="POST">
                         @csrf
-                        <div class="form-group">
-                            <label for="Location">Location: </label>
-                            <input type="text" id="Location" name="Location" required>
+                        <div class="Form_Input_Section">
+                            <label class="Form_Label" for="Location">Location: </label>
+                            <input class="Form_Input" type="text" id="Location" name="Location" required>
                         </div>
                         <input class="btn btn-green" type="submit" value="Create Location">
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="list" data-aos="zoom-in">
-        <div class="list_one">
+        <div class="Two_List">
             <table>
-                <thead>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-left-radius: 10px;">ID</th>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-right-radius: 10px;">location List</th>
+                <thead class="thead_section">
+                    <tr>
+                        <th>ID</th>
+                        <th>location List</th>
+                    </tr>
                 </thead>
-                <tbody>
+                <tbody class="body_section">
                     @foreach ($location as $location)
                     <tr>
                         <td>{{$location->location_id}}</td>
-                        <td>{{$location->location}}</td>
+                        <td>{{$location->location_name}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -61,4 +62,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

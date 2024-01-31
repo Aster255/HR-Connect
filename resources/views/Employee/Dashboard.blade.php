@@ -25,9 +25,11 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
     @include("Layout.NavBarEmployee")
     <div class="greetings">
         <h1 class="Title_navbar">DASHBOARD</h1>
-        <div>
-            <p>{{ $greeting }}! {{$employee->first_name}} {{$employee->last_name}}. Here's our agenda for today.</p>
-        </div>
+
+    </div>
+
+    <div class="agenda">
+        <p>{{ $greeting }}! {{$employee->first_name}} {{$employee->last_name}}. Here's our agenda for today.</p>
     </div>
 
 
@@ -76,4 +78,5 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

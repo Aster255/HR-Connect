@@ -4,12 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Employee;
 use App\Models\Position;
-use App\Models\User;
 use App\Models\Department;
-use App\Models\EmployeeInformation;
-use App\Models\EmployeeNotify;
-use App\Models\EmployeeDoc;
+use App\Models\Location;
+use App\Models\Role;
+use App\Models\Workschedule;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -20,6 +20,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Role::factory()->create([
+            'role_id' => 1,
+            'role_name' => 'Admin',
+        ]);
+
+        Role::factory()->create([
+            'role_id' => 2,
+            'role_name' => 'User',
+        ]);
+        Location::factory()->create([
+            'location_name' => 'On-Site',
+        ]);
+
+
+        Workschedule::factory()->create([
+            'schedule_id' => 1,
+            'start_time' => '08:00',
+            'end_time' => '05:00',
+        ]);
+
         $this->CreateUserAdmins();
 
         Department::factory()->create([
@@ -33,11 +53,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Employee::factory(50)->withEmployeeData()->create();
-
     }
 
     private function CreateUserAdmins()
     {
+
         $department = Department::factory()->create([
             'department_name' => 'Website Administrator',
             'department_status' => 'Active',
@@ -74,4 +94,3 @@ class DatabaseSeeder extends Seeder
             ]);
     }
 }
-

@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminShowEmployee.css') }}">
 </head>
 
@@ -11,13 +11,13 @@
     @include("Layout.NavBarAdmin")
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in">{{$employee->first_name}} {{$employee->last_name}}</h1>
-    </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="{{ route('Employee.index') }}">BACK</a>
-        <button type="button" class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$employee->employee_id}}'>
-            DELETE
-        </button>
+        <div class="button">
+            <a class="btn btn-brand" href="{{ route('Employee.index') }}">BACK</a>
+            <button type="button" class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$employee->employee_id}}'>
+                DELETE
+            </button>
+        </div>
     </div>
     <div class="modal fade" id="delete_{{$employee->employee_id}}" tabindex="-1">
         <div class="modal-dialog" role="document">
@@ -45,7 +45,7 @@
 
     {{-- picture --}}
     <div class="picture">
-        <img src="/img/user_profiles/{{$employee->picture}}" alt="{{$employee->first_name}} pictures" width="100px">
+        <img src="{{$employee->picture}}" alt="{{$employee->first_name}} pictures" width="100px">
     </div>
 
     <div class="picturebtn">
@@ -63,6 +63,7 @@
             function chooseFile() {
                 document.getElementById('picture').click();
             }
+
         </script>
     </div>
 
@@ -454,7 +455,7 @@
                 <p class="title_information">PhilHealth: </p>
                 <p class="information">{{ $employeedoc ? $employeedoc->philhealth : '' }}</p>
             </div>
-            <div >
+            <div>
                 <p class="title_information">HDMF: </p>
                 <p class="information">{{ $employeedoc ? $employeedoc->hdmf : '' }}</p>
             </div>

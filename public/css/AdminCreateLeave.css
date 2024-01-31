@@ -6,27 +6,9 @@
     padding-inline: 20px;
 }
 
-.table_title {
-    padding-block: 10px;
-    color: var(--Brand);
-
-    text-align: center;
-    text-transform: uppercase;
-}
-
 .Position_List,
 .Department_List {
     width: 100%;
-}
-
-.table_section th {
-    background-color: var(--Nuetrals);
-    width: 25%;
-    padding-inline: 20px;
-}
-.table_section td {
-    padding-inline: 20px;
-    background-color: var(--Nuetrals100);
 }
 
 .card {

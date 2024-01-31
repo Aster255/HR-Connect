@@ -13,12 +13,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Department
- * 
+ *
  * @property int $department_id
  * @property string $department_name
  * @property string $department_status
  * @property Carbon $department_timestamp
- * 
+ *
  * @property Collection|Employee[] $employees
  * @property Collection|Position[] $positions
  *
@@ -26,29 +26,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Department extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $table = 'departments';
-	protected $primaryKey = 'department_id';
-	public $timestamps = false;
+    protected $table = 'departments';
+    protected $primaryKey = 'department_id';
+    public $timestamps = false;
 
-	protected $casts = [
-		'department_timestamp' => 'datetime'
-	];
+    protected $casts = [
+        'department_timestamp' => 'datetime'
+    ];
 
-	protected $fillable = [
-		'department_name',
-		'department_status',
-		'department_timestamp'
-	];
+    protected $fillable = [
+        'department_name',
+        'department_status',
+        'department_timestamp'
+    ];
 
-	public function employees()
-	{
-		return $this->hasMany(Employee::class);
-	}
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'department_id');
+    }
 
-	public function positions()
-	{
-		return $this->hasMany(Position::class);
-	}
+    public function positions()
+    {
+        return $this->hasMany(Position::class, 'department_id');
+    }
 }
