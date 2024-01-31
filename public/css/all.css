@@ -15,7 +15,7 @@
 
     /* Success Colors */
     --Success-Hover: #37c000;
-    --Success:  #47de0b;
+    --Success: #47de0b;
     --Success900: rgba(56, 111, 9, 1);
 
     /* Fail Colors */
@@ -98,7 +98,6 @@
     border: none;
     cursor: pointer;
 
-
     transition: background-color 0.5s, color 0.5s;
 }
 .btn-grey:hover {
@@ -113,7 +112,6 @@
     border-radius: 5px;
     border: none;
     cursor: pointer;
-
 
     transition: background-color 0.5s;
 }
@@ -320,7 +318,8 @@ table {
 
     padding-block: 5px;
 }
-.thead_section tr th, .body_section tr td {
+.thead_section tr th,
+.body_section tr td {
     flex: 1;
 }
 
@@ -346,4 +345,23 @@ table {
 }
 .Two_List {
     flex: 3;
+}
+
+/* Pagination */
+.page-link {
+    position: relative;
+    display: block;
+    color: var(--Brand);
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: var(--Brand);
+    border-color: var(--Brand);
 }

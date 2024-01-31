@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     @include("Layout.Head")
 
@@ -55,6 +52,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $employees->links() }}
         </div>
     </div>
 

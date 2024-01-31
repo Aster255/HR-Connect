@@ -23,7 +23,7 @@ class EmployeeController extends BaseController
     {
         $employees = Employee::query()
             ->filter(request(['search']))
-            ->get();
+            ->paginate(10);
 
         return view('AdminEmployee.Employee', compact('employees'));
     }
