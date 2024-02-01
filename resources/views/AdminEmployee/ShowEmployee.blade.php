@@ -14,7 +14,8 @@
 
         <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="{{ route('Employee.index') }}">BACK</a>
-            <button type="button" class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$employee->employee_id}}'>
+            <button type="button" class="btn btn-red" data-bs-toggle='modal'
+                data-bs-target='#delete_{{$employee->employee_id}}'>
                 DELETE
             </button>
         </div>
@@ -43,25 +44,26 @@
 
     {{-- picture --}}
     <div class="picture">
-        <img src="{{$employee->picture}}" alt="{{$employee->first_name}} pictures" width="100px">
+        <img id="preview" src="{{$employee->picture}}" alt="{{$employee->first_name}} pictures" width="100px">
     </div>
 
     <div class="picturebtn">
         <form action="/Admin/Employee/{{$employee->employee_id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
-            <input type="file" name="picture" id="picture" accept="image/*" hidden>
-            <button type="button" class="btn btn-green" onclick="chooseFile()">Change Profile</button>
-
+            <input type="hidden" name="picture" id="picture" value="" />
+            <input type="text" name="formpreview" id="formpreview" value="IMAGE HASH" />
+            <button type="button" class="btn btn-green" onclick="PreviewPic()">Preview Picture</button>
             <button type="submit" class="btn btn-brand">Update Picture</button>
         </form>
 
         <script>
-            function chooseFile() {
-                document.getElementById('picture').click();
+            function PreviewPic() {
+                var strhash = document.getElementById('formpreview').value;
+                var robohashURL = 'https://robohash.org/' + strhash + '.png?set=set5';
+                document.getElementById('preview').src = robohashURL;
+                document.getElementById('picture').value = robohashURL;
             }
-
         </script>
     </div>
 
@@ -79,7 +81,8 @@
         </div>
 
         {{-- edit section information --}}
-        <div class="modal fade" id="EditpersonalInformation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="EditpersonalInformation" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -89,7 +92,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data" method="POST" class="form-group">
+                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data"
+                            method="POST" class="form-group">
                             @csrf
                             @method('PUT')
                             <label for="title">Title</label>
@@ -165,7 +169,8 @@
         </div>
 
         {{-- edit section other information --}}
-        <div class="modal fade" id="EditOtherInformation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="EditOtherInformation" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -175,7 +180,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data" method="POST" class="form-group">
+                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data"
+                            method="POST" class="form-group">
                             @csrf
                             @method('PUT')
 
@@ -248,7 +254,8 @@
         </div>
 
         {{-- edit section contact-information --}}
-        <div class="modal fade" id="EditContactInformation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="EditContactInformation" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -258,13 +265,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data" method="POST" class="form-group">
+                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data"
+                            method="POST" class="form-group">
                             @csrf
                             @method('PUT')
 
                             <!-- Phone No. -->
                             <label for="mobile_no">Phone No. :</label>
-                            <input type="text" name="mobile_no" id="mobile_no" value="{{$employeeinformation->mobile_no}}">
+                            <input type="text" name="mobile_no" id="mobile_no"
+                                value="{{$employeeinformation->mobile_no}}">
 
                             <!-- Telephone No. -->
                             <label for="phone_no">Telephone No. :</label>
@@ -272,7 +281,8 @@
 
                             <!-- Email -->
                             <label for="email_address">Email:</label>
-                            <input type="email" name="email_address" id="email_address" value="{{$employeeinformation->email_address}}">
+                            <input type="email" name="email_address" id="email_address"
+                                value="{{$employeeinformation->email_address}}">
 
                             <!-- Address -->
                             <label for="zip">Zip Code:</label>
@@ -338,7 +348,8 @@
         </div>
 
         {{-- edit section --}}
-        <div class="modal fade" id="EditDepartment_Position" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="EditDepartment_Position" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -348,7 +359,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data" method="POST" class="form-group">
+                        <form action="/Admin/Employee/{{$employee->employee_id}}" enctype="multipart/form-data"
+                            method="POST" class="form-group">
                             @csrf
                             @method('PUT')
 

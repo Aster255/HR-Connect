@@ -35,7 +35,7 @@ class EmployeeFactory extends Factory
                 'salary' => $this->faker->numberBetween(25000, 50000),
                 'middle_name' => $this->faker->optional()->lastName,
                 'nick_name' => $this->faker->optional()->userName,
-                'picture' => 'https://robohash.org/' . $this->faker->firstName . $this->faker->lastName,
+                'picture' => 'https://robohash.org/' . $this->faker->firstName . $this->faker->lastName . '.png?set=set5',
                 'schedule_id' => $workschedule->schedule_id,
             ];
         } else {
@@ -46,7 +46,7 @@ class EmployeeFactory extends Factory
                 'salary' => $this->faker->numberBetween(25000, 50000),
                 'middle_name' => $this->faker->optional()->lastName,
                 'nick_name' => $this->faker->optional()->userName,
-                'picture' => 'https://robohash.org/' . $this->faker->firstName . $this->faker->lastName,
+                'picture' => 'https://robohash.org/' . $this->faker->firstName . $this->faker->lastName . '.png?set=set5',
                 'schedule_id' => $workschedule->schedule_id,
             ];
         }

@@ -17,7 +17,8 @@
         <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Organization">BACK</a>
             <a class="btn btn-green" href="/Admin/Organization/Position/{{$position->position_id}}/edit">EDIT</a>
-            <a class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$position -> position_id}}'>DELETE</a>
+            <a class="btn btn-red" data-bs-toggle='modal'
+                data-bs-target='#delete_{{$position -> position_id}}'>DELETE</a>
         </div>
     </div>
 
@@ -51,7 +52,8 @@
             <input class="Search_Input" type="text" name="search" value="{{ request('search') }}">
             <div class="Search_Button">
                 <button class="btn-brand" type="submit">Search</button>
-                <a href="{{ url('/Admin/Organization/Position/' . $position->position_id) }}" class="btn-grey ">Clear</a>
+                <a href="{{ url('/Admin/Organization/Position/' . $position->position_id) }}"
+                    class="btn-grey ">Clear</a>
             </div>
         </form>
     </div>
