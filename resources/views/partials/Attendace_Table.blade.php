@@ -1,4 +1,4 @@
-<div class="One_List">
+<div class="One_List" data-aos="zoom-in" data-aos-duration="600">
     <table>
         <thead class="thead_section">
             <tr class="table_title">

@@ -9,9 +9,9 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">ATTENDANCE</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">ATTENDANCE</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a href="/Admin/Attendance/Log" class="btn btn-brand">Log List</a>
             <!-- <a href="/Admin/Attendance/Calendar" class="btn btn-brand">Calendar</a> -->
             <a href="/Admin/Attendance/Schedule" class="btn btn-brand">Schedule</a>

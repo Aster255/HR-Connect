@@ -10,17 +10,17 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">ADD NEW POSITION</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">ADD NEW POSITION</h1>
 
-        <div class="button">
-            <a class="btn btn-brand" href="/Admin/Organization" data-aos="zoom-in">Back</a>
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
+            <a class="btn btn-brand" href="/Admin/Organization">Back</a>
         </div>
     </div>
 
 
 
 
-    <div class="Form_Section mx-5">
+    <div class="Form_Section mx-5" data-aos="zoom-in-up" data-aos-duration="800">
         <div class="Form_Body">
             <form action="{{ route('Position.store') }}" method="POST">
                 @csrf

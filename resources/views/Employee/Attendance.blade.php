@@ -9,9 +9,9 @@
 <body>
     @include("Layout.NavBarEmployee")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">LOG IN</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">LOG IN</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <button type="button" class="btn btn-brand" data-bs-toggle='modal' data-bs-target='#request_schedule'>
                 REQUEST NEW SCHEDULE
             </button>
@@ -49,15 +49,16 @@
             </div>
         </div>
     </div>
-    <div class="Form_Input_Section">
+
+    <div class="Form_Input_Section" data-aos="zoom-in" data-aos-duration="600">
         <p class="Form_Title">YOUR CURRENT SCHEDULE IS {{ $schedule->start_time->format('h:i A') }} - {{ $schedule->end_time->format('h:i
             A') }}</p>
     </div>
-    <div class="Attendance_Time">
+    <div class="Attendance_Time" data-aos="zoom-in" data-aos-duration="600">
         <p id="realtime-date">{{ date('h:i:s') }}</p>
     </div>
 
-    <div class="Form_Section">
+    <div class="Form_Section" data-aos="zoom-in" data-aos-duration="600">
         <div class="Form_Body">
 
             <form action="/Attendance" method="POST">
@@ -92,7 +93,7 @@
     </div>
 
     <div class="List">
-        <div class="One_List">
+        <div class="One_List" data-aos="zoom-in" data-aos-duration="600">
             <table>
                 <thead class="thead_section">
                     <th>Attendance ID</th>

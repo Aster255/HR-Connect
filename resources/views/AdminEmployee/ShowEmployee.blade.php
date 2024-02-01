@@ -10,9 +10,9 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">{{$employee->first_name}} {{$employee->last_name}}</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">{{$employee->first_name}} {{$employee->last_name}}</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="{{ route('Employee.index') }}">BACK</a>
             <button type="button" class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$employee->employee_id}}'>
                 DELETE
@@ -39,8 +39,6 @@
             </div>
         </div>
     </div>
-    </div>
-
 
 
     {{-- picture --}}

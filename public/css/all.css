@@ -163,14 +163,14 @@ information */
     align-items: center;
 
     background-color: var(--Nuetrals100);
-    margin: 25px;
+    margin: 20px;
     padding: 20px;
     border-radius: 5px;
 }
 .agenda p {
     text-align: start;
     color: var(--Nuetrals900);
-    font-size: 25px;
+    font-size: 1.2rem;
 }
 /*
 
@@ -214,7 +214,7 @@ search bar pre design
     flex: 1;
     display: flex;
     justify-content: center;
-    margin-block: 30px;
+    margin: 30px;
 }
 .Form_Body {
     background-color: rgba(241, 243, 245, 1);
@@ -255,7 +255,7 @@ search bar pre design
 }
 
 .Form_Label {
-    flex: 1;
+    flex-grow: 1;
     display: block;
     font-weight: bold;
     color: var(--Brand);

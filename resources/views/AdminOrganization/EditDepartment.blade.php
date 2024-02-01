@@ -10,14 +10,14 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">EDIT: {{$department->department_name}}</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">EDIT: {{$department->department_name}}</h1>
 
-        <div class="button">
-            <a class="btn btn-brand" data-aos="zoom-in" href="/Admin/Organization/Department/{{$department->department_id}}">Back</a>
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
+            <a class="btn btn-brand" href="/Admin/Organization/Department/{{$department->department_id}}">Back</a>
         </div>
     </div>
 
-    <div class="Form_Section">
+    <div class="Form_Section" data-aos="zoom-in-up" data-aos-duration="600">
         <div class="Form_Body">
             <form action="/Admin/Organization/Department/{{$department->department_id}}" method="POST">
                 @csrf

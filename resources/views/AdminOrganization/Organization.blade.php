@@ -9,16 +9,16 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">ORAGANIZATION</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">ORAGANIZATION</h1>
 
-        <div class="button" data-aos="zoom-in">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Organization/Position/create">ADD POSITION</a>
             <a class="btn btn-brand" href="/Admin/Organization/Department/create">ADD DEPARTMENT</a>
         </div>
     </div>
 
     <div class="List_Column">
-        <div>
+        <div data-aos="zoom-in-up" data-aos-duration="600">
             <table>
                 <thead class="thead_section">
                     <tr>
@@ -53,7 +53,7 @@
             <p>No Data</p>
             @endif
         </div>
-        <div>
+        <div data-aos="zoom-in-down" data-aos-duration="600">
             <table>
                 <thead class="thead_section">
                     <tr>

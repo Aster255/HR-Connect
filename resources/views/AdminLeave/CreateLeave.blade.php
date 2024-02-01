@@ -10,15 +10,15 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">CREATE LEAVE TYPE</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">CREATE LEAVE TYPE</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Leave">BACK</a>
         </div>
     </div>
 
     <div class="List">
-        <div class="One_List">
+        <div class="One_List" data-aos="zoom-in-right" data-aos-duration="600">
             <div class="Form_Section">
                 <div class="Form_Body">
                     <div class="Form_Title_Section">
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="Two_List">
+        <div class="Two_List" data-aos="zoom-in-left" data-aos-duration="600">
             <table>
                 <thead class="thead_section">
                     <tr>

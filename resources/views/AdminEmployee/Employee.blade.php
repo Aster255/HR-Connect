@@ -11,14 +11,14 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">EMPLOYEE</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">EMPLOYEE</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Employee/create">ADD EMPLOYEE</a>
         </div>
     </div>
 
-    <div>
+    <div data-aos="zoom-in" data-aos-duration="600">
         <form class="Search_Bar" action="">
             <input class="Search_Input" type="text" name="search" value="{{ request('search') }}">
             <div class="Search_Button">
@@ -28,7 +28,7 @@
         </form>
     </div>
 
-    <div class="List">
+    <div class="List" data-aos="zoom-in-up" data-aos-duration="600">
         <div class="One_List">
             <table>
                 <thead class="thead_section">

@@ -12,15 +12,15 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">LOG LIST</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">LOG LIST</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Attendance">BACK</a>
             <a class="btn btn-green" href="/Admin/Attendance/Log/create">Log In</a>
         </div>
     </div>
 
-    <div class="List">
+    <div class="List" data-aos="zoom-in" data-aos-duration="600">
         <div class="One_List">
             <table>
                 <thead class="thead_section">
@@ -107,5 +107,10 @@
         updateRealtimeDate();
         setInterval(updateRealtimeDate, 1000);
     });
+
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
 
 </script>

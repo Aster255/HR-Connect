@@ -10,14 +10,14 @@
 <body>
     @include("Layout.NavBarEmployee")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">LEAVE</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">LEAVE</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Leave/create">REQUEST LEAVE</a>
         </div>
     </div>
 
-    <div class="List">
+    <div class="List" data-aos="zoom-in" data-aos-duration="600">
         <div class="One_List">
             <table>
                 <thead class="thead_section">

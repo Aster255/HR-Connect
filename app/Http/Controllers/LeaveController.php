@@ -57,14 +57,16 @@ class LeaveController extends BaseController
      */
     public function store(Request $request)
     {
-        $requestleave = new Leave;
-        $requestleave->start_date = $request->input('start_date');
-        $requestleave->end_date = $request->input('end_date');
-        $requestleave->status = $request->input('status');
-        $requestleave->leavetype_id = $request->input('leavetype_id');
-
         $user = Auth::user();
         if ($user) {
+
+            $requestleave = new Leave;
+            $requestleave->start_date = $request->input('start_date');
+            $requestleave->end_date = $request->input('end_date');
+            $requestleave->status = $request->input('status');
+            $requestleave->leavetype_id = $request->input('leavetype_id');
+            $requestleave->leave_reason = $request->input('leave_reason');
+
             $employee_id = Employee::where('employee_id', $user->employee_id)->first();
             $requestleave->employee_id = $employee_id->employee_id;
             $requestleave->save();

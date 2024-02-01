@@ -10,14 +10,48 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">LEAVE</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">LEAVE</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Leave/Create" data-aos="zoom-in">Leave Types</a>
         </div>
     </div>
 
-    <div class="List">
+
+    @foreach ($leave as $l)
+    <div class="modal fade" id="delete_{{$l->leave_id}}" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/Leave/{{$l->leave_id}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="Form_Input_Section">
+                            <p class="Form_Label">Reason of Leave</p>
+                            <p class="Form_Input">{{ $l->leave_reason ?? ' ' }}</p>
+                        </div>
+                        <div class="Form_Input_Section">
+                            <label class="Form_Label" for="status">What would you like to do?</label>
+                            <select name="status" id="status" class="Form_Input">
+                                <option value="">Select an option</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Denied">Denied</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button class="btn btn-danger" type="submit">Confirm</button>
+                    </form> <!-- Close the form tag here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
+    <div class="List" data-aos="zoom-in-up" data-aos-duration="600">
         <div class="One_List">
             <table>
                 <thead class='thead_section'>
@@ -40,8 +74,11 @@
                         @endforeach
                         <td>{{ $l->start_date }}</td>
                         <td>{{ $l->end_date }}</td>
-                        <td class="mt2- mb-2"><a class="btn-brand" href="/trial">information</a></td>
+                        <td>
+                            <a class="btn btn-brand" data-bs-toggle='modal' data-bs-target='#delete_{{$l->leave_id}}'>information</a>
+                        </td>
                     </tr>
+
                     @empty
                     <tr>
                         <td colspan="5">No Leave Information</td>
@@ -51,12 +88,9 @@
             </table>
         </div>
     </div>
-
-
 </body>
 
 </html>
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();

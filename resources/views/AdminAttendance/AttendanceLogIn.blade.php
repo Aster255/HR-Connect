@@ -10,19 +10,19 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">LOG IN</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">LOG IN</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Attendance/Log">BACK</a>
         </div>
     </div>
 
-    <div class="row justify-content-center" data-aos="zoom-in">
+    <div class="row justify-content-center" data-aos="zoom-in" data-aos-duration="600">
         <div class="col-md-11">
             <p id="realtime-date">{{ date('h:i:s') }}</p>
         </div>
     </div>
-    <div class="row justify-content-center" data-aos="zoom-in">
+    <div class="row justify-content-center" data-aos="zoom-in" data-aos-duration="600">
         <div class="col-md-11">
             <div class="card">
                 <div class="card-body">

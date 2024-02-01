@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->date('start_date');
             $table->date('end_date');
+            $table->string('leave_reason')->nullable();
             $table->enum('status', ['Pending', 'Approved', 'Denied']);
             $table->unsignedBigInteger('leavetype_id');
             $table->timestamps();

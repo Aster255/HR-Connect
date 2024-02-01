@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Employee;
 use App\Models\Position;
 use App\Models\Department;
+use App\Models\LeaveType;
 use App\Models\Location;
 use App\Models\Role;
 use App\Models\Workschedule;
@@ -32,8 +33,9 @@ class DatabaseSeeder extends Seeder
         Location::factory()->create([
             'location_name' => 'On-Site',
         ]);
-
-
+        LeaveType::factory()->create([
+            'leave_type_name' => 'Birthday Leave',
+        ]);
         Workschedule::factory()->create([
             'schedule_id' => 1,
             'start_time' => '08:00',

@@ -12,9 +12,9 @@
     @include("Layout.NavBarAdmin")
 
     <div class="greetings">
-        <h1 class="Title_navbar">{{$position->position_name}}</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">{{$position->position_name}}</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand" href="/Admin/Organization">BACK</a>
             <a class="btn btn-green" href="/Admin/Organization/Position/{{$position->position_id}}/edit">EDIT</a>
             <a class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$position -> position_id}}'>DELETE</a>
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div>
+    <div data-aos="zoom-in" data-aos-duration="600">
         <form class="Search_Bar" action="">
             <input class="Search_Input" type="text" name="search" value="{{ request('search') }}">
             <div class="Search_Button">
@@ -58,7 +58,7 @@
 
 
     <div class="List">
-        <div class="One_List">
+        <div class="One_List" data-aos="zoom-in-up" data-aos-duration="600">
             <table>
                 <thead class="thead_section">
                     <th>Employee ID</th>

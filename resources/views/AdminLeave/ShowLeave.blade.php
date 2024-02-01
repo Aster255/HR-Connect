@@ -10,16 +10,18 @@
 <body>
     @include("Layout.NavBarAdmin")
     <h1 class="Title_navbar" data-aos="zoom-in">LEAVE</h1>
-    <div class="list">
-        <div class="list_one " data-aos="zoom-in">
-            <table class="table ">
-                <thead>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-left-radius: 10px;">Leave ID</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">Start Date</th>
-                    <th style="background-color: rgba(206, 212, 218, 1);">End Date</th>
-                    <th style="background-color: rgba(206, 212, 218, 1); border-top-right-radius: 10px;">Status</th>
+    <div class="List">
+        <div class="One_List " data-aos="zoom-in">
+            <table>
+                <thead class="thead_section">
+                    <tr>
+                        <th>Leave ID</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                    </tr>
                 </thead>
-                <tbody>
+                <tbody class="body_section">
                     @foreach ($leave as $l)
                     <tr>
                         <td>{{$l->leave_id}}</td>

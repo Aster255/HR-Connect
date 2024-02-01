@@ -10,16 +10,14 @@
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">ADD NEW EMPLOYEE</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">ADD NEW EMPLOYEE</h1>
 
-        <div class="button">
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
             <a class="btn btn-brand ms-2" href="{{ route('Employee.index') }}" data-aos="zoom-in">BACK</a>
         </div>
     </div>
 
-
-
-    <div class="List">
+    <div class="List" data-aos="zoom-in" data-aos-duration="600">
         <div class="Form_Section">
             <div class="Form_Body">
                 <form action="{{ route('Employee.store') }}" method="POST" enctype="multipart/form-data" class="form-group">
