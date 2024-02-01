@@ -1,4 +1,5 @@
 body {
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -59,9 +60,18 @@ body {
     border-radius: 3px;
     padding-inline: 10px;
     width: 50%;
-    user-select: all;
+    -webkit-user-select: all;
+    user-select:all;
 }
 .picturebtn {
     display: flex;
     justify-content: center;
+    align-items: stretch;
+}
+#formpreview {
+    border: 1px solid var(--Brand);
+    border-radius: 5px;
+    outline: none;
+    padding: 5px;
+    height: 100%;
 }

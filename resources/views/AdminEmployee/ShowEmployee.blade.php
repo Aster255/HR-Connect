@@ -52,10 +52,17 @@
         <form action="/Admin/Employee/{{$employee->employee_id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <input type="hidden" name="picture" id="picture" value="" />
-            <input type="text" name="formpreview" id="formpreview" value="IMAGE HASH" />
-            <button type="button" class="btn btn-green" onclick="PreviewPic()">Preview Picture</button>
-            <button type="submit" class="btn btn-brand">Update Picture</button>
+
+            <div class="Form_Input_Section">
+                <input type="text" name="formpreview" id="formpreview" value="IMAGE HASH" />
+                <input type="hidden" name="picture" id="picture" value="" />
+            </div>
+
+            <div class="Form_Input_Section_Column">
+                <button type="button" class="btn btn-green" onclick="PreviewPic()">Preview Picture</button>
+                <button type="submit" class="btn btn-brand">Update Picture</button>
+            </div>
+
         </form>
 
         <script>
