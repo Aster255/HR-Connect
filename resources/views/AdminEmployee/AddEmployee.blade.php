@@ -33,7 +33,7 @@
                         </div>
                         <div class="Form_Input_Section_Column mt-2">
                             <label class="Form_Label" for="title">Title:</label>
-                            <select class="Form_Input" name="title" id="title">
+                            <select class="Form_Input_Column" name="title" id="title">
                                 <option value=""></option>
                                 <option value="Mr">Mr.</option>
                                 <option value="Mrs">Mrs.</option>
@@ -42,23 +42,23 @@
                         </div>
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="first_name">First Name:</label>
-                            <input class="Form_Input" type="text" name="first_name" id="first_name" value="">
+                            <input class="Form_Input_Column" type="text" name="first_name" id="first_name" value="">
                         </div>
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="last_name">Last Name:</label>
-                            <input class="Form_Input" type="text" name="last_name" id="last_name" value="">
+                            <input class="Form_Input_Column" type="text" name="last_name" id="last_name" value="">
                         </div>
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="middle_name">Middle Name:</label>
-                            <input class="Form_Input" type="text" name="middle_name" id="middle_name" value="">
+                            <input class="Form_Input_Column" type="text" name="middle_name" id="middle_name" value="">
                         </div>
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="maiden_name">Maiden Name:</label>
-                            <input class="Form_Input" type="text" name="maiden_name" id="maiden_name" value="">
+                            <input class="Form_Input_Column" type="text" name="maiden_name" id="maiden_name" value="">
                         </div>
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="nick_name">Nick Name:</label>
-                            <input class="Form_Input" type="text" name="nick_name" id="nick_name" value="">
+                            <input class="Form_Input_Column" type="text" name="nick_name" id="nick_name" value="">
                         </div>
                     </div>
 
@@ -67,22 +67,22 @@
                         <!-- Date of Birth -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="date_of_birth">Date of Birth: </label>
-                            <input class="Form_Input" type="date" name="date_of_birth" id="date_of_birth" value="">
+                            <input class="Form_Input_Column" type="date" name="date_of_birth" id="date_of_birth" value="">
                         </div>
                         <!-- Place of Birth -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="place_of_birth">Place of Birth: </label>
-                            <textarea class="Form_Input" rows="5" cols="40" name="place_of_birth" style="resize: none;" id="place_of_birth" value=""></textarea>
+                            <textarea class="Form_Input_Column" rows="5" cols="40" name="place_of_birth" style="resize: none;" id="place_of_birth" value=""></textarea>
                         </div>
                         <!-- Nationality -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="nationality">Nationality: </label>
-                            <input class="Form_Input" type="text" name="nationality" id="nationality" value="">
+                            <input class="Form_Input_Column" type="text" name="nationality" id="nationality" value="">
                         </div>
                         <!-- Civil Status -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="civil_status">Status: </label>
-                            <select class="Form_Input" name="civil_status" id="civil_status">
+                            <select class="Form_Input_Column" name="civil_status" id="civil_status">
                                 <option value=""></option>
                                 <option value="single">Single</option>
                                 <option value="married">Married</option>
@@ -93,7 +93,7 @@
                         <!-- Gender -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="gender">Gender: </label>
-                            <select class="Form_Input" name="gender" id="gender">
+                            <select class="Form_Input_Column" name="gender" id="gender">
                                 <option value=""></option>
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
@@ -107,25 +107,25 @@
                         <!-- mobile Number -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="mobile_no">Mobile No.:</label>
-                            <input class="Form_Input" type="text" name="mobile_no" value="">
+                            <input class="Form_Input_Column" type="text" name="mobile_no" value="">
                         </div>
                         <!-- email -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="email">Email:</label>
-                            <input class="Form_Input" type="email" name="email" id="email" value="">
+                            <input class="Form_Input_Column" type="email" name="email" id="email" value="">
                         </div>
                         <!-- Address -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label">Address</label>
-                            <input class="Form_Input" type="number" name="zip" id="zip" placeholder="Zip" value="">
-                            <input class="Form_Input" type="text" name="street" id="street" placeholder="Street" value="">
-                            <input class="Form_Input" type="text" name="city" id="city" placeholder="City" value="">
-                            <input class="Form_Input" type="text" name="province" id="province" placeholder="Province" value="">
+                            <input class="Form_Input_Column" type="number" name="zip" id="zip" placeholder="Zip" value="">
+                            <input class="Form_Input_Column" type="text" name="street" id="street" placeholder="Street" value="">
+                            <input class="Form_Input_Column" type="text" name="city" id="city" placeholder="City" value="">
+                            <input class="Form_Input_Column" type="text" name="province" id="province" placeholder="Province" value="">
                         </div>
                         <!-- Phone number -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="phone_no">Phone Number:</label>
-                            <input class="Form_Input" type="text" name="phone_no" id="phone_no" value="">
+                            <input class="Form_Input_Column" type="text" name="phone_no" id="phone_no" value="">
                         </div>
                     </div>
 
@@ -134,22 +134,22 @@
                         <!-- Name Contact -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="name">Name: </label>
-                            <input class="Form_Input" type="text" name="name" id="name" value="">
+                            <input class="Form_Input_Column" type="text" name="name" id="name" value="">
                         </div>
                         <!-- Relationship -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="relationship">Relationship: </label>
-                            <input class="Form_Input" type="text" name="relationship" id="relationship" value="">
+                            <input class="Form_Input_Column" type="text" name="relationship" id="relationship" value="">
                         </div>
                         <!-- Mobile number Contact -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="mobile_no_contact">Mobile No.: </label>
-                            <input class="Form_Input" type="text" name="mobile_no_contact" id="mobile_no_contact" value="">
+                            <input class="Form_Input_Column" type="text" name="mobile_no_contact" id="mobile_no_contact" value="">
                         </div>
                         <!-- Address contact -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="address_contact">Address: </label>
-                            <input class="Form_Input" type="text" name="address_contact" id="address_contact" value="">
+                            <input class="Form_Input_Column" type="text" name="address_contact" id="address_contact" value="">
                         </div>
                     </div>
 
@@ -158,22 +158,22 @@
                         <!-- sss -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="sss">SSS: </label>
-                            <input class="Form_Input" type="number" name="sss" id="sss" value="">
+                            <input class="Form_Input_Column" type="number" max="9999999999" title="Please enter a 10-digit SSS number" name="sss" id="sss" value="">
                         </div>
                         <!-- tin -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="tin">TIN: </label>
-                            <input class="Form_Input" type="number" name="tin" id="tin" value="">
+                            <input class="Form_Input_Column" type="number" max="999999999" title="Please enter a 9-digit TIN number" name="tin" id="tin" value="">
                         </div>
                         <!-- philhealth -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="philhealth">PhilHealth: </label>
-                            <input class="Form_Input" type="number" name="philhealth" id="philhealth" value="">
+                            <input class="Form_Input_Column" type="number" max="999999999999" title="Please enter a 12-digit PhilHealth number" name="philhealth" id="philhealth" value="">
                         </div>
                         <!-- hdmf -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="hdmf">HDMF: </label>
-                            <input class="Form_Input" type="number" name="hdmf" id="hdmf" value="">
+                            <input class="Form_Input_Column" type="number" max="999999999999" title="Please enter a 12-digit HDMF number" name="hdmf" id="hdmf" value="">
                         </div>
                     </div>
 
@@ -182,7 +182,7 @@
                         <!-- position -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="position_id">Position:</label>
-                            <select name="position_id" id="position_id">
+                            <select class="Form_Input" name="position_id" id="position_id">
                                 <option value="">Select Position</option>
                                 @foreach ($position as $pos)
                                 <option value="{{ $pos->position_id }}">{{ $pos->position_name }}</option>
@@ -192,7 +192,7 @@
                         <!-- department -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="department_id">Department:</label>
-                            <select name="department_id" id="department_id">
+                            <select class="Form_Input_Column" name="department_id" id="department_id">
                                 <option value="">Select Department</option>
                                 @foreach ($department as $dept)
                                 <option value="{{ $dept->department_id }}">{{ $dept->department_name }}</option>
@@ -202,12 +202,12 @@
                         <!-- Hire Date -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="hire_date">Hire Date:</label>
-                            <input class="Form_Input" type="date" name="hire_date" id="hire_date">
+                            <input class="Form_Input_Column" type="date" name="hire_date" id="hire_date">
                         </div>
                         <!-- schedule -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="schedule_id">Schedule:</label>
-                            <select name="schedule_id" id="schedule_id">
+                            <select class="Form_Input_Column" name="schedule_id" id="schedule_id">
                                 <option value="">Select Schedule</option>
                                 @foreach ($schedule as $sched)
                                 <option value="{{ $sched->schedule_id }}">{{ $sched->start_time->format('H:i:s') }} - {{
@@ -219,7 +219,7 @@
                         <!-- Salary -->
                         <div class="Form_Input_Section_Column">
                             <label class="Form_Label" for="salary">Salary:</label>
-                            <input class="Form_Input" type="number" name="salary" id="salary" min="5000">
+                            <input class="Form_Input_Column" type="number" name="salary" id="salary" min="5000">
                         </div>
 
                         <div class="Form_Body">

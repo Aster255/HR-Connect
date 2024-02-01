@@ -53,6 +53,13 @@ class EmployeeController extends BaseController
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'sss' => 'nullable|numeric|digits:10',
+            'tin' => 'nullable|numeric|digits:9',
+            'philhealth' => 'nullable|numeric|digits:12',
+            'hdmf' => 'nullable|numeric|digits:12',
+        ]);
+
 
         $newemployee = new Employee();
 

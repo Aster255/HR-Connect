@@ -17,7 +17,6 @@
         </div>
     </div>
 
-
     @foreach ($leave as $l)
     <div class="modal fade" id="delete_{{$l->leave_id}}" tabindex="-1">
         <div class="modal-dialog">
@@ -43,8 +42,8 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
-                    <button class="btn btn-danger" type="submit">Confirm</button>
-                    </form> <!-- Close the form tag here -->
+                    <button class="btn btn-green" type="submit">Confirm</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -60,6 +59,7 @@
                         <th>Employee Name</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+                        <th>Status</th>
                         <th>Approval</th>
                     </tr>
                 </thead>
@@ -74,6 +74,7 @@
                         @endforeach
                         <td>{{ $l->start_date }}</td>
                         <td>{{ $l->end_date }}</td>
+                        <td>{{ $l->status }}</td>
                         <td>
                             <a class="btn btn-brand" data-bs-toggle='modal' data-bs-target='#delete_{{$l->leave_id}}'>information</a>
                         </td>
@@ -81,7 +82,7 @@
 
                     @empty
                     <tr>
-                        <td colspan="5">No Leave Information</td>
+                        <td colspan="6">No Leave Information</td>
                     </tr>
                     @endforelse
                 </tbody>

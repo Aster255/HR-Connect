@@ -250,6 +250,8 @@ search bar pre design
 .Form_Input_Section_Column {
     display: flex;
     gap: 30px;
+
+    align-items: flex-start;
 }
 
 .Form_Label {
@@ -269,6 +271,17 @@ search bar pre design
     margin-bottom: 10px;
 
     outline: none;
+}
+.Form_Input_Column {
+    flex: 3;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--Brand);
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    outline: none;
+    max-width: 600px
 }
 .Form_Input:focus,
 .Form_Input:active {
