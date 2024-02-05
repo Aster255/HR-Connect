@@ -34,7 +34,8 @@
                         <th>Employee ID</th>
                         <th>Employee Name</th>
                         <th>Hire Date</th>
-                        <th></th>
+                        <th>Username</th>
+                        <th>ACTIONS</th>
                     </tr>
                 </thead>
 
@@ -46,8 +47,18 @@
                         <td>{{$e->first_name}} {{$e->last_name}}</td>
                         <td>{{ $e->hire_date->format('m-d-Y') }}</td>
                         <td>
-                            <a class="btn btn-brand btn-large" href="/Admin/Employee/{{$e->employee_id}}">info</a>
+                            @if($e->user)
+                            {{ $e->user->username }}
+                            @else
+                            <a class="btn btn-brand btn-large" href="">Create USER</a>
+                            @endif
                         </td>
+
+                        <td>
+                            <a class="btn btn-brand btn-large" href="/Admin/Employee/{{$e->employee_id}}">info</a>
+
+                        </td>
+
                     </tr>
                     @endforeach
                 </tbody>

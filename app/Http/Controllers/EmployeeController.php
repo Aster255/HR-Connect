@@ -22,6 +22,7 @@ class EmployeeController extends BaseController
     public function index()
     {
         $employees = Employee::query()
+            ->with("user")
             ->filter(request(['search']))
             ->paginate(10);
 
