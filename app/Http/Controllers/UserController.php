@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserLogInEvent;
 use Session;
 use App\Models\Role;
 use App\Models\User;
@@ -37,6 +38,8 @@ class UserController extends BaseController
             $request->session()->put('employee_id', $user->employee_id);
 
             $employee = Employee::find($user->employee_id);
+
+            event(new UserLogInEvent($user));
 
             if ($user->role === 1) {
                 return redirect(url('/Admin/Dashboard'))->with(compact('employee'))->with('success', 'Logged in as admin!');
