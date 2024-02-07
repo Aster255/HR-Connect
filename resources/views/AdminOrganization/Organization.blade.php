@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-
+    <title>HR Connect | Organization</title>
 </head>
 
 <body>

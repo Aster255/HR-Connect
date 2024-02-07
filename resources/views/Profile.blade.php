@@ -79,6 +79,7 @@
         }
 
     </style>
+    <title>HR Connect | Profile</title>
 </head>
 
 <body>

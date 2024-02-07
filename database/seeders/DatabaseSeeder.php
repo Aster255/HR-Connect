@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             'position_name' => 'Human Resource Associate',
         ]);
 
-        Employee::factory(5000)->withEmployeeData()->create();
+        Employee::factory(500)->withEmployeeData()->create();
     }
 
     private function CreateUserAdmins()

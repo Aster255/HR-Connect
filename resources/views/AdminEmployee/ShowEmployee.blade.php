@@ -5,6 +5,7 @@
     @include("Layout.Head")
 
     <link rel="stylesheet" href="{{ asset('css/AdminShowEmployee.css') }}">
+    <title>HR Connect</title>
 </head>
 
 <body>
@@ -46,35 +47,56 @@
     {{-- picture --}}
     <div class="picture">
         <img id="preview" src="{{$employee->picture}}" alt="{{$employee->first_name}} pictures" width="100px">
+        <button type="button" data-bs-target="#updatePicture" data-bs-toggle="modal" class="btn btn-brand update">Edit Profile Picture</button>
+        <div class="modal fade" id="updatePicture">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update Profile Picture</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="picturebtn">
+                        <form action="/Admin/Employee/{{$employee->employee_id}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="picture">
+                                <img id="preview_modal" src="{{$employee->picture}}" alt="{{$employee->first_name}} pictures" width="100px">
+                            </div>
+
+                            <div class="Form_Input_Section">
+                                <input type="text" name="formpreview" id="formpreview" value="IMAGE HASH" />
+                                <input type="hidden" name="picture" id="picture" value="" />
+                            </div>
+
+                            <div class="modal-footer">
+                                <div class="Form_Input_Section_Column">
+                                    <button type="button" class="btn btn-green" onclick="PreviewPic()">Preview Picture</button>
+                                    <button type="submit" class="btn btn-brand">Update Picture</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                        <script>
+                            function PreviewPic() {
+                                var strhash = document.getElementById('formpreview').value;
+                                var robohashURL = 'https://robohash.org/' + strhash + '.png?set=set5';
+                                document.getElementById('preview').src = robohashURL;
+                                document.getElementById('preview_modal').src = robohashURL;
+                                document.getElementById('picture').value = robohashURL;
+                            }
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="picturebtn">
-        <form action="/Admin/Employee/{{$employee->employee_id}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
 
-            <div class="Form_Input_Section">
-                <input type="text" name="formpreview" id="formpreview" value="IMAGE HASH" />
-                <input type="hidden" name="picture" id="picture" value="" />
-            </div>
 
-            <div class="Form_Input_Section_Column">
-                <button type="button" class="btn btn-green" onclick="PreviewPic()">Preview Picture</button>
-                <button type="submit" class="btn btn-brand">Update Picture</button>
-            </div>
-
-        </form>
-
-        <script>
-            function PreviewPic() {
-                var strhash = document.getElementById('formpreview').value;
-                var robohashURL = 'https://robohash.org/' + strhash + '.png?set=set5';
-                document.getElementById('preview').src = robohashURL;
-                document.getElementById('picture').value = robohashURL;
-            }
-
-        </script>
-    </div>
 
     {{-- Personal Information --}}
     <div class="section">

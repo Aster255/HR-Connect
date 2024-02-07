@@ -4,29 +4,24 @@
 <head>
     @include('Layout.Head')
     <link rel="stylesheet" href="{{ asset('css/AdminCreateUser.css') }}">
+    <title>HR Connect | Create User</title>
 </head>
 
 <body>
     @include("Layout.Messege")
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">CREATE NEW USER</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">{{ $employee->first_name }} {{ $employee->last_name }}</h1>
     </div>
 
 
 
     <div class="Form_Section" data-aos="zoom-in" data-aos-duration="600">
         <div class="Form_Body">
-            <form action="/Admin/CreateUser" method="POST">
+            <form action="/Admin/Employee/{{ $employee->employee_id }}/CreateUser" method="POST">
                 @csrf
                 <div class="Form_Input_Section_Column">
-                    <label class="Form_Label" for="employee_id">Employee_id</label>
-                    <select class="Form_Input" name="employee_id" id="employee_id" required>
-                        <option value="">Select Employee</option>
-                        @foreach ($employee as $e)
-                        <option value="{{$e->employee_id}}">{{$e->last_name}}, {{$e->first_name}}</option>
-                        @endforeach
-                    </select>
+
                     <label class="Form_Label" for="role">Select Role:</label>
                     <select class="Form_Input" name="role" id="role" required>
                         <option value="">Select Role</option>

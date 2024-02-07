@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserLoggedOutEvent;
 use App\Events\UserLogInEvent;
 use Session;
 use App\Models\Role;
@@ -56,25 +57,32 @@ class UserController extends BaseController
     // Logging Out from the system
     public function logOut()
     {
-        Auth::logout();
-        return redirect('/')->with('success', 'Successfully Log Out');
+        if (Auth::check()) {
+            $user = Auth::user();
+            event(new UserLoggedOutEvent($user));
+
+            Auth::logout();
+            return redirect('/')->with('success', 'Successfully Log Out');
+        }
+
+        return redirect('/')->with('error', 'User not authenticated');
     }
 
 
     // Create User Webpage
-    public function UserCreate()
+    public function UserCreate(string $id)
     {
         $user = User::all();
         $role = Role::all();
-        $employee = Employee::whereNotIn('employee_id', $user->pluck('employee_id'))->get();
+        $employee = Employee::where('employee_id', $id)->first();
+
         return view('CreateUser', compact('user', 'employee', 'role'));
     }
 
     // User Creation
-    public function UserStore(Request $request)
+    public function UserStore(Request $request, string $id)
     {
         $request->validate([
-            'employee_id' => 'required|exists:employees,employee_id',
             'username' => [
                 'required',
                 'string',
@@ -88,15 +96,17 @@ class UserController extends BaseController
             'role' => 'required|string',
         ]);
 
+        $employee = Employee::where('employee_id', $id)->first();
+
         $user = new User();
-        $user->employee_id = $request->input('employee_id');
+        $user->employee_id = $employee->employee_id;
         $user->username = $request->input('username');
         $user->password = Hash::make($request->input('password'));
         $user->role = $request->input('role');
 
         $user->save();
 
-        return redirect('/Admin/CreateUser')->with('success', 'Successfully Created User');
+        return redirect("/Admin/Employee")->with('success', 'Successfully Created User');
     }
 
     // Show Profile;

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttendanceCreate;
+use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartmentController;
@@ -22,8 +23,8 @@ Route::post('/', [UserController::class, 'Login']);
 // Admin=================================================
 
 Route::prefix('Admin')->group(function () {
-    Route::get('CreateUser', [UserController::class, 'UserCreate']);
-    Route::post('CreateUser', [UserController::class, 'UserStore']);
+    Route::get('Employee/{id}/CreateUser', [UserController::class, 'UserCreate']);
+    Route::post('Employee/{id}/CreateUser', [UserController::class, 'UserStore']);
 
     Route::get('Dashboard', [AdminController::class, 'ShowDashboard']);
 
@@ -46,7 +47,7 @@ Route::prefix('Admin')->group(function () {
     Route::get('Leave/Create', [LeaveCreate::class, 'LeaveCreate']);
     Route::post('Leave/Create', [LeaveCreate::class, 'LeaveStore']);
 
-
+    Route::get('auditlog', [AuditLogController::class, 'index']);
 });
 
 

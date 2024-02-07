@@ -2,7 +2,7 @@
     @include("Layout.Head")
 
     <link rel="stylesheet" href="{{ asset('css/AdminEmployee.css') }}">
-
+    <title>HR Connect | Employee</title>
 </head>
 
 <body>
@@ -50,12 +50,12 @@
                             @if($e->user)
                             {{ $e->user->username }}
                             @else
-                            <a class="btn btn-brand btn-large" href="">Create USER</a>
+                            <a class="btn btn-brand btn-large" href="/Admin/Employee/{{ $e->employee_id }}/CreateUser">Create user</a>
                             @endif
                         </td>
 
                         <td>
-                            <a class="btn btn-brand btn-large" href="/Admin/Employee/{{$e->employee_id}}">info</a>
+                            <a class="btn btn-brand btn-large" href="/Admin/Employee/{{$e->employee_id}}">View Info</a>
 
                         </td>
 

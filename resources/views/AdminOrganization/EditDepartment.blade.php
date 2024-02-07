@@ -5,6 +5,7 @@
     @include("Layout.Head")
     <title>Admin</title>
     <link rel="stylesheet" href="{{ asset('css/AdminEditDepartment.css') }}">
+    <title>HR Connect</title>
 </head>
 
 <body>

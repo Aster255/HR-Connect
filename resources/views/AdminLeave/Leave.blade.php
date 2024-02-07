@@ -5,6 +5,7 @@
     @include("Layout.Head")
 
     <link rel="stylesheet" href="{{ asset('css/AdminLeave.css') }}">
+    <title>HR Connect | Leave</title>
 </head>
 
 <body>
