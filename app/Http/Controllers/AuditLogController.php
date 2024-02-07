@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuditLog;
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AuditLogController extends Controller
+class AuditLogController extends BaseController
 {
     public function index()
     {
-        $auditlogs = AuditLog::all();
+        if (Auth::user()) {
+            $auditlogs = AuditLog::all();
 
-        dd($auditlogs);
+            return view('auditlog', [
+                'auditlogs' => $auditlogs,
+            ]);
+        }
     }
 }
