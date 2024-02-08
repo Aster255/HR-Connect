@@ -13,6 +13,7 @@
         <a href="/Admin/Attendance">ATTENDANCE</a>
         <a href="/Admin/Leave"> LEAVE</a>
         <a href="/trial"> PAYROLL</a>
+        <a href="/Admin/Auditlog">AUDIT LOG</a>
         <div class="dropdown">
             <img class="profile_picture" src="{{$employee_picture->picture}}" alt="{{$employee_picture->first_name}} pictures" onclick="toggleDropdown()">
             <div class="dropdown-content" id="myDropdown">

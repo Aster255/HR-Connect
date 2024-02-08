@@ -12,7 +12,7 @@ class AuditLogController extends BaseController
     public function index()
     {
         if (Auth::user()) {
-            $auditlogs = AuditLog::all();
+            $auditlogs = AuditLog::with('user')->all();
 
             return view('auditlog', [
                 'auditlogs' => $auditlogs,

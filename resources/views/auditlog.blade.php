@@ -13,6 +13,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Action</th>
+                    <th>Triggered by</th>
                     <th>Auditable type</th>
                     <th>Auditable id</th>
                     <th>Old Values</th>
@@ -27,11 +28,12 @@
                 <tr>
                     <td>{{ $al->id }}</td>
                     <td>{{ $al->action }}</td>
-                    <td>{{ $al->auditable_type }}</td>
-                    <td>{{ $al->auditable_id }}</td>
-                    <td>{{ $al->old_values }}</td>
-                    <td>{{ $al->new_values }}</td>
-                    <td>{{ $al->additional_details }}</td>
+                    <td>{{ $al->user->username }}</td>
+                    <td>{{ $al->auditable_type ? $al->auditable_type:'NULL' }}</td>
+                    <td>{{ $al->auditable_id ? $al->auditable_id:'NULL'}}</td>
+                    <td>{{ $al->old_values ? $al->old_values:'NULL'}}</td>
+                    <td>{{ $al->new_values ? $al->new_values:'NULL'}}</td>
+                    <td>{{ $al->additional_details ? $al->additional_details:'NULL' }}</td>
                     <td>{{ $al->updated_at }}</td> <!-- Fixed typo here -->
                     <td><button>View Info</button></td>
                 </tr>
