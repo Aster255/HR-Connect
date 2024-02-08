@@ -21,40 +21,34 @@ Route::get('/', [UserController::class, 'showLogin']);
 Route::post('/', [UserController::class, 'Login']);
 
 // Admin=================================================
-
 Route::prefix('Admin')->group(function () {
+    Route::get('Employee/{id}/CreateUser', [UserController::class, 'UserCreate']);
+    Route::post('Employee/{id}/CreateUser', [UserController::class, 'UserStore']);
+
     Route::get('Dashboard', [AdminController::class, 'ShowDashboard']);
+
+    Route::get('Organization', [AdminController::class, 'ShowOrganization']);
+    Route::resource('Organization/Department', DepartmentController::class);
+    Route::resource('Organization/Position', PositionController::class);
+
+    Route::resource('Employee', EmployeeController::class);
+    Route::get('Employee/search', [AdminController::class, 'index'])->name('admin.employee.search');
+
+    Route::get('Attendance', [AdminController::class, 'ShowAttendace']);
+    Route::get('Attendance/Calendar', [AdminController::class, 'ShowCalendar']);
+    Route::get('Attendance/Schedule', [AttendanceCreate::class, 'ListSchedule']);
+    Route::post('Attendance/Schedule', [AttendanceCreate::class, 'CreateSchedule']);
+    Route::get('Attendance/Location', [AttendanceCreate::class, 'ListLocation']);
+    Route::post('Attendance/Location', [AttendanceCreate::class, 'CreateLocation']);
+    Route::resource('Attendance/Log', Logs::class);
+
+    Route::get('Leave', [AdminController::class, 'ShowLeave']);
+    Route::get('Leave/Create', [LeaveCreate::class, 'LeaveCreate']);
+    Route::post('Leave/Create', [LeaveCreate::class, 'LeaveStore']);
+
     Route::get('Auditlog', [AuditLogController::class, 'index']);
-
-    Route::prefix('Employee')->group(function () {
-        Route::resource('', EmployeeController::class);
-        Route::get('{id}/CreateUser', [UserController::class, 'UserCreate']);
-        Route::post('{id}/CreateUser', [UserController::class, 'UserStore']);
-        Route::get('search', [AdminController::class, 'index'])->name('admin.employee.search');
-    });
-
-    Route::prefix('Organization')->group(function () {
-        Route::get('', [AdminController::class, 'Show']);
-        Route::resource('Department', DepartmentController::class);
-        Route::resource('Position', PositionController::class);
-    });
-
-    Route::prefix('Attendance')->group(function () {
-        Route::get('', [AdminController::class, 'ShowAttendace']);
-        Route::get('Calendar', [AdminController::class, 'ShowCalendar']);
-        Route::get('Schedule', [AttendanceCreate::class, 'ListSchedule']);
-        Route::post('Schedule', [AttendanceCreate::class, 'CreateSchedule']);
-        Route::get('Location', [AttendanceCreate::class, 'ListLocation']);
-        Route::post('Location', [AttendanceCreate::class, 'CreateLocation']);
-        Route::resource('Log', Logs::class);
-    });
-
-    Route::prefix('Leave')->group(function () {
-        Route::get('', [AdminController::class, 'ShowLeave']);
-        Route::get('Create', [LeaveCreate::class, 'LeaveCreate']);
-        Route::post('Create', [LeaveCreate::class, 'LeaveStore']);
-    });
 });
+
 
 // ===================================================================
 Route::get('/Dashboard', [EmployeeUserEmployee::class, 'EmployeeDashboard']);

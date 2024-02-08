@@ -6,6 +6,8 @@ use App\Events\UserLoggedOutEvent;
 use App\Events\UserLogInEvent;
 use App\Listeners\UserLoggedInListener;
 use App\Listeners\UserLoggedOutlistener;
+use App\Models\User;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -35,7 +37,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        User::observe(UserObserver::class);
     }
 
     /**
