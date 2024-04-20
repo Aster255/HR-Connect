@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    @include("Layout.Head")
+    @include("includes.Head")
 
     <link rel="stylesheet" href="{{ asset('css/AdminLeave.css') }}">
     <title>HR Connect | Leave</title>
 </head>
 
 <body>
-    @include("Layout.NavBarAdmin")
+    <x-navbar-component  />
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">LEAVE</h1>
 

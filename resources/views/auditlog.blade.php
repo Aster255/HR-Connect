@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('Layout.Head')
+    @include('includes.Head')
     <title>Hr Connect | Audit Log</title>
 </head>
 <body>
-    @include('Layout.NavBarAdmin')
+    <x-navbar-component />
 
     <div>
         <table>

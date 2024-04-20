@@ -5,8 +5,8 @@
         <img src="/img/HRconnect_Name.png" />
     </div>
 
+    @if(Auth::user()->role == 1)
     <div class="navbar">
-        <!-- DASHBOARD -->
         <a href="/Admin/Dashboard">DASHBOARD</a>
         <a href="/Admin/Organization">ORGANIZATION</a>
         <a href="/Admin/Employee">EMPLOYEES</a>
@@ -46,13 +46,49 @@
             <a href="/Admin/CreateUser">CREATE USER</a>
         </div>
     </div>
-</div>
+    @elseif(Auth::user()->role == 2)
+    <div class="navbar">
+        <!-- DASHBOARD -->
+        <a href="/Dashboard">DASHBOARD</a>
+        <a href="/Attendance">ATTENDANCE</a>
+        <a href="/Leave">LEAVE</a>
+        <a href="/trial">PAYROLL</a>
+        <div class="dropdown">
+            <img class="profile_picture" src="{{$employee_picture->picture}}" alt="{{$employee_picture->first_name}} pictures" onclick="toggleDropdown()">
+            <div class="dropdown-content" id="myDropdown">
+                <a href="/trial">Profile</a>
+                <a href="/trial">Setting</a>
+                <a href="/logout">Log out</a>
+            </div>
+        </div>
+    </div>
+    <div class="small_navbar">
+
+        <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+        <i class="fa-solid fa-x" onclick="toggleMenu()"></i>
+        <div class="dropdown">
+            <img class="profile_picture" src="{{$employee_picture->picture}}" alt="{{$employee_picture->first_name}} pictures" onclick="toggleDropdown()">
+            <div class="dropdown-content" id="myDropdown2">
+                <a href="/trial">Profile</a>
+                <a href="/trial">Setting</a>
+                <a href="/logout">Log out</a>
+            </div>
+
+
+            <div class="small_navbar_content">
+                <a href="/Dashboard">DASHBOARD</a>
+                <a href="/Attendance">ATTENDANCE</a>
+                <a href="/Leave">LEAVE</a>
+                <a href="/trial">PAYROLL</a>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
 
 <div class="messege">
-    @include('Layout.Messege')
+    @include('includes.Messege')
 </div>
-
 
 <script>
     function toggleDropdown() {
