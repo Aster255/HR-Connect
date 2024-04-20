@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    @include("Layout.Head")
+    @include("includes.Head")
 
     <link rel="stylesheet" href="{{ asset('css/AdminSchedule.css') }}">
     <title>HR Connect</title>
 </head>
 
 <body>
-    @include("Layout.NavBarAdmin")
+    <x-navbar-component  />
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">SCHEDULE</h1>
 
@@ -21,7 +21,7 @@
     <div class="List">
         <div class="One_List" data-aos="zoom-in-right" data-aos-duration="600">
             <div class="Form_Section">
-                <div class="Form_Body" style="margin-">
+                <div class="Form_Body">
                     <div class="Form_Title_Section">
                         <h2 class=" Form_Title">Create Schedule</h2>
                     </div>

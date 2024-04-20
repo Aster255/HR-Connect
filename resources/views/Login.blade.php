@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    @include('Layout.Head')
+    @include('includes.Head')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <title>HRconnect</title>
 </head>
 
 <body class="login">
-    @include("Layout.Messege")
+    @include("includes.Messege")
     <div class="SignIn">
         <img src="/img/HRconnect_Name.png" />
         <div class="form-login">

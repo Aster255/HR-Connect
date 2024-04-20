@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include("Layout.Head")
+    @include("includes.Head")
     <link rel="stylesheet" href="/css/calendar.css">
 </head>
 

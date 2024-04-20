@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include("Layout.Head")
+    @include("includes.Head")
 
     <style>
         body {
@@ -82,7 +82,7 @@
 </head>
 
 <body>
-    @include("Layout.NavBarAdmin")
+    <x-navbar-component  />
     <h1 class="Title_navbar">My Profile</h1>
 
     <div class="container" data-aos="zoom-in">

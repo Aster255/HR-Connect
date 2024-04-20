@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    @include("Layout.Head")
+    @include("includes.Head")
     <title>Admin</title>
     <link rel="stylesheet" href="{{ asset('css/AdminEditDepartment.css') }}">
     <title>HR Connect</title>
 </head>
 
 <body>
-    @include("Layout.NavBarAdmin")
+    <x-navbar-component  />
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">EDIT: {{$department->department_name}}</h1>
 

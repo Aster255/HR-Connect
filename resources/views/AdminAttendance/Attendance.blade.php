@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    @include("Layout.Head")
+    @include("includes.Head")
     <title>HR Connect | Attendance</title>
 </head>
 
 <body>
-    @include("Layout.NavBarAdmin")
+    <x-navbar-component  />
     <div class="greetings">
         <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">ATTENDANCE</h1>
 

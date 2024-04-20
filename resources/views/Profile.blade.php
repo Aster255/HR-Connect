@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include("Layout.Head")
+    @include("includes.Head")
 
     @include('Layout.Button')
     <style>
