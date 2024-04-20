@@ -22,12 +22,14 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar">DASHBOARD</h1>
-
-        <p class="agenda">{{ $greeting }}! {{$employee->first_name}} {{$employee->last_name}}. here's our Agenda Today.</p>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">DASHBOARD</h1>
+    </div>
+    <div class="agenda" data-aos="zoom-in" data-aos-duration="600">
+        <p>{{ $greeting }}! {{$employee->first_name}} {{$employee->last_name}}. here's our Agenda Today.</p>
     </div>
 
-    <div class="panel">
+
+    <div class="panel" data-aos="zoom-in" data-aos-duration="600">
         <div class="pending_leave">
             <a href="Employee">
                 <h1 style="padding-block: 15px">{{ $totalemployee}}</h1>
@@ -55,7 +57,7 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
     </div>
 
     <div class="notification">
-        <div class="notice">
+        <div class="notice" data-aos="zoom-in-right" data-aos-duration="600">
             <h3 class="font-style">Notice</h3>
             <div class="notice_content">
                 <div class=" notice_info">
@@ -73,7 +75,7 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
             </div>
         </div>
 
-        <div class="event">
+        <div class="event" data-aos="zoom-in-left" data-aos-duration="600">
             <h3 class="font-style">Events</h3>
             <div class="event_content">
                 <div class=" event_info">
@@ -97,6 +99,7 @@ if ($currentTime >= '05:00' && $currentTime < '12:00') {
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>
 
 </html>

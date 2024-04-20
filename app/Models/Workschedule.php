@@ -7,11 +7,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Workschedule
- * 
+ *
  * @property int $schedule_id
  * @property Carbon|null $start_time
  * @property Carbon|null $end_time
@@ -20,17 +21,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Workschedule extends Model
 {
-	protected $table = 'workschedule';
-	protected $primaryKey = 'schedule_id';
-	public $timestamps = false;
+    use HasFactory;
+    protected $table = 'workschedules';
+    protected $primaryKey = 'schedule_id';
+    public $timestamps = false;
 
-	protected $casts = [
-		'start_time' => 'datetime',
-		'end_time' => 'datetime'
-	];
+    protected $casts = [
+        'start_time' => 'datetime',
+        'end_time' => 'datetime'
+    ];
 
-	protected $fillable = [
-		'start_time',
-		'end_time'
-	];
+    protected $fillable = [
+        'start_time',
+        'end_time'
+    ];
 }

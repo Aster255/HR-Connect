@@ -7,6 +7,7 @@ use App\Models\Leave;
 use App\Models\Employee;
 use App\Models\LeaveType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LeaveController extends BaseController
 {
@@ -15,10 +16,12 @@ class LeaveController extends BaseController
      */
     public function index()
     {
-        if (Session::has('user_id')) {
+        $user = Auth::user();
+        if ($user) {
+            $employee_id = Employee::where('employee_id', $user->employee_id)->first();
             $employee = Employee::query()
                 ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
+                ->where("employee_id", "=", $employee_id)
                 ->first();
 
             $leaves = LeaveType::all();
@@ -33,14 +36,16 @@ class LeaveController extends BaseController
      */
     public function create()
     {
-        if (Session::has('user_id')) {
+        $user = Auth::user();
+        if ($user) {
+            $employee_id = Employee::where('employee_id', $user->employee_id)->first();
             $employee = Employee::query()
                 ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
+                ->where("employee_id", "=", $employee_id)
                 ->first();
             $leave = Leave::query()
                 ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
+                ->where("employee_id", "=",  $employee_id)
                 ->get();
             $leavelist = LeaveType::all();
             return view('Employee.CreateLeave', compact('leave', 'leavelist', 'employee'));
@@ -52,15 +57,18 @@ class LeaveController extends BaseController
      */
     public function store(Request $request)
     {
-        $requestleave = new Leave;
-        $requestleave->start_date = $request->input('start_date');
-        $requestleave->end_date = $request->input('end_date');
-        $requestleave->status = $request->input('status');
-        $requestleave->leavetype_id = $request->input('leavetype_id');
+        $user = Auth::user();
+        if ($user) {
 
-        if (Session::has('user_id')) {
-            $employee_id = Session::get('employee_id');
-            $requestleave->employee_id = $employee_id;
+            $requestleave = new Leave;
+            $requestleave->start_date = $request->input('start_date');
+            $requestleave->end_date = $request->input('end_date');
+            $requestleave->status = $request->input('status');
+            $requestleave->leavetype_id = $request->input('leavetype_id');
+            $requestleave->leave_reason = $request->input('leave_reason');
+
+            $employee_id = Employee::where('employee_id', $user->employee_id)->first();
+            $requestleave->employee_id = $employee_id->employee_id;
             $requestleave->save();
 
             return redirect('/Leave')->with("success", "Successfully sent a Leave Request!");

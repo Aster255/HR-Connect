@@ -1,21 +1,17 @@
 .font-style {
     color: var(--Brand);
 }
-/* ============================ */
-
-.agenda {
-    margin-inline: 10px;
-}
 
 .panel {
-    margin-top: 30px;
-
     display: flex;
-    gap: 30px;
     justify-content: space-around;
-}
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin: 10px;
 
-.panel > * {
+    gap: 10px;
+}
+.panel > div {
     background: var(--Nuetrals100);
     padding-inline: 30px;
     border-radius: 5px;
@@ -24,16 +20,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 200px;
 }
 
 .notification {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+
+    margin: 10px;
 }
 
-.notification > * {
-    width: 48%;
-    margin: 15px;
+.notification > div {
+    flex: 1;
+    min-width: 350px;
+    margin: 10px;
 }
 
 .notice_content,

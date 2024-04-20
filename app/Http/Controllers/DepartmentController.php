@@ -6,7 +6,7 @@ use App\Models\Employee;
 use App\Models\Position;
 use App\Models\Department;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class DepartmentController extends BaseController
 {
@@ -42,11 +42,14 @@ class DepartmentController extends BaseController
         $employee = Employee::query()
             ->select('*', DB::raw('(SELECT position_name FROM positions WHERE positions.position_id = employees.position_id) AS position_name'))
             ->where('department_id', $id)
+            ->filter(request(['search']))
             ->get();
+
         $position = Position::query()
             ->select('positions.*', 'departments.*')
-            ->join('departments', 'departments.department_id', 'positions.department_id')
+            ->join('departments', 'departments.department_id', '=', 'positions.department_id')
             ->where('positions.department_id', $id)
+            ->filter(request(['tag', 'search']))
             ->get();
 
         return view('AdminOrganization.ShowDepartment', compact('department', 'employee', 'position'));

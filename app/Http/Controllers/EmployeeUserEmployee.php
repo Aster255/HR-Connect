@@ -3,145 +3,148 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
-use App\Models\Leave;
-use App\Models\User;
 use App\Models\Employee;
 use App\Models\Location;
 use App\Models\Workschedule;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeUserEmployee extends BaseController
 {
     public function EmployeeDashboard(Request $request)
     {
-        if (Session::has('user_id')) {
-
-            $employee = Employee::query()
-                ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
-                ->get()
+        $user = Auth::user();
+        if ($user) {
+            $employee_id = $user->employee_id;
+            $employee = Employee::with(['attendance', 'workschedule'])
+                ->where('employee_id', $employee_id)
                 ->first();
-            $attendance = Attendance::query()
-                ->select('*')
-                ->where('employee_id', '=', $employee->employee_id)
-                ->get()
-                ->first();
-            $schedule = Workschedule::query()
-                ->select('*')
-                ->where('schedule_id', '=', $employee->schedule_id)
-                ->get()
-                ->first();
-
             $locations = Location::all();
 
-            return view('Employee.Dashboard', compact('employee', 'attendance', 'schedule', 'locations'));
+            return view('Employee.Dashboard', compact('employee', 'locations'));
         }
     }
 
     public function Attendance()
     {
-        if (Session::has('user_id')) {
-            $employee = Employee::query()
-                ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
-                ->first(); 
-            $attendance = Attendance::query()
-                ->select('*')
-                ->where('employee_id', '=', $employee->employee_id)
-                ->get();
+        $user = Auth::user();
 
-            $schedule = Workschedule::query()
-                ->select('*')
-                ->where('schedule_id', '=', $employee->schedule_id)
-                ->first(); 
+        if ($user) {
+            $employee_id = $user->employee_id;
+            $employee = Employee::with(['attendance', 'workschedule'])
+                ->where('employee_id', $employee_id)
+                ->first();
 
-            $locations = Location::all();
+            if ($employee) {
+                $attendance = $employee->attendance;
+                $schedule = $employee->workschedule;
+                $workschedule = Workschedule::all();
+                $locations = Location::all();
+
+                return view('Employee.Attendance', compact('employee', 'attendance', 'locations', 'schedule', 'workschedule'));
+            }
         }
 
-        return view('Employee.Attendance', compact('employee', 'attendance', 'locations', 'schedule'));
+        return redirect('/')->with('fail', 'Employee not found.');
     }
-
-
 
     public function AttendanceLogIn(Request $request)
     {
-        if (Session::has('user_id')) {
-            $employee = Employee::query()
-                ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
-                ->get()
-                ->first();
-            $employee_id = $employee->employee_id;
-            $schedule_id = $employee->schedule_id;
-
-            $existingAttendance = Attendance::where('employee_id', Session::get("employee_id"))
-                ->whereNull('out_time')
+        $user = Auth::user();
+        if ($user) {
+            $employee = Employee::where('employee_id', $user->employee_id)
+                ->with('attendance')
                 ->first();
 
-            if ($existingAttendance) {
-                return redirect('/Attendance')->with('fail', 'You are already logged in. Please log out first.');
+            if ($employee) {
+                $existingAttendance = Attendance::where('employee_id', $employee->employee_id)
+                    ->where('attendance_date', today())
+                    ->first();
+
+                if ($existingAttendance) {
+                    return redirect()->back()->with('fail', "You has already logged in today.");
+                }
+                $schedule_id = $employee->schedule_id;
+                $workschedule = Workschedule::where('schedule_id', $schedule_id)->first();
+                $start_time = $workschedule->start_time;
+                $login_time = now();
+
+                $time_difference = $login_time->diffInMinutes($start_time);
+                $sign = ($time_difference < 0) ? '+' : '-';
+                $minutes = abs($time_difference);
+                $time_difference_formatted = $sign . $minutes;
+
+                $max_early_late_log_in = 180;
+
+                if ($time_difference_formatted < -$max_early_late_log_in) {
+                    return redirect()->back()->with('fail', "Cannot log in. You are too early.");
+                } elseif ($time_difference_formatted > $max_early_late_log_in) {
+                    return redirect()->back()->with("fail", "Cannot log in. You are too late.");
+                }
+
+                $attendance = new Attendance;
+                $attendance->location_id = $request->input('location_id');
+                $attendance->employee_id = $user->employee_id;
+                $attendance->attendance_date = now();
+
+                $acceptable_early_late_minutes = 10;
+
+                if ($time_difference_formatted < -$acceptable_early_late_minutes) {
+                    $attendance->in_status = "Early In";
+                } elseif ($time_difference_formatted >= -$acceptable_early_late_minutes && $time_difference_formatted <= $acceptable_early_late_minutes) {
+                    $attendance->in_status = "In-Time";
+                } elseif ($time_difference_formatted > $acceptable_early_late_minutes) {
+                    $attendance->in_status = "Late";
+                }
+
+                $attendance->save();
+
+                return redirect('/Attendance')->with('success', 'successfully LogIn, Your ' . $attendance->in_status);
             }
-
-
-            $workschedule = Workschedule::where('schedule_id', $schedule_id)->first();
-            if (!$workschedule) {
-                return redirect('/Schedule')->with('fail', "You have not selected your schedule");
-            }
-
-
-            $start_time = $workschedule->start_time;
-            $login_time = now();
-            $time_difference = $login_time->diffInMinutes($start_time);
-            $sign = ($time_difference < 0) ? '+' : '-';
-            $minutes = abs($time_difference);
-            $time_difference_formatted = $sign . $minutes;
-
-            $attendance = new Attendance;
-            $attendance->location_id = $request->input('location_id');
-            $attendance->employee_id = $employee_id;
-
-            if ($time_difference_formatted < -60) {
-                $attendance->in_status = "Early In";
-            } elseif ($time_difference_formatted <= -10 && $time_difference_formatted >= -10) {
-                $attendance->in_status = "In-Time";
-            } elseif ($time_difference_formatted > 30) {
-                $attendance->in_status = "Late";
-            }
-
-            $attendance->save();
-
-            return redirect('/Attendance')->with('success', 'successfully LogIn, Your ' . $attendance->in_status);
         }
+
+        return redirect('/')->with('fail', 'Employee not found.');
     }
 
     public function AttendanceLogOut()
     {
-        if (Session::has('user_id')) {
-            $employee = Employee::query()
-                ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
-                ->first();
-            $attendance = Attendance::where('employee_id', $employee->employee_id)
+        $user = Auth::user();
+        if ($user) {
+            $employee = Employee::where('employee_id', $user->employee_id)->first();
+
+            $existingAttendance = Attendance::where('employee_id', $user->employee_id)
+                ->whereDate('attendance_date', today())
                 ->whereNotNull('in_status')
-                ->whereNull('out_time')
-                ->orderBy('created_at', 'desc')
+                ->whereNotNull('out_time')
                 ->first();
 
-            if (!$attendance) {
-                return redirect('/Attendance')->with('fail', 'You have already logged out.');
+            if ($existingAttendance) {
+                return redirect()->back()->with('fail', "You have already logged out.");
             }
 
+            $attendance = Attendance::where('employee_id', $user->employee_id)
+                ->whereDate('attendance_date', today())
+                ->first();
             $schedule_id = $employee->schedule_id;
             $workschedule = Workschedule::where('schedule_id', $schedule_id)->first();
+
             $end_time = $workschedule->end_time;
-            $login_time = now();
-            $time_difference = $login_time->diffInMinutes($end_time);
+            $logout_time = now();
+
+            $time_difference = $logout_time->diffInMinutes($end_time);
             $sign = ($time_difference < 0) ? '+' : '-';
             $minutes = abs($time_difference);
             $time_difference_formatted = $sign . $minutes;
 
-            $attendance->out_time = $login_time;
+            $max_early_late_log_out = 180;
+
+            if ($time_difference_formatted > -$max_early_late_log_out) {
+                return redirect()->back()->with('fail', "Unable to log out. Please note that the minimum time to log out is 3 hours before the scheduled log-out time.");
+            }
+
+
+            $attendance->out_time = $logout_time;
+
             if ($time_difference_formatted < -60) {
                 $attendance->out_status = "Early Out";
             } elseif ($time_difference_formatted <= -10 && $time_difference_formatted >= -10) {
@@ -150,25 +153,10 @@ class EmployeeUserEmployee extends BaseController
                 $attendance->out_status = "Over Time";
             }
 
+
             $attendance->save();
         }
         return redirect('/Attendance')->with('success', 'Successfully Logged Out, Your ' . $attendance->out_status);
-    }
-
-    public function schedule()
-    {
-        if (Session::has('user_id')) {
-            $employee = Employee::query()
-                ->select('*')
-                ->where("employee_id", "=", Session::get("employee_id"))
-                ->first();
-
-            $scheduleId = $employee->schedule_id;
-            $schedule = WorkSchedule::where('schedule_id', $scheduleId)->first();
-            $workschedule = Workschedule::all();
-        }
-
-        return view('Employee.Schedule', compact('employee', 'schedule', 'workschedule'));
     }
 
     public function getschedule(Request $request, string $id)
@@ -177,8 +165,9 @@ class EmployeeUserEmployee extends BaseController
             'selectschedule' => 'required',
         ]);
 
-        if (Session::has('user_id')) {
-            $employee = Employee::where("employee_id", $id)->first();
+        $user = Auth::user();
+        if ($user) {
+            $employee = Employee::where('employee_id', $user->employee_id)->first();
 
             if ($employee) {
                 $employee->update([
@@ -194,19 +183,11 @@ class EmployeeUserEmployee extends BaseController
 
     public function requestschedule(Request $request, string $id)
     {
-        $request->validate([
-            'requestschedule' => 'required',
-        ]);
-
-        if (Session::has('user_id')) {
-            $employee = Employee::where("employee_id", $id)->first();
+        $user = Auth::user();
+        if ($user) {
+            $employee = Employee::where('employee_id', $user->employee_id)->first();
 
             if ($employee) {
-               // Update the schedule only if it's not commented out in your original code
-                // $employee->update([
-                //     'schedule_id' => $request->input('requestschedule'),
-                // ]); 
-
                 return redirect('/Schedule')->with('info', 'THIS IS NOT PART OF OUR DEMO!');
             }
         }

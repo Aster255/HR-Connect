@@ -3,46 +3,47 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminAddPosition.css') }}">
+    <title>HR Connect</title>
 </head>
 
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">ADD NEW POSITION</h1>
-    </div>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">ADD NEW POSITION</h1>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Organization" data-aos="zoom-in">Back</a>
-    </div>
-
-    <div class="row justify-content-center" data-aos="zoom-in">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ route('Position.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="position_name">Position Name</label>
-                            <input type="text" name="position_name" id="position_name" class="form-control" required>
-                            <input type="hidden" name="position_status" value="added">
-                        </div>
-                        <div class="form-group">
-                            <label for="department_id">Department</label>
-                            <select name="department_id" id="department_id" class="form-control" required>
-                                <option value="0">Select Department</option>
-                                @foreach ($department as $d)
-                                <option value="{{ $d->department_id }}">{{ $d->department_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <input type="submit" class="btn btn-green" value="New Position" />
-                    </form>
-                </div>
-            </div>
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
+            <a class="btn btn-brand" href="/Admin/Organization">Back</a>
         </div>
     </div>
+
+
+
+
+    <div class="Form_Section mx-5" data-aos="zoom-in-up" data-aos-duration="800">
+        <div class="Form_Body">
+            <form action="{{ route('Position.store') }}" method="POST">
+                @csrf
+                <div class="Form_Input_Section">
+                    <label class="Form_Label" for="position_name">Position Name</label>
+                    <input class="Form_Input" type="text" name="position_name" id="position_name" required>
+                    <input type="hidden" name="position_status" value="Added">
+                </div>
+                <div class="Form_Input_Section">
+                    <label class="Form_Label" for="department_id">Department</label>
+                    <select class="Form_Input" name="department_id" id="department_id" required>
+                        <option value="0">Select Department</option>
+                        @foreach ($department as $d)
+                        <option value="{{ $d->department_id }}">{{ $d->department_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <input type="submit" class="btn btn-green" value="New Position" />
+            </form>
+        </div>
+    </div>
+
 </body>
 
 </html>
@@ -50,4 +51,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

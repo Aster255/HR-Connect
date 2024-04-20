@@ -10,10 +10,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Employee
- * 
+ *
  * @property int $employee_id
  * @property int|null $position_id
  * @property int|null $department_id
@@ -29,7 +30,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string|null $nick_name
  * @property string $picture
  * @property int|null $schedule_id
- * 
+ *
  * @property Department|null $department
  * @property Collection|User[] $users
  *
@@ -37,64 +38,91 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Employee extends Model
 {
-	use HasFactory;
-	protected $table = 'employees';
-	protected $primaryKey = 'employee_id';
-	public $timestamps = false;
+    use HasFactory;
+    protected $table = 'employees';
+    protected $primaryKey = 'employee_id';
+    public $timestamps = false;
 
-	protected $casts = [
-		'position_id' => 'int',
-		'department_id' => 'int',
-		'hire_date' => 'datetime',
-		'salary' => 'float',
-		'employee_timestamp' => 'datetime',
-		'schedule_id' => 'int'
-	];
+    protected $casts = [
+        'position_id' => 'int',
+        'department_id' => 'int',
+        'hire_date' => 'datetime',
+        'salary' => 'float',
+        'employee_timestamp' => 'datetime',
+        'schedule_id' => 'int'
+    ];
 
-	protected $fillable = [
-		'position_id',
-		'department_id',
-		'first_name',
-		'last_name',
-		'hire_date',
-		'salary',
-		'employee_timestamp',
-		'employee_status',
-		'title',
-		'middle_name',
-		'maiden_name',
-		'nick_name',
-		'picture',
-		'schedule_id'
-	];
 
-	public function department()
-	{
-		return $this->belongsTo(Department::class);
-	}
+    protected $fillable = [
+        'position_id',
+        'department_id',
+        'first_name',
+        'last_name',
+        'hire_date',
+        'salary',
+        'employee_timestamp',
+        'employee_status',
+        'title',
+        'middle_name',
+        'maiden_name',
+        'nick_name',
+        'picture',
+        'schedule_id'
+    ];
 
-	public function users()
-	{
-		return $this->hasMany(User::class);
-	}
+    public function scopeFilter($query, array $filter)
+    {
+        if ($filter['search'] ?? false) {
+            $query->where(function ($query) use ($filter) {
+                $searchTerm = '%' . $filter['search'] . '%';
 
-	public function employeeDocs()
-	{
-		return $this->hasMany(EmployeeDoc::class);
-	}
+                $query->where('first_name', 'like', $searchTerm)
+                    ->orWhere('last_name', 'like', $searchTerm)
+                    ->orWhere('employee_id', 'like', $searchTerm)
+                    ->orWhere(DB::raw("CONCAT(first_name, ' ', last_name)"), 'like', $searchTerm)
+                    ->orWhere('hire_date', 'like', $searchTerm)
+                    ->orWhereHas('position', function ($query) use ($searchTerm) {
+                        $query->where('position_name', 'like', $searchTerm);
+                    });
+            });
+        }
+    }
 
-	public function employeeEducations()
-	{
-		return $this->hasMany(EmployeeEducation::class);
-	}
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'position_id');
+    }
 
-	public function employeeInformations()
-	{
-		return $this->hasMany(EmployeeInformation::class);
-	}
+    public function user()
+    {
+        return $this->hasOne(User::class, "employee_id");
+    }
 
-	public function employeeNotifies()
-	{
-		return $this->hasMany(EmployeeNotify::class);
-	}
+    public function employeeDocs()
+    {
+        return $this->hasMany(EmployeeDoc::class);
+    }
+
+    public function employeeInformations()
+    {
+        return $this->hasMany(EmployeeInformation::class);
+    }
+
+    public function employeeNotifies()
+    {
+        return $this->hasMany(EmployeeNotify::class);
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class, 'employee_id');
+    }
+    public function workschedule()
+    {
+        return $this->belongsTo(Workschedule::class, 'schedule_id');
+    }
 }

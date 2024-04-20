@@ -5,20 +5,22 @@
     @include("Layout.Head")
     <title>Admin</title>
     <link rel="stylesheet" href="{{ asset('css/AdminShowDepartment.css') }}">
+    <title>HR Connect</title>
 </head>
 
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">{{$department->department_name}}</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">{{$department->department_name}}</h1>
+
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
+            <a class="btn btn-brand" href="/Admin/Organization">BACK</a>
+            <a class="btn btn-brand" href="/Admin/Organization/Department/{{$department->department_id}}/edit" class="btn btn-primary">EDIT</a></td>
+            <a class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$department->department_id}}'>DELETE</a>
+            </td>
+        </div>
     </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Organization">BACK</a>
-        <a class="btn btn-brand" href="/Admin/Organization/Department/{{$department->department_id}}/edit" class="btn btn-primary">EDIT</a></td>
-        <a class="btn btn-red" data-bs-toggle='modal' data-bs-target='#delete_{{$department->department_id}}'>DELETE</a>
-        </td>
-    </div>
     <div class="modal fade" id="delete_{{$department->department_id}}" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -43,37 +45,49 @@
             </div>
         </div>
     </div>
-    <div class="list">
-        <div>
-            <table class="Position_List">
-                <thead class="table_section">
+    <div data-aos="zoom-in-up" data-aos-duration="600">
+        <form class="Search_Bar" action="">
+            <input class="Search_Input" type="text" name="search" value="{{ request('tag') ?? request('search') }}">
+            <div class="Search_Button">
+                <button class="btn-brand" type="submit">Search</button>
+                <a href="{{ url('/Admin/Organization/Department/' . $department->department_id) }}" class="btn-grey ">Clear</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="List">
+        <div class="One_List" data-aos="zoom-in-right" data-aos-duration="600">
+            <table>
+                <thead class="thead_section">
                     <th>ID</th>
-                    <th>Name</th>
                     <th>Position</th>
                 </thead>
-                <tbody>
-                    @foreach ($employee as $emp)
-                    <tr class="table_section">
-                        <td>{{$emp->position_id}}</td>
-                        <td>{{$emp->first_name}} {{$emp->last_name}}</td>
-                        <td>{{$emp->position_name}}</td>
+                <tbody class="body_section">
+                    @foreach ($position as $pos)
+                    <tr>
+
+                        <td>{{$pos->position_id}}</td>
+                        <td><a href="?tag={{ $pos->position_name }}">{{$pos->position_name}} </a></td>
+
                     </tr>
                     @endforeach
                 </tbody>
 
             </table>
         </div>
-        <div>
-            <table class="Department_List">
-                <thead class="table_section">
-                    <th>ID</th>
+        <div class="Two_List" data-aos="zoom-in-left" data-aos-duration="600">
+            <table>
+                <thead class="thead_section">
+                    <th>Employee ID</th>
+                    <th>Name</th>
                     <th>Position</th>
                 </thead>
-                <tbody>
-                    @foreach ($position as $pos)
-                    <tr class="table_section">
-                        <td>{{$pos->position_id}}</td>
-                        <td>{{$pos->position_name}}</td>
+                <tbody class="body_section">
+                    @foreach ($employee as $emp)
+                    <tr>
+                        <td>{{$emp->employee_id}}</td>
+                        <td>{{$emp->first_name}} {{$emp->last_name}}</td>
+                        <td>{{$emp->position_name}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -90,4 +104,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>

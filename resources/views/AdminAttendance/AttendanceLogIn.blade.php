@@ -3,26 +3,27 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     <link rel="stylesheet" href="{{ asset('css/AdminAttendanceLogin.css')}}">
+    <title>HR Connect</title>
 </head>
 
 <body>
     @include("Layout.NavBarAdmin")
     <div class="greetings">
-        <h1 class="Title_navbar" data-aos="zoom-in">LOG IN</h1>
+        <h1 class="Title_navbar" data-aos="zoom-in-right" data-aos-duration="100">LOG IN</h1>
+
+        <div class="button" data-aos="zoom-in-left" data-aos-duration="100">
+            <a class="btn btn-brand" href="/Admin/Attendance/Log">BACK</a>
+        </div>
     </div>
 
-    <div class="button">
-        <a class="btn btn-brand" href="/Admin/Attendance/Log">BACK</a>
-    </div>
-
-    <div class="row justify-content-center" data-aos="zoom-in">
+    <div class="row justify-content-center" data-aos="zoom-in" data-aos-duration="600">
         <div class="col-md-11">
             <p id="realtime-date">{{ date('h:i:s') }}</p>
         </div>
     </div>
-    <div class="row justify-content-center" data-aos="zoom-in">
+    <div class="row justify-content-center" data-aos="zoom-in" data-aos-duration="600">
         <div class="col-md-11">
             <div class="card">
                 <div class="card-body">
@@ -41,7 +42,7 @@
                             <select name="location_id" id="location_id" required>
                                 <option value="">select one</option>
                                 @foreach ($locations as $location)
-                                <option value="{{ $location->location_id }}">{{ $location->location }}</option>
+                                <option value="{{ $location->location_id }}">{{ $location->location_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -59,6 +60,7 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>
 
 <script>
@@ -72,4 +74,5 @@
     }
     updateRealtimeDate();
     setInterval(updateRealtimeDate, 1000);
+
 </script>

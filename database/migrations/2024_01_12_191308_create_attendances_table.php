@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,7 +14,7 @@ return new class extends Migration {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id('attendance_id');
             $table->unsignedBigInteger('employee_id');
-            $table->date('attendance_date');
+            $table->date('attendance_date')->default(now());
             $table->unsignedBigInteger('location_id');
             $table->time('in_time')->nullable();
             $table->string('in_status', 40)->nullable();

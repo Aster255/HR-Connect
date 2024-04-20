@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
-use Carbon\Carbon;
 use App\Models\Workschedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceCreate extends BaseController
@@ -35,7 +35,7 @@ class AttendanceCreate extends BaseController
     public function CreateLocation(Request $request)
     {
         $location = new Location;
-        $location->location = $request->input('Location');
+        $location->location_name = $request->input('Location');
         $location->save();
 
         return redirect('Admin/Attendance/Location');

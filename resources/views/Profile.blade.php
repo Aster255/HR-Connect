@@ -3,7 +3,7 @@
 
 <head>
     @include("Layout.Head")
-    <title>System Admin</title>
+
     @include('Layout.Button')
     <style>
         body {
@@ -77,7 +77,9 @@
             border-radius: 5px;
             background-color: white;
         }
+
     </style>
+    <title>HR Connect | Profile</title>
 </head>
 
 <body>
@@ -249,4 +251,5 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     AOS.init();
+
 </script>
